@@ -1,9 +1,9 @@
 <template>
   <section
       class="v-projects"
-      v-for="project in projects"
   >
     <Project
+        v-for="project in projects"
         :data="project"
     />
   </section>
