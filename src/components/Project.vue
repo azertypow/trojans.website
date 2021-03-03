@@ -7,15 +7,18 @@
 
 <script lang="ts">
 import {defineComponent, PropType } from "vue"
-import {IProject} from "@/main"
+import {IApiProjects} from "@/api"
 
 export default defineComponent({
+
   name: 'Project',
+
   props: {
     data: {
-      type: Object as PropType<IProject>
+      type: Object as PropType<IApiProjects>
     },
   },
+
 });
 </script>
 

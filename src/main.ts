@@ -18,14 +18,3 @@ async function getProjects() {
   const projects = await response.json()
   store.commit( "updateProjects", projects )
 }
-
-export interface IProject {
-  id: number,
-  description: string,
-  title: string,
-  published_at: Date,
-  created_at: Date,
-  updated_at: Date,
-  exhibition_links: [],
-  images: []
-}
