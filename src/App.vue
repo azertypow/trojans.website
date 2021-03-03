@@ -1,35 +1,20 @@
 <template>
-  <div v-for="project in projects">
-    <Project
-        :data="project"
-    />
-  </div>
+  <navigation/>
+  <router-view/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Project from "@/components/Project.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
+import Navigation from "@/components/Navigation.vue"
 
 export default defineComponent({
   name: 'App',
 
   components: {
-    Project,
+    Navigation,
   },
-
-  data() {
-    return {
-      store: useStore(key)
-    }
-  },
-
-  computed: {
-    projects(): any {
-      return this.store.state.projects
-    }
-  }
 
 });
 </script>
