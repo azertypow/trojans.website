@@ -14,7 +14,7 @@ async function getContent() {
 }
 
 async function getProjects() {
-  const response = await fetch("http://104.248.20.170/Projects")
+  const response = await fetch("http://104.248.20.170/Projects?_limit=-1")
   const projects = await response.json()
   store.commit( "updateProjects", projects )
 }
