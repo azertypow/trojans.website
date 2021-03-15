@@ -9,7 +9,7 @@
       <div
           class="v-view-projects__year"
       >
-        <h3>{{year}}</h3>
+        <h5>{{year}}</h5>
       </div>
 
       <Project

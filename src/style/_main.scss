@@ -1,5 +1,6 @@
 @import "param";
 @import "grid";
+@import "typography";
 
 html {
   padding: 0;
@@ -16,16 +17,15 @@ body {
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 20px;
-  font-size: 17px;
+  @extend .t-text-reg;
 }
 
-.t-title {
-  font-weight: 400;
-  text-transform: uppercase;
-  color: $site-color;
-  line-height: 50px;
-  font-size: $font-title-size;
+h3 {
+  @extend .t-text-m;
+}
+
+h5 {
+  @extend .t-text-small;
 }
 
 .t-nav-link {

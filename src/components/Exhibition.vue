@@ -1,7 +1,7 @@
 <template>
   <section class="v-exhibition">
     <div>Exhibition</div>
-    <h4>{{data.exhibition_title}}, {{new Date(data.date).getFullYear()}}</h4>
+    <h3>{{data.exhibition_title}}, {{new Date(data.date).getFullYear()}}</h3>
     <p>{{data.partenariat_description}}</p>
   </section>
 </template>
