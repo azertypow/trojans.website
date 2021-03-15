@@ -1,8 +1,14 @@
 <template>
   <section class="v-exhibition">
-    <div>Exhibition</div>
-    <h3>{{data.exhibition_title}}, {{new Date(data.date).getFullYear()}}</h3>
-    <p>{{data.partenariat_description}}</p>
+    <div
+        class="t-text-subtitle"
+    >Exhibition</div>
+    <p
+        v-if="data.exhibition_title"
+    >{{data.exhibition_title}}, {{new Date(data.date).getFullYear()}}</p>
+    <p
+        v-if="data.partenariat_description"
+    >{{data.partenariat_description}}</p>
   </section>
 </template>
 

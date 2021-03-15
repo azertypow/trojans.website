@@ -28,3 +28,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.t-text-subtitle {
+  @extend .t-text-small;
+  text-transform: uppercase;
+  color: $site-color;
+}
