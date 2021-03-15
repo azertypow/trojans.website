@@ -6,7 +6,11 @@
     <div
         v-for="(projectsInThisYear, year) in sortedProjects"
     >
-      <h3>{{year}}</h3>
+      <div
+          class="v-view-projects__year"
+      >
+        <h3>{{year}}</h3>
+      </div>
 
       <Project
           v-for="(project, key) in projectsInThisYear"
@@ -74,5 +78,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "../style/param";
 
+.v-view-projects__year {
+  overflow: hidden;
+  background: $site-background-color;
+  box-shadow:  $tile-box-shadow;
+}
 </style>

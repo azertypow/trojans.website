@@ -79,7 +79,7 @@ export default defineComponent({
 
 .v-project {
   overflow: hidden;
-  box-shadow:  0 3px 10px #00000033;
+  box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
 
   &.is-open {
