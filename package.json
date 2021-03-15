@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build --dest doc"
   },
   "dependencies": {
     "@types/markdown-it": "^12.0.1",
