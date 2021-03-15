@@ -1,6 +1,6 @@
 <template>
   <section
-      :class="{'is-open': !thisIsOpen}"
+      :class="{'is-closed': !thisIsOpen}"
       class="v-project"
       :style="style"
   >
@@ -82,8 +82,12 @@ export default defineComponent({
   box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
 
-  &.is-open {
+  &.is-closed {
     max-height: $font-title-size;
+
+    &:hover {
+      max-height: $font-title-size * 1.5;
+    }
   }
 }
 
