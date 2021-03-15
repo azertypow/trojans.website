@@ -20,6 +20,10 @@ body {
   @extend .t-text-reg;
 }
 
+p {
+  @extend .t-text-reg;
+}
+
 h3 {
   @extend .t-text-m;
 }

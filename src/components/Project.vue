@@ -9,7 +9,27 @@
         class="v-project__container">
 
       <h1 class="v-project__title t-title">{{ data.title }}</h1>
-      <div v-html="data.description"></div>
+
+      <div
+          v-if="data.description"
+          class="v-project__description-container"
+      >
+        <div
+            class="v-project__description-viewer"
+            :style="descriptionViewerStyle"
+        >
+          <div
+              ref="descriptionContainer"
+              class="v-project__description-container"
+              v-html="data.description"></div>
+        </div>
+
+        <button
+            v-if="showReadMoreButton"
+            class="v-project__description__more"
+            @click="toggleDescriptionView"
+        >{{ readMoreButtonText }}</button>
+      </div>
 
       <exhibition
           v-for="exhibition of exhibitions"
@@ -42,12 +62,68 @@ export default defineComponent({
     },
   },
 
+  mounted() {
+
+    const maxChildrenElement  = 3
+    const paragrapheMargin    = 20 //px unit
+
+    this.$nextTick(() => {
+
+      const descriptionContent = this.$refs.descriptionContainer
+
+      if(
+          descriptionContent instanceof HTMLElement
+          && descriptionContent.children.length > maxChildrenElement
+      ) {
+
+        this.hasLongContent = true
+
+        for (
+            let childrenKey = 0;
+            childrenKey < maxChildrenElement;
+            childrenKey++
+        ) {
+          this.minHeightForLongContent +=
+              descriptionContent.children[ childrenKey ].getBoundingClientRect().height
+          + maxChildrenElement * paragrapheMargin
+        }
+
+        this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
+      }
+    })
+  },
+
+  methods: {
+    toggleDescriptionView() {
+
+      this.readMoreIsOpen = !this.readMoreIsOpen
+
+      const descriptionContainer = this.$refs.descriptionContainer
+
+      if( descriptionContainer instanceof HTMLElement ) {
+        if( this.readMoreIsOpen )
+          this.descriptionViewerStyle.maxHeight = descriptionContainer.getBoundingClientRect().height + 'px'
+        else
+          this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
+
+      } else {
+        this.descriptionViewerStyle.maxHeight = ""
+      }
+    },
+  },
+
   data() {
     return {
       store: useStore(key),
       style: {
         maxHeight: "O"
-      }
+      },
+      descriptionViewerStyle: {
+        maxHeight: ""
+      },
+      hasLongContent: false,
+      minHeightForLongContent: 0,
+      readMoreIsOpen: false,
     }
   },
 
@@ -56,9 +132,17 @@ export default defineComponent({
       return this.data.exhibition_links || []
     },
 
+    showReadMoreButton(): boolean {
+      return this.hasLongContent
+    },
+
     thisIsOpen(): boolean {
       return this.stringProjectId === this.store.state.idOfOpenedProject
     },
+
+    readMoreButtonText(): string {
+      return this.readMoreIsOpen ? "show less" : "read more"
+    }
   },
 
   watch: {
@@ -76,6 +160,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../style/param";
 @import "../style/grid";
+@import "../style/typography";
 
 .v-project {
   overflow: hidden;
@@ -88,6 +173,27 @@ export default defineComponent({
     &:hover {
       max-height: $font-title-size * 1.5;
     }
+  }
+}
+
+.v-project__description-viewer {
+  overflow: hidden;
+  transition: max-height 500ms ease-in-out;
+}
+
+.v-project__description__more {
+  @extend .t-text-reg;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  &:focus {
+    color: $site-color;
+    outline: none;
   }
 }
 
