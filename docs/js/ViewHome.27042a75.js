@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["ViewHome"],{4886:function(e,t,a){"use strict";a.r(t);var c=a("7a23");const b=Object(c["F"])("data-v-65a460bb");Object(c["t"])("data-v-65a460bb");const o={class:"v-view-home"};Object(c["r"])();const n=b((e,t,a,b,n,s)=>(Object(c["q"])(),Object(c["e"])("section",o," home view ")));var s=Object(c["i"])({name:"ViewHome"});s.render=n,s.__scopeId="data-v-65a460bb";t["default"]=s}}]);
-//# sourceMappingURL=ViewHome.27042a75.js.map
