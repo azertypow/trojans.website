@@ -1,0 +1,43 @@
+@import "param";
+@import "grid";
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+  font-family: Helvetica, Neue, sans-serif;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 20px;
+  font-size: 17px;
+}
+
+.t-title {
+  font-weight: 400;
+  text-transform: uppercase;
+  color: $site-color;
+  line-height: 50px;
+  font-size: $font-title-size;
+}
+
+.t-nav-link {
+  font-weight: 400;
+  text-transform: uppercase;
+  color: $site-background-color;
+  text-decoration: none;
+  line-height: 70px;
+  font-size: 63px;
+
+  &.router-link-exact-active {
+    text-decoration: line-through;
+    cursor: default;
+  }
+}

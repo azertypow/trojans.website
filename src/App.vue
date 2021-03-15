@@ -11,6 +11,7 @@
     >
       <component :is="Component" />
     </transition>
+    <div class="overlay-left"></div>
   </router-view>
 </template>
 
@@ -44,18 +45,41 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
+$transition-duration: .5s;
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition-duration: $transition-duration;
+
+  & ~ .overlay-left {
+    display: block;
+    transition: transform $transition-duration;
+    transition-timing-function: cubic-bezier(.33333,0,0,1);
+  }
 }
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+
+.overlay-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: red;
+  transition: none;
+  display: none;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.fade-leave-to ~ .overlay-left {
+  transform: translate3d(0, 0, 0);
+}
+
+.fade-enter ~ .overlay-left {
+  transform: translate3d(0, 0, 0);
+}
+
+.fade-enter-to ~ .overlay-left {
+  transform: translate3d(100%, 0, 0);
 }
 </style>

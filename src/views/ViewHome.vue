@@ -1,5 +1,5 @@
 <template>
-  <section class="v-home">
+  <section class="v-view-home">
     home view
   </section>
 </template>
@@ -9,7 +9,7 @@ import {defineComponent, PropType} from "vue"
 
 export default defineComponent({
 
-  name: 'Home',
+  name: 'ViewHome',
 
 })
 </script>
