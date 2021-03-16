@@ -216,6 +216,10 @@ export default defineComponent({
 
 .v-project__description-container {
   overflow: hidden;
+
+  + * {
+    padding-top: 40px;
+  }
 }
 
 .v-project__description__more {
