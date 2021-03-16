@@ -4,7 +4,10 @@
     <div
         v-if="isClose"
         class="v-navigation__menu">
-      <div class="v-navigation__logo">trojans</div>
+      <div class="v-navigation__logo">
+        <img alt="trojan logo"
+             src="../style/images/TrojansLogo.svg">
+      </div>
     </div>
 
     <div
@@ -115,9 +118,15 @@ export default defineComponent({
 }
 
 .v-navigation__logo {
-  @include gutter;
-  font-size: 50px;
-  line-height: 1em;
+  height: 100%;
+  width: 100%;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center left;
+  }
 }
 
 .v-navigation__toggle {
