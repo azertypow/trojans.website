@@ -76,6 +76,7 @@ export default defineComponent({
 
 .v-navigation {
   position: fixed;
+  z-index: 1000;
   left: 0;
   bottom: 0;
   height: $height;
