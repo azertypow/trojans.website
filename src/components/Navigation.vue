@@ -86,6 +86,7 @@ export default defineComponent({
 
 .v-navigation__menu {
   @include column-container;
+  box-shadow: $tile-box-shadow;
   height: 100%;
   flex-direction: column;
   justify-content: center;
