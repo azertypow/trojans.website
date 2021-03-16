@@ -85,7 +85,7 @@ export default defineComponent({
         ) {
           this.minHeightForLongContent +=
               descriptionContent.children[ childrenKey ].getBoundingClientRect().height
-          + maxChildrenElement * paragrapheMargin
+          + (maxChildrenElement - 1) * paragrapheMargin
         }
 
         this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
@@ -101,8 +101,18 @@ export default defineComponent({
       const descriptionContainer = this.$refs.descriptionContainer
 
       if( descriptionContainer instanceof HTMLElement ) {
-        if( this.readMoreIsOpen )
+        if( this.readMoreIsOpen ) {
           this.descriptionViewerStyle.maxHeight = descriptionContainer.getBoundingClientRect().height + 'px'
+
+          this.style.maxHeight =
+              parseFloat( this.style.maxHeight )
+              + ( descriptionContainer.getBoundingClientRect().height
+              - this.minHeightForLongContent ) + 'px'
+
+          console.log( "this.style.maxHeight", this.style.maxHeight )
+          console.log( "descriptionContainer.getBoundingClientRect().height", descriptionContainer.getBoundingClientRect().height )
+          console.log( "this.minHeightForLongContent", this.minHeightForLongContent )
+        }
         else
           this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
 
@@ -116,7 +126,7 @@ export default defineComponent({
     return {
       store: useStore(key),
       style: {
-        maxHeight: "O"
+        maxHeight: ""
       },
       descriptionViewerStyle: {
         maxHeight: ""
@@ -179,6 +189,10 @@ export default defineComponent({
 .v-project__description-viewer {
   overflow: hidden;
   transition: max-height 500ms ease-in-out;
+}
+
+.v-project__description-container {
+  overflow: hidden;
 }
 
 .v-project__description__more {
