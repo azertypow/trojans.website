@@ -5,10 +5,17 @@
       :style="style"
   >
     <div
+        v-if="thisIsOpen"
+        @click="closeProject"
+        class="v-project__close">✗</div>
+
+    <div
         ref="container"
         class="v-project__container">
 
-      <h1 class="v-project__title t-title">{{ data.title }}</h1>
+      <h1 class="v-project__title t-title">
+        {{ data.title }}
+      </h1>
 
       <div
           v-if="data.description"
@@ -94,6 +101,11 @@ export default defineComponent({
   },
 
   methods: {
+    closeProject(e: MouseEvent) {
+      e.stopImmediatePropagation()
+      this.store.state.idOfOpenedProject = null
+    },
+
     toggleDescriptionView() {
 
       this.readMoreIsOpen = !this.readMoreIsOpen
@@ -176,6 +188,7 @@ export default defineComponent({
   overflow: hidden;
   box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
+  position: relative;
 
   &.is-closed {
     max-height: $font-title-size;
@@ -184,6 +197,16 @@ export default defineComponent({
       max-height: $font-title-size * 1.5;
     }
   }
+}
+
+.v-project__close {
+  @extend .t-title;
+  @include gutter;
+  cursor: pointer;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .v-project__description-viewer {
