@@ -31,5 +31,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "../style/param";
+@import "../style/typography";
+
+p {
+  @extend .t-text-small;
+}
 
 </style>
