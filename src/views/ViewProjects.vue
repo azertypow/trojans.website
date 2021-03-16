@@ -80,9 +80,14 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../style/param";
 
+.v-view-projects {
+  overflow: hidden;
+}
+
 .v-view-projects__year {
   overflow: hidden;
   background: $site-background-color;
   box-shadow:  $tile-box-shadow;
+  position: relative;
 }
 </style>
