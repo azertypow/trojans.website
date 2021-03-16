@@ -64,7 +64,7 @@ export default defineComponent({
 
   mounted() {
 
-    const maxChildrenElement  = 3
+    const maxChildrenElement  = 2
     const paragrapheMargin    = 20 //px unit
 
     this.$nextTick(() => {
