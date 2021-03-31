@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store, {key} from './store'
-import {IApiProject} from "@/api"
+import {API_PROJECT_URL, IApiProject} from "@/api"
 import MarkdownIt from "markdown-it"
 import "./style/_main.scss"
 
@@ -23,7 +23,7 @@ async function getContent() {
 }
 
 async function getProjects() {
-  const response = await fetch("http://104.248.20.170/Projects?_limit=-1")
+  const response = await fetch( API_PROJECT_URL )
   const projects: IApiProject[] = await response.json()
 
   for(const project of projects ) {

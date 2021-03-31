@@ -1,3 +1,8 @@
+// urls
+export const API_BASE_URL    = "http://104.248.20.170"
+export const API_PROJECT_URL = `${API_BASE_URL}/Projects?_limit=-1`
+
+
 export interface IApiProject {
   id: number
   description?: string

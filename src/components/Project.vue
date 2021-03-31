@@ -5,7 +5,6 @@
       :style="style"
   >
     <div
-        v-if="thisIsOpen"
         @click="closeProject"
         class="v-project__close">✗</div>
 
@@ -46,21 +45,28 @@
           :data="exhibition"
       />
 
+
+      <Gallery
+          v-for="image of images"
+          :data="image"
+      />
+
     </div>
   </section>
 </template>
 
 <script lang="ts">
 import {defineComponent, PropType } from "vue"
-import {IApiExhibition_links, IApiProject} from "@/api"
+import {IApiExhibition_links, IApiImage, IApiProject} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
+import Gallery from "@/components/Gallery.vue"
 
 export default defineComponent({
 
   name: 'Project',
-  components: {Exhibition},
+  components: {Gallery, Exhibition},
   props: {
     data: {
       type: Object as PropType<IApiProject>,
@@ -105,8 +111,10 @@ export default defineComponent({
 
   methods: {
     closeProject(e: MouseEvent) {
-      e.stopImmediatePropagation()
-      this.store.state.idOfOpenedProject = null
+      if(this.thisIsOpen) {
+        e.stopImmediatePropagation()
+        this.store.state.idOfOpenedProject = null
+      }
     },
 
     toggleDescriptionView() {
@@ -155,6 +163,10 @@ export default defineComponent({
   computed: {
     exhibitions(): IApiExhibition_links[] {
       return this.data.exhibition_links || []
+    },
+
+    images(): IApiImage[] {
+      return this.data.images || []
     },
 
     showReadMoreButton(): boolean {
@@ -210,8 +222,16 @@ export default defineComponent({
   cursor: pointer;
   margin: 0;
   position: absolute;
-  top: 0;
+  top: $gutter / 2;
   right: 0;
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+  transform: rotate3d(0, 0, 1, 0);
+  opacity: 1;
+
+  .v-project.is-closed & {
+    transform: rotate3d(0, 0, 1, 45deg);
+    opacity: 0;
+  }
 }
 
 .v-project__description {
@@ -258,14 +278,14 @@ export default defineComponent({
 }
 
 .v-project__title {
-  @include gutter;
   @include no-margin-for-first-and-last;
 
-  padding-top: $gutter / 2;
-  padding-bottom: $gutter / 2;
-
+  padding: $gutter / 2 3em $gutter / 2 $gutter;
   user-select: none;
-  cursor: pointer;
+
+  .v-project.is-closed & {
+    cursor: pointer;
+  }
 }
 
 </style>
