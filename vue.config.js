@@ -4,5 +4,11 @@
  * @type {import('@vue/cli-service').ProjectOptions}
  */
 module.exports = {
-    publicPath: "http://trojans-prototype.glitch.me/"
+
+    publicPath: process.env.NODE_ENV === 'production'
+        ? 'http://trojans-prototype.glitch.me/'
+        : '/',
+    pwa: {
+        themeColor: 'red',
+    }
 }
