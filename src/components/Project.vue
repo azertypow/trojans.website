@@ -188,16 +188,18 @@ export default defineComponent({
 @import "../style/typography";
 
 .v-project {
+  $height-of-closed-project: $font-title-size + $gutter;
+
   overflow: hidden;
   box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
   position: relative;
 
   &.is-closed {
-    max-height: $font-title-size;
+    max-height: $height-of-closed-project;
 
     &:hover {
-      max-height: $font-title-size * 1.5;
+      max-height: $height-of-closed-project * 1.5;
     }
   }
 }

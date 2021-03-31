@@ -79,12 +79,15 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @import "../style/param";
+@import "../style/grid";
 
 .v-view-projects {
   overflow: hidden;
 }
 
 .v-view-projects__year {
+  @include gutter;
+
   overflow: hidden;
   background: $site-background-color;
   box-shadow:  $tile-box-shadow;
