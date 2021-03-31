@@ -13,13 +13,15 @@
         ref="container"
         class="v-project__container">
 
-      <h1 class="v-project__title t-title">
-        {{ data.title }}
-      </h1>
+      <div class="v-project__title">
+        <h1 class="t-title">
+          {{ data.title }}
+        </h1>
+      </div>
 
       <div
           v-if="data.description"
-          class="v-project__description-container"
+          class="v-project__description"
       >
         <div
             class="v-project__description-viewer"
@@ -39,6 +41,7 @@
       </div>
 
       <exhibition
+          class="v-project__exhibitions"
           v-for="exhibition of exhibitions"
           :data="exhibition"
       />
@@ -209,6 +212,10 @@ export default defineComponent({
   right: 0;
 }
 
+.v-project__description {
+  @include gutter;
+}
+
 .v-project__description-viewer {
   overflow: hidden;
   transition: max-height 500ms ease-in-out;
@@ -238,6 +245,10 @@ export default defineComponent({
   }
 }
 
+.v-project__exhibitions {
+  @include gutter;
+}
+
 .v-project__container {
   @include no-margin-for-first-and-last;
   overflow: hidden;
@@ -245,6 +256,12 @@ export default defineComponent({
 }
 
 .v-project__title {
+  @include gutter;
+  @include no-margin-for-first-and-last;
+
+  padding-top: $gutter / 2;
+  padding-bottom: $gutter / 2;
+
   user-select: none;
   cursor: pointer;
 }
