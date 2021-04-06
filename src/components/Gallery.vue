@@ -1,20 +1,9 @@
 <template>
-  <section class="v-gallery">
-    <div
-        class="v-gallery__header"
+    <img
+        class="v-gallery"
+        :alt="data.caption"
+        :src="largeImgUrl"
     >
-
-    </div>
-
-    <div
-        class="v-gallery__body"
-    >
-      <img
-          :alt="data.caption"
-          :src="`${API_BASE_URL}${data.formats.large.url}`"
-      >
-    </div>
-  </section>
 </template>
 
 <script lang="ts">
@@ -27,19 +16,25 @@ export default defineComponent({
 
   props: {
     data: {
-      type: Object as PropType<IApiImage>
+      required: true,
+      type: Object as PropType<IApiImage>,
     },
   },
 
-  data() {
-    return {
-      API_BASE_URL,
-    }
-  },
+  computed: {
+    largeImgUrl(): string {
+      const largeImagePath: string = this.data.formats?.large?.url || this.data.url || ""
+      return `${API_BASE_URL}${largeImagePath}`
+    },
+  }
 
 });
 </script>
 
 <style scoped lang="scss">
-
+.v-gallery {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 </style>

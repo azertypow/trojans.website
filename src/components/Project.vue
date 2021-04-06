@@ -12,44 +12,60 @@
         ref="container"
         class="v-project__container">
 
-      <div class="v-project__title">
+      <div
+          ref="containerTitle"
+          class="v-project__title"
+      >
         <h1 class="t-title">
           {{ data.title }}
         </h1>
       </div>
 
-      <div
-          v-if="data.description"
-          class="v-project__description"
+      <toggle-table
+          ref="firstTable"
+          class="v-project__toggle-table"
+          @toggled="tableToggled( -1, $event )"
+          :is-open="getThisTableIsOpen(-1)"
       >
         <div
-            class="v-project__description-viewer"
-            :style="descriptionViewerStyle"
+            v-if="data.description"
+            class="v-project__description"
         >
           <div
-              ref="descriptionContainer"
-              class="v-project__description-container"
-              v-html="data.description"></div>
+              class="v-project__description-viewer"
+              :style="descriptionViewerStyle"
+          >
+            <div
+                ref="descriptionContainer"
+                class="v-project__description-container"
+                v-html="data.description"></div>
+          </div>
+
+          <button
+              v-if="showReadMoreButton"
+              class="v-project__description__more"
+              @click="toggleDescriptionView"
+          >{{ readMoreButtonText }}</button>
         </div>
 
-        <button
-            v-if="showReadMoreButton"
-            class="v-project__description__more"
-            @click="toggleDescriptionView"
-        >{{ readMoreButtonText }}</button>
-      </div>
+        <exhibition
+            class="v-project__exhibitions"
+            v-for="exhibition of exhibitions"
+            :data="exhibition"
+        />
+      </toggle-table>
 
-      <exhibition
-          class="v-project__exhibitions"
-          v-for="exhibition of exhibitions"
-          :data="exhibition"
-      />
+      <toggle-table
+          class="v-project__toggle-table"
+          v-for="(image, index) of images"
+          @toggled="tableToggled(index, $event)"
+          :is-open="getThisTableIsOpen(index)"
+      >
+        <Gallery
+            :data="image"
+        />
+      </toggle-table>
 
-
-      <Gallery
-          v-for="image of images"
-          :data="image"
-      />
 
     </div>
   </section>
@@ -62,11 +78,12 @@ import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
 import Gallery from "@/components/Gallery.vue"
+import ToggleTable from "@/components/ToggleTable.vue"
 
 export default defineComponent({
 
   name: 'Project',
-  components: {Gallery, Exhibition},
+  components: {ToggleTable, Gallery, Exhibition},
   props: {
     data: {
       type: Object as PropType<IApiProject>,
@@ -117,6 +134,18 @@ export default defineComponent({
       }
     },
 
+    updateHeight(heightOfOpenTable: number) {
+      const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
+
+      const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
+
+      this.style.maxHeight =
+          (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
+          + heightOfOpenTable
+          + totalToggleTableHeaderHeight
+          + "px"
+    },
+
     toggleDescriptionView() {
 
       this.readMoreIsOpen = !this.readMoreIsOpen
@@ -143,6 +172,17 @@ export default defineComponent({
         this.descriptionViewerStyle.maxHeight = ""
       }
     },
+
+    getThisTableIsOpen(index: number): boolean {
+      return this.arrayOfToggleTableOpen.includes(index)
+    },
+
+    tableToggled(index: number, $event: number) {
+      this.updateHeight( $event )
+
+      if( index === -1 || this.getThisTableIsOpen(index) ) this.arrayOfToggleTableOpen = [ -1 ]
+      else this.arrayOfToggleTableOpen = [ index ]
+    },
   },
 
   data() {
@@ -157,6 +197,7 @@ export default defineComponent({
       hasLongContent: false,
       minHeightForLongContent: 0,
       readMoreIsOpen: false,
+      arrayOfToggleTableOpen: [] as number[],
     }
   },
 
@@ -184,10 +225,14 @@ export default defineComponent({
 
   watch: {
     thisIsOpen() {
-      if( this.thisIsOpen && this.$refs["container"] instanceof HTMLElement)
-        this.style.maxHeight = `${this.$refs["container"].getBoundingClientRect().height}px`
-      else
+      if( this.thisIsOpen && this.$refs["container"] instanceof HTMLElement) {
+        this.arrayOfToggleTableOpen = [ -1 ]
+        ;(this.$refs.firstTable as any).toggled()
+
+      } else {
+        this.arrayOfToggleTableOpen = []
         this.style.maxHeight = ""
+      }
     }
   },
 
@@ -206,10 +251,9 @@ export default defineComponent({
   box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
   position: relative;
+  max-height: $height-of-closed-project;
 
   &.is-closed {
-    max-height: $height-of-closed-project;
-
     &:hover {
       max-height: $height-of-closed-project * 1.5;
     }
@@ -280,7 +324,7 @@ export default defineComponent({
 .v-project__title {
   @include no-margin-for-first-and-last;
 
-  padding: $gutter / 2 3em $gutter / 2 $gutter;
+  padding: $gutter/2 3em $gutter/2 $gutter/2;
   user-select: none;
 
   .v-project.is-closed & {
