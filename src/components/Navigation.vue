@@ -82,7 +82,7 @@ export default defineComponent({
   z-index: 1000;
   left: 0;
   bottom: 0;
-  height: $height;
+  height: $nav-height;
   background: $site-background-color;
   width: 100%;
   user-select: none;

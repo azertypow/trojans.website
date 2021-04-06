@@ -45,8 +45,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import "./style/param";
 
 $transition-duration: .5s;
+
+#app {
+  padding-bottom: $nav-height;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
 .fade-enter-active,
 .fade-leave-active {
