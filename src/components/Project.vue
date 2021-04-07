@@ -22,6 +22,7 @@
       </div>
 
       <toggle-table
+          :has-close-ui="false"
           ref="firstTable"
           class="v-project__toggle-table"
           @toggled="tableToggled( -1, $event )"
@@ -330,6 +331,31 @@ export default defineComponent({
   .v-project.is-closed & {
     cursor: pointer;
   }
+}
+
+.v-project__toggle-table {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 525ms;
+
+  &:nth-child(1) { transition-delay: 150ms }
+  &:nth-child(2) { transition-delay: 225ms }
+  &:nth-child(3) { transition-delay: 300ms }
+  &:nth-child(4) { transition-delay: 375ms }
+  &:nth-child(5) { transition-delay: 450ms }
+
+  .is-closed & {
+    opacity: 0;
+  }
+}
+
+</style>
+
+<style lang="scss">
+@import "../style/param";
+@import "../style/grid";
+
+.v-project__description-container {
+  @include no-margin-for-first-and-last;
 }
 
 </style>

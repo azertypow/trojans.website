@@ -29,7 +29,6 @@ import {defineComponent, PropType} from "vue"
 import Project from "../components/Project.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
-import ToggleTable from "@/components/ToggleTable.vue"
 import {IApiProject} from "@/api"
 
 export default defineComponent({
@@ -37,7 +36,6 @@ export default defineComponent({
   name: 'ViewProjects',
 
   components: {
-    ToggleTable,
     Project,
   },
 

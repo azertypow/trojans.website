@@ -7,7 +7,6 @@
   >
 
     <div
-        v-if="hasArrow"
         @click="toggled"
         class="v-toggle-table__header"
         ref="headerContainer"
@@ -15,8 +14,8 @@
       <div
           class="v-toggle-table__toggle"
       >
-        <template v-if="isOpen">✗</template>
-        <template v-else>↗</template>
+        <template v-if="isOpen && hasCloseUi">✗</template>
+        <template v-else-if="!isOpen">↗</template>
       </div>
     </div>
 
@@ -48,7 +47,7 @@ export default defineComponent({
   name: 'ToggleTable',
 
   props:{
-    hasArrow: {
+    hasCloseUi: {
       type: Boolean,
       required: false,
       default: () => true,
