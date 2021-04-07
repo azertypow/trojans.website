@@ -1,6 +1,7 @@
 // urls
 export const API_BASE_URL    = "http://104.248.20.170"
 export const API_PROJECT_URL = `${API_BASE_URL}/Projects?_limit=-1`
+export const API_CONTACT_URL = `${API_BASE_URL}/Contact`
 
 
 export interface IApiProject {
@@ -60,4 +61,23 @@ export interface IApiImageSize {
   size?: number,
   width?: number,
   height?: number
+}
+
+
+export interface IApiContact {
+  id: number
+  Address: string
+  City: string
+  Postal_Code: number
+  Country: string
+  mail: string
+  published_at: string
+  created_at: string
+  updated_at: string
+  links:
+    {
+      id: number
+      name: string
+      url: string
+    }[]
 }

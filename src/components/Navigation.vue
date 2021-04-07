@@ -1,8 +1,54 @@
 <template>
-  <nav class="v-navigation">
+  <nav
+      class="v-navigation"
+      :class="{'is-open': isOpen}"
+  >
 
     <div
-        v-if="isClose"
+        v-if="isOpen"
+        class="v-navigation__content"
+    >
+      <div
+          class="v-navigation__content__box"
+      >
+        <div
+            class="v-navigation__links"
+        >
+          <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
+          <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
+          <router-link class="t-nav-link" @click="closeMenu" to="/projects">Projects</router-link>
+        </div>
+
+        <div
+            class="v-navigation__contact"
+            v-if="contactData !== null"
+        >
+
+          <p>Address:
+            <br>{{contactData.Address}}
+            <br>{{contactData.Postal_Code}} {{contactData.City}}
+            <br>{{contactData.Country}}
+          </p>
+
+          <p>Mail:
+            <br><a :href="`mailto:${contactData.mail}`">{{contactData.mail}}</a>
+          </p>
+
+          <p>
+            <a
+                v-for="(link, index) of contactData.links"
+                :href="link.url"
+            >
+              <template v-if="index > 0"> | </template>
+              {{link.name}}
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div
         class="v-navigation__menu">
       <div class="v-navigation__logo">
         <img alt="trojan logo"
@@ -10,18 +56,6 @@
       </div>
     </div>
 
-    <div
-        v-if="isOpen"
-        class="v-navigation__content"
-    >
-      <div
-          class="v-navigation__links"
-      >
-        <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
-        <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
-        <router-link class="t-nav-link" @click="closeMenu" to="/projects">Projects</router-link>
-      </div>
-    </div>
 
     <div
         @click="toggleMenu"
@@ -35,6 +69,7 @@
 import {defineComponent, PropType} from "vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
+import {IApiContact} from "@/api"
 
 export default defineComponent({
 
@@ -58,6 +93,10 @@ export default defineComponent({
     currentRouteName(): string | symbol | undefined | null {
       return this.$router.currentRoute.value.name
     },
+
+    contactData(): null | IApiContact {
+      return this.store.state.contact
+    }
   },
 
   methods: {
@@ -86,6 +125,10 @@ export default defineComponent({
   background: $site-background-color;
   width: 100%;
   user-select: none;
+
+  &.is-open {
+    background: $site-color;
+  }
 }
 
 .v-navigation__menu {
@@ -102,9 +145,17 @@ export default defineComponent({
   left: 0;
   width: 100%;
   height: 100%;
-  background: $site-color;
-  padding-top: $gutter;
+  box-sizing: border-box;
+  padding-bottom: $nav-height;
+}
+
+.v-navigation__content__box {
   @include gutter;
+  padding-top: $gutter;
+  background: $site-color;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .v-navigation__links {
@@ -115,6 +166,13 @@ export default defineComponent({
     @include gutter;
   }
 
+}
+
+.v-navigation__contact {
+  @include no-margin-for-first-and-last;
+  position: absolute;
+  bottom: 0;
+  color: white;
 }
 
 .v-navigation__logo {

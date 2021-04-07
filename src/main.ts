@@ -3,7 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store, {key} from './store'
-import {API_PROJECT_URL, IApiProject} from "@/api"
+import {API_CONTACT_URL, API_PROJECT_URL, IApiContact, IApiProject} from "@/api"
 import MarkdownIt from "markdown-it"
 import "./style/_main.scss"
 
@@ -20,6 +20,7 @@ const markdownIt = new MarkdownIt()
 async function getContent() {
   console.log('get content')
   getProjects()
+  getContact()
 }
 
 async function getProjects() {
@@ -32,4 +33,11 @@ async function getProjects() {
   }
 
   store.commit( "updateProjects", projects )
+}
+
+async function getContact() {
+  const response = await fetch( API_CONTACT_URL )
+  const contact: IApiContact = await response.json()
+
+  store.commit( "updateContact", contact )
 }
