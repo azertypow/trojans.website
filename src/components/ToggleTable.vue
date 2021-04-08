@@ -134,6 +134,8 @@ $header-height: $gutter;
 .v-toggle-table__body {
   overflow: hidden;
   transition: max-height 500ms ease-in-out;
+  background: $site-background-color;
+  position: relative;
 }
 
 .is-dark .v-toggle-table__body__container {
