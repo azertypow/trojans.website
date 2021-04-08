@@ -72,7 +72,7 @@ $transition-duration: .5s;
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: red;
+  background: $site-color;
   transition: none;
   display: none;
   transform: translate3d(-100%, 0, 0);

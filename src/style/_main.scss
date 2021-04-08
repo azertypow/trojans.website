@@ -42,7 +42,7 @@ h5 {
   font-size: 63px;
 
   &.router-link-exact-active {
-    text-decoration: line-through;
     cursor: default;
+    opacity: .5;
   }
 }

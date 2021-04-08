@@ -4,6 +4,11 @@
         :alt="data.caption"
         :src="largeImgUrl"
     >
+  <div
+      v-if="data.caption"
+  >
+    {{data.caption}}
+  </div>
 </template>
 
 <script lang="ts">

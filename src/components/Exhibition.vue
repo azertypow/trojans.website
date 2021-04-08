@@ -36,6 +36,7 @@ export default defineComponent({
 
 p {
   @extend .t-text-small;
+  margin: 0;
 }
 
 </style>

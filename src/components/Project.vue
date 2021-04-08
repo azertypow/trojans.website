@@ -336,6 +336,8 @@ export default defineComponent({
 .v-project__toggle-table {
   opacity: 1;
   transition: opacity 250ms ease-in-out 525ms;
+  box-shadow: $tile-box-shadow;
+  background: white;
 
   &:nth-child(1) { transition-delay: 150ms }
   &:nth-child(2) { transition-delay: 225ms }

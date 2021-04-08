@@ -3,6 +3,7 @@
       class="v-toggle-table"
       :class="{
         'is-open': isOpen,
+        'is-dark': isDark,
       }"
   >
 
@@ -11,6 +12,7 @@
         class="v-toggle-table__header"
         ref="headerContainer"
     >
+      <div v-if="title.length > 0">{{title}}</div>
       <div
           class="v-toggle-table__toggle"
       >
@@ -41,10 +43,17 @@ import {defineComponent, PropType} from "vue"
 export default defineComponent({
 
   emits: [
-      "toggled"
+      "toggled",
+      "mounted",
   ],
 
   name: 'ToggleTable',
+
+  mounted() {
+    (this as any).$nextTick(() => {
+      this.$emit("mounted")
+    })
+  },
 
   props:{
     hasCloseUi: {
@@ -56,6 +65,16 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    isDark: {
+      type: Boolean,
+      required: false,
+      default: () => false,
+    },
+    title: {
+      type: String,
+      required: false,
+      default: () => "",
+    }
   },
 
   data() {
@@ -97,6 +116,8 @@ export default defineComponent({
 $header-height: $gutter;
 
 .v-toggle-table__header {
+  box-shadow: $tile-box-shadow;
+  background: $site-background-color;
   position: relative;
   height: $header-height;
   user-select: none;
@@ -113,6 +134,11 @@ $header-height: $gutter;
 .v-toggle-table__body {
   overflow: hidden;
   transition: max-height 500ms ease-in-out;
+}
+
+.is-dark .v-toggle-table__body__container {
+  background-color: black;
+  color: white;
 }
 
 </style>

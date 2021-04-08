@@ -1,7 +1,12 @@
 // urls
-export const API_BASE_URL    = "http://104.248.20.170"
-export const API_PROJECT_URL = `${API_BASE_URL}/Projects?_limit=-1`
-export const API_CONTACT_URL = `${API_BASE_URL}/Contact`
+export const API_BASE_URL       = "http://104.248.20.170"
+export const API_PROJECT_URL    = `${API_BASE_URL}/Projects?_limit=-1`
+export const API_CONTACT_URL    = `${API_BASE_URL}/Contact`
+export const API_ABOUT_URL      = `${API_BASE_URL}/about`
+export const API_AWARDS_URL     = `${API_BASE_URL}/exhibitions-and-awards`
+export const API_MANIFESTO_URL  = `${API_BASE_URL}/manifesto`
+export const API_INFO_URL       = `${API_BASE_URL}/info`
+export const API_WITH_US_URL    = `${API_BASE_URL}/they-work-with-us`
 
 
 export interface IApiProject {
@@ -80,4 +85,56 @@ export interface IApiContact {
       name: string
       url: string
     }[]
+}
+
+export interface IApiAbout {
+  id: number,
+  description: string,
+  created_at: string,
+  updated_at: string,
+  published_at: string,
+  images: IApiImage[ ]
+}
+
+export interface IApiExhibitionsAndAwards {
+  id: number,
+  published_at: string,
+  created_at: string,
+  updated_at: string,
+  events: {
+      id: number,
+      name: string,
+      link: string,
+      date: string,
+      location: string
+    }[]
+}
+
+export interface IApiManifesto {
+  id: number,
+  description: string,
+  published_at: string,
+  created_at: string,
+  updated_at: string,
+  images: IApiImage[]
+}
+
+export interface IApiInfo {
+  id: number,
+  published_at: string,
+  created_at: string,
+  updated_at: string,
+  infos: string,
+  activated: boolean
+}
+
+export interface IApiTheyWorkWithUs {
+  id: number,
+  created_at: string,
+  updated_at: string,
+  partner: {
+    id: number,
+    name: string,
+    url: string
+  }[]
 }
