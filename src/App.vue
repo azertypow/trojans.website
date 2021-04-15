@@ -1,18 +1,23 @@
 <template>
 
-  <navigation/>
+  <div
+      :class="{'is-home': isHome}"
+      class="v-app">
+    <navigation/>
 
-  <router-view
-      v-slot="{ Component, route }"
-  >
-    <transition
-        name="fade"
-        mode="out-in"
+    <router-view
+        v-slot="{ Component, route }"
     >
-      <component :is="Component" />
-    </transition>
-    <div class="overlay-left"></div>
-  </router-view>
+      <transition
+          name="fade"
+          mode="out-in"
+      >
+        <component :is="Component" />
+      </transition>
+      <div class="overlay-left"></div>
+    </router-view>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -34,6 +39,12 @@ export default defineComponent({
     }
   },
 
+  computed: {
+    isHome(): boolean {
+      return this.$route.path === '/'
+    },
+  },
+
   beforeRouteUpdate (to, from, next) {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
@@ -49,10 +60,14 @@ export default defineComponent({
 
 $transition-duration: .5s;
 
-#app {
+.v-app {
   padding-bottom: $nav-height;
   min-height: 100vh;
   box-sizing: border-box;
+
+  &.is-home {
+    padding-bottom: 0;
+  }
 }
 
 .fade-enter-active,

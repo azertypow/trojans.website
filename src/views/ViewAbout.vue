@@ -28,6 +28,7 @@
           class="v-view-about__table-content"
       >
         <div
+            class="v-view-about__table-content__item no-space"
             v-for="partner of theyWorkWithUs.partner"
         >
           <a
@@ -51,8 +52,19 @@
             class="v-view-about__table-content__item"
             v-for="event of exhibitionsAndAwards.events"
         >
-          — {{event.name}} {{event.date}}
-          <br>{{event.location}}
+          <a
+              v-if="event.link"
+              :href="event.link"
+          >
+            — {{event.name}} {{event.date}}
+            <br>{{event.location}}
+          </a>
+          <template
+              v-else
+          >
+            — {{event.name}} {{event.date}}
+            <br>{{event.location}}
+          </template>
         </div>
 
       </div>
@@ -159,5 +171,22 @@ export default defineComponent({
 
 .v-view-about__table-content__item {
   padding-bottom: $gutter / 2;
+
+  > a {
+    display: block;
+    text-decoration: none;
+
+    &:after {
+      color: $site-color;
+      content: " ↗";
+      font-family: 'Inter', Helvetica, Neue, sans-serif;
+      top: 3px;
+      position: relative;
+    }
+  }
+
+  &.no-space {
+    padding-bottom: 0;
+  }
 }
 </style>

@@ -136,6 +136,7 @@ $header-height: $gutter;
   position: absolute;
   top: 0;
   right: 0;
+  color: $site-color;
 }
 
 .v-toggle-table__title {
