@@ -1,7 +1,10 @@
 <template>
   <nav
       class="v-navigation"
-      :class="{'is-open': isOpen}"
+      :class="{
+        'is-open': isOpen,
+        'show-news': showNews,
+      }"
   >
 
     <div
@@ -15,8 +18,8 @@
             class="v-navigation__links"
         >
           <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
+          <router-link class="t-nav-link" @click="closeMenu" to="/projects">Works</router-link>
           <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
-          <router-link class="t-nav-link" @click="closeMenu" to="/projects">Projects</router-link>
         </div>
 
         <div
@@ -49,7 +52,16 @@
     <div
         class="v-navigation__menu">
       <div class="v-navigation__logo">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        <div
+            class="v-navigation__news t-text-subtitle"
+            v-if="showNews">
+          <div>news</div>
+          <div
+              v-html="news" v-if="news !== null"></div>
+        </div>
+        <svg
+            v-else
+            version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              x="0px" y="0px"
              viewBox="0 0 595.3 220.7" style="enable-background:new 0 0 595.3 220.7;" xml:space="preserve">
 <g>
@@ -92,7 +104,19 @@
     <div
         @click="toggleMenu"
         :class="{'is-open': isOpen}"
-        class="v-navigation__toggle">toggle icon</div>
+        class="v-navigation__toggle">
+
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           x="0px"
+           y="0px"
+           viewBox="0 0 65 65"
+           class="v-navigation__toggle-icon"
+           xml:space="preserve">
+        <path d="M 18 43 47 43 z"/>
+        <path d="M 18 32 47 32 z"/>
+        <path d="M 18 21 47 21 z"/>
+      </svg>
+    </div>
 
   </nav>
 </template>
@@ -109,11 +133,30 @@ export default defineComponent({
 
   data() {
     return {
-      store: useStore(key)
+      store: useStore(key),
+      scrollTop: 0,
     }
   },
 
+  mounted() {
+    window.addEventListener("scroll", (e) => {
+      this.scrollTop = window.scrollY;
+    })
+  },
+
   computed: {
+    actualRout(): string {
+      return this.$route.path
+    },
+
+    navigationOverHomeIntroLogo(): boolean {
+      return this.scrollTop < 250 && this.actualRout === '/'
+    },
+
+    showNews(): boolean {
+      return this.actualRout === '/' && !this.isOpen
+    },
+
     isOpen(): boolean {
       return this.store.state.menuIsOpen
     },
@@ -128,6 +171,11 @@ export default defineComponent({
 
     contactData(): null | IApiContact {
       return this.store.state.contact
+    },
+
+    news(): string | null {
+      if( this.store.state.info?.activated === false ) return null
+      return this.store.state.info?.infos || null
     }
   },
 
@@ -160,6 +208,18 @@ export default defineComponent({
 
   &.is-open {
     background: $site-color;
+  }
+
+  &.show-news {
+    background: transparent;
+
+    .v-navigation__menu {
+      box-shadow: none;
+    }
+
+    .v-navigation__news {
+      color: $site-background-color;
+    }
   }
 }
 
@@ -215,21 +275,73 @@ export default defineComponent({
     width: auto;
     height: 100%;
     fill: $site-color;
+    transition: fill ease-in-out 250ms;
+  }
+
+  .is-open & {
+    > svg {
+      fill: $site-background-color;
+    }
   }
 }
 
 .v-navigation__toggle {
-  @include gutter;
   transition: color 1s ease-in-out;
-  padding-bottom: $gutter;
-  padding-top: $gutter;
   position: fixed;
   bottom: 0;
   right: 0;
+  user-select: none;
+  height: $nav-height;
+
+  > svg {
+    display: block;
+    height: 100%;
+    width: auto;
+    fill: $site-color;
+  }
 
   &.is-open {
     color: white;
+
+    > svg {
+      fill: $site-background-color;
+    }
   }
+}
+
+.v-navigation__toggle-icon {
+  fill: none;
+  stroke: $site-color;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  opacity: 1;
+
+  path {
+    transition: d ease-in-out 150ms, opacity ease-in-out 150ms;
+  }
+
+  .is-open & {
+    stroke: $site-background-color;
+
+    path:nth-child(1) {
+      d: path("M 18 43 47 21 z");
+    }
+
+    path:nth-child(2) {
+      opacity: 0;
+    }
+
+    path:nth-child(3) {
+      d: path("M 18 21 47 43 z");
+    }
+  }
+}
+
+.v-navigation__news {
+  @include gutter;
+  color: black;
+  padding-right: $nav-height;
 }
 
 </style>

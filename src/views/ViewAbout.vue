@@ -1,5 +1,9 @@
 <template>
-  <section class="v-view-about">
+  <section class="v-view-about"
+           :class="{
+            'is-dark-bck': hasBlackBackground
+           }"
+  >
     <toggle-table
         v-if="about"
         :is-open="getThisTableIsOpen( 0 )"
@@ -23,10 +27,14 @@
       <div
           class="v-view-about__table-content"
       >
-        <a v-for="partner of theyWorkWithUs.partner"
-           :href="partner.url"
-           target="_blank"
-        >{{ partner.name }}</a>
+        <div
+            v-for="partner of theyWorkWithUs.partner"
+        >
+          <a
+             :href="partner.url"
+             target="_blank"
+          >{{ partner.name }}</a>
+        </div>
       </div>
     </toggle-table>
 
@@ -88,7 +96,6 @@ export default defineComponent({
 
   methods: {
     firstTableMounted() {
-      console.log("mounted!")
         this.arrayOfToggleTableOpen = [0]
         ;(this.$refs.firstTable as any).toggled()
     },
@@ -103,6 +110,12 @@ export default defineComponent({
   },
 
   computed: {
+    hasBlackBackground(): boolean {
+
+      return this.arrayOfToggleTableOpen.includes(3);
+
+    },
+
     about(): IApiAbout | null {
       return (this.store.state as State).about
     },
@@ -127,8 +140,21 @@ export default defineComponent({
 @import "../style/param";
 @import "../style/grid";
 
+.v-view-about {
+  background: white;
+  box-sizing: border-box;
+  min-height: 100vh;
+  transition: background ease-in-out 150ms;
+
+  &.is-dark-bck {
+    background: black;
+  }
+}
+
 .v-view-about__table-content {
+  @include gutter;
   padding-top: $gutter / 2;
+  padding-bottom: $gutter;
 }
 
 .v-view-about__table-content__item {

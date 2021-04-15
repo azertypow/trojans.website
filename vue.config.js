@@ -9,6 +9,7 @@ module.exports = {
         ? 'http://trojans-prototype.glitch.me/'
         : '/',
     pwa: {
-        themeColor: 'red',
-    }
+        themeColor: '#00EF2E',
+    },
+
 }

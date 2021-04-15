@@ -12,7 +12,9 @@
         class="v-toggle-table__header"
         ref="headerContainer"
     >
-      <div v-if="title.length > 0">{{title}}</div>
+      <div v-if="title.length > 0"
+           class="v-toggle-table__title"
+      >{{title}}</div>
       <div
           class="v-toggle-table__toggle"
       >
@@ -112,6 +114,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "../style/grid";
 @import "../style/param";
+@import "../style/typography";
 
 $header-height: $gutter;
 
@@ -122,13 +125,24 @@ $header-height: $gutter;
   height: $header-height;
   user-select: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .v-toggle-table__toggle {
+  font-family: 'Inter', Helvetica, Neue, sans-serif;
   @include gutter;
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.v-toggle-table__title {
+  @include gutter;
+  @extend .t-text-subtitle;
+  margin: 0;
+  color: black;
 }
 
 .v-toggle-table__body {
@@ -136,6 +150,10 @@ $header-height: $gutter;
   transition: max-height 500ms ease-in-out;
   background: $site-background-color;
   position: relative;
+}
+
+.v-toggle-table {
+  background: white;
 }
 
 .is-dark .v-toggle-table__body__container {

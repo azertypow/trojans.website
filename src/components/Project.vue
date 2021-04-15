@@ -264,6 +264,7 @@ export default defineComponent({
 .v-project__close {
   @extend .t-title;
   @include gutter;
+  font-family: 'Inter', Helvetica, Neue, sans-serif;
   cursor: pointer;
   margin: 0;
   position: absolute;
@@ -272,6 +273,7 @@ export default defineComponent({
   transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
   transform: rotate3d(0, 0, 1, 0);
   opacity: 1;
+  font-size: 17px;
 
   .v-project.is-closed & {
     transform: rotate3d(0, 0, 1, 45deg);
@@ -336,7 +338,7 @@ export default defineComponent({
 .v-project__toggle-table {
   opacity: 1;
   transition: opacity 250ms ease-in-out 525ms;
-  box-shadow: $tile-box-shadow;
+  //box-shadow: $tile-box-shadow;
   background: white;
 
   &:nth-child(1) { transition-delay: 150ms }
@@ -356,8 +358,29 @@ export default defineComponent({
 @import "../style/param";
 @import "../style/grid";
 
+.v-project {
+  .v-gallery__desc {
+    margin-bottom: -20px;
+  }
+}
+
 .v-project__description-container {
   @include no-margin-for-first-and-last;
 }
+
+.v-project__toggle-table {
+  &:nth-child(2) {
+    .v-toggle-table__header {
+      box-shadow: none
+    }
+
+
+  }
+}
+
+.v-toggle-table__body__container {
+  padding-bottom: $gutter;
+}
+
 
 </style>

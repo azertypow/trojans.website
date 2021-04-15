@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'trojanFont';
+  font-style:  normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url("light.otf") format("otf");
+}
+@font-face {
+  font-family: 'trojanFont';
+  font-style:  italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url("LightItalic.otf") format("otf");
+}

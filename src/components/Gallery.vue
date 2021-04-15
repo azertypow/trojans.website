@@ -5,6 +5,7 @@
         :src="largeImgUrl"
     >
   <div
+      class="v-gallery__desc"
       v-if="data.caption"
   >
     {{data.caption}}
@@ -42,4 +43,9 @@ export default defineComponent({
   width: 100%;
   height: auto;
 }
+
+.v-gallery__desc {
+  font-size: 12px;
+}
+
 </style>
