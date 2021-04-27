@@ -11,6 +11,7 @@
         @mounted="firstTableMounted"
         @toggled="tableToggled(0, $event)"
         title="About"
+        :has-body-container-padding-bottom="false"
     >
       <div
           class="v-view-about__table-content"
@@ -28,6 +29,7 @@
         :is-open="getThisTableIsOpen( 1 )"
         @toggled="tableToggled(1, $event)"
         title="They Work With Us"
+        :has-body-container-padding-bottom="false"
     >
       <div
           class="v-view-about__table-content"
@@ -49,6 +51,7 @@
         :is-open="getThisTableIsOpen( 2 )"
         @toggled="tableToggled(2, $event)"
         title="Exhibitions and Awards"
+        :has-body-container-padding-bottom="false"
     >
       <div
           class="v-view-about__table-content"
@@ -82,6 +85,7 @@
         @toggled="tableToggled(3, $event)"
         :isGreen="true"
         title="Manifesto"
+        :has-body-container-padding-bottom="false"
     >
       <div
           class="v-view-about__table-content"

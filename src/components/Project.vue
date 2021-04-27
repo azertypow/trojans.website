@@ -380,9 +380,4 @@ export default defineComponent({
   }
 }
 
-.v-toggle-table__body__container {
-  padding-bottom: $gutter;
-}
-
-
 </style>

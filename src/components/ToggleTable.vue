@@ -6,6 +6,7 @@
         'is-dark': isDark,
         'is-green': isGreen,
         'has-title': hasTitle,
+        'has-body-container-padding-bottom': hasBodyContainerPaddingBottom,
       }"
   >
 
@@ -83,6 +84,11 @@ export default defineComponent({
       type: String,
       required: false,
       default: () => "",
+    },
+    hasBodyContainerPaddingBottom: {
+      type: Boolean,
+      required: false,
+      default: () => true,
     }
   },
 
@@ -186,6 +192,10 @@ $header-height: $gutter;
     background-color: $site-color;
     color: black;
   }
+}
+
+.has-body-container-padding-bottom .v-toggle-table__body__container {
+  padding-bottom: $gutter;
 }
 
 </style>
