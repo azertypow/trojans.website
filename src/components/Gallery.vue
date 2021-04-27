@@ -6,7 +6,7 @@
     >
   <div
       class="v-gallery__desc"
-      v-if="data.caption"
+      v-if="data.caption && withDesc"
   >
     {{data.caption}}
   </div>
@@ -25,6 +25,11 @@ export default defineComponent({
       required: true,
       type: Object as PropType<IApiImage>,
     },
+    withDesc: {
+      required: false,
+      type: Boolean,
+      default: true,
+    }
   },
 
   computed: {

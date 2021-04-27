@@ -3,7 +3,7 @@ import { InjectionKey } from 'vue'
 import {
   IApiAbout,
   IApiContact,
-  IApiExhibitionsAndAwards,
+  IApiExhibitionsAndAwards, IApiHomeImage,
   IApiInfo,
   IApiManifesto,
   IApiProject,
@@ -22,6 +22,7 @@ export interface State {
   manifesto:      IApiManifesto | null
   info:           IApiInfo | null
   theyWorkWithUs: IApiTheyWorkWithUs | null
+  homeImages:     IApiHomeImage[] | null
 }
 
 export interface IStoreMutation {
@@ -33,6 +34,7 @@ export interface IStoreMutation {
   updateManifesto       (state: State, manifesto:      IApiManifesto): void
   updateInfo            (state: State, info:           IApiInfo): void
   updateTheyWorkWithUs  (state: State, theyWorkWithUs: IApiTheyWorkWithUs): void
+  updateHomeImages      (state: State, homeImages: IApiHomeImage[]): void
 }
 
 // define injection key
@@ -48,7 +50,8 @@ export default createStore<State>({
     award: null,
     info: null,
     manifesto: null,
-    theyWorkWithUs: null
+    theyWorkWithUs: null,
+    homeImages: null,
   },
   mutations: {
     updateProjects(state, projects) {
@@ -71,7 +74,10 @@ export default createStore<State>({
     },
     updateTheyWorkWithUs(state: State, theyWorkWithUs: IApiTheyWorkWithUs) {
       state.theyWorkWithUs = theyWorkWithUs
-    }
+    },
+    updateHomeImages(state: State, homeImages: IApiHomeImage[]) {
+      state.homeImages = homeImages
+    },
   } as IStoreMutation,
   actions: {
   },

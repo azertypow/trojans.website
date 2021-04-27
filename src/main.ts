@@ -6,11 +6,11 @@ import store, {key} from './store'
 import {
   API_ABOUT_URL,
   API_AWARDS_URL,
-  API_CONTACT_URL, API_INFO_URL, API_MANIFESTO_URL,
+  API_CONTACT_URL, API_HOME_IMAGE_URL, API_INFO_URL, API_MANIFESTO_URL,
   API_PROJECT_URL, API_WITH_US_URL,
   IApiAbout,
   IApiContact,
-  IApiExhibitionsAndAwards, IApiInfo, IApiManifesto,
+  IApiExhibitionsAndAwards, IApiHomeImage, IApiInfo, IApiManifesto,
   IApiProject, IApiTheyWorkWithUs
 } from "@/api"
 import MarkdownIt from "markdown-it"
@@ -60,6 +60,7 @@ async function getContent() {
   getManifesto()
   getInfo()
   getTheyWorkWithUs()
+  getHomeImages()
 }
 
 async function getProjects() {
@@ -117,3 +118,11 @@ async function getTheyWorkWithUs() {
 
   store.commit( "updateTheyWorkWithUs", theyWorkWithUs )
 }
+
+async function getHomeImages() {
+  const response = await fetch( API_HOME_IMAGE_URL )
+  const homeImages: IApiHomeImage[] = await response.json()
+
+  store.commit( "updateHomeImages", homeImages )
+}
+

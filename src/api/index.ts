@@ -7,6 +7,7 @@ export const API_AWARDS_URL     = `${API_BASE_URL}/exhibitions-and-awards`
 export const API_MANIFESTO_URL  = `${API_BASE_URL}/manifesto`
 export const API_INFO_URL       = `${API_BASE_URL}/info`
 export const API_WITH_US_URL    = `${API_BASE_URL}/they-work-with-us`
+export const API_HOME_IMAGE_URL = `${API_BASE_URL}/home-images`
 
 
 export interface IApiProject {
@@ -138,4 +139,13 @@ export interface IApiTheyWorkWithUs {
     name: string,
     url: string
   }[]
+}
+
+export interface IApiHomeImage {
+  id: number,
+  Link: string,
+  published_at: string,
+  created_at: string,
+  updated_at: string,
+  Image: IApiImage,
 }
