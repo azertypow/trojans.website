@@ -58,7 +58,10 @@
           <div>news</div>
           <div
               class="v-navigation__news__content"
-              v-html="news" v-if="news !== null"></div>
+              v-if="news !== null"
+          >
+            <div class="v-navigation__news__content__html" v-html="news" ></div>
+          </div>
         </div>
 
         <a
@@ -355,13 +358,38 @@ export default defineComponent({
   @include gutter;
   color: black;
   padding-right: $nav-height;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  padding-bottom: $gutter / 2;
+}
 
-  .v-navigation__news__content {
-    > p {
-      @extend .t-text-small;
-    }
+.v-navigation__news__content {
+  height: $small-line-height * 2;
+  //overflow: hidden;
+  overflow: scroll;
+}
+
+</style>
+
+<style lang="scss" >
+@import "../style/param";
+@import "../style/grid";
+@import "../style/typography";
+
+.v-navigation__news__content__html {
+  @include no-margin-for-first-and-last;
+
+  p {
+    @extend .t-text-small;
   }
 
+  img {
+    display: inline-block;
+    height: $small-line-height * 2;
+  }
 }
 
 </style>
