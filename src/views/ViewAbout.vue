@@ -35,7 +35,7 @@
           class="v-view-about__table-content"
       >
         <div
-            class="v-view-about__table-content__item no-space"
+            class="v-view-about__table-content__item"
             v-for="partner of theyWorkWithUs.partner"
         >
           <a
