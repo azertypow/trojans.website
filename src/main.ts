@@ -26,6 +26,31 @@ createApp(App)
 
 const markdownIt = new MarkdownIt()
 
+// ---
+// target _blank
+// Remember old renderer, if overridden, or proxy to default renderer
+const defaultRender = markdownIt.renderer.rules.link_open || function(tokens, idx, options, env, self) {
+  return self.renderToken(tokens, idx, options);
+}
+
+markdownIt.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+  // If you are sure other plugins can't add `target` - drop check below
+  const aIndex = tokens[idx].attrIndex('target');
+
+  if (aIndex < 0) {
+    tokens[idx].attrPush(['target', '_blank']); // add new attribute
+  } else {
+    const attrs = tokens[idx].attrs
+    if( attrs ) {
+      attrs[aIndex][1] = '_blank';    // replace value of existing attr
+    }
+  }
+
+  // pass token to default renderer.
+  return defaultRender(tokens, idx, options, env, self)
+}
+// -----
+
 async function getContent() {
   console.log('get content')
   getProjects()
