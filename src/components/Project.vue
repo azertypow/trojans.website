@@ -4,9 +4,9 @@
       class="v-project"
       :style="style"
   >
-    <div
-        @click="closeProject"
-        class="v-project__close">✗</div>
+<!--    <div-->
+<!--        @click="closeProject"-->
+<!--        class="v-project__close">✗</div>-->
 
     <div
         ref="container"
