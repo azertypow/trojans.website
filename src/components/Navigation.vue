@@ -59,8 +59,13 @@
           <div
               class="v-navigation__news__content"
               v-if="news !== null"
+              ref="newsElementContainer"
           >
-            <div class="v-navigation__news__content__html" v-html="news" ></div>
+            <div
+                class="v-navigation__news__content__html"
+                v-html="news"
+                ref="newsElement"
+            ></div>
           </div>
         </div>
 
@@ -149,8 +154,11 @@ export default defineComponent({
   },
 
   mounted() {
-    window.addEventListener("scroll", (e) => {
-      this.scrollTop = window.scrollY;
+    this.$nextTick(() => {
+      window.addEventListener("scroll", (e) => {
+        this.scrollTop = window.scrollY;
+      })
+      this.initNewsAnimation()
     })
   },
 
@@ -197,6 +205,36 @@ export default defineComponent({
     closeMenu() {
       this.store.state.menuIsOpen = false
     },
+
+    initNewsAnimation() {
+      window.setInterval( () => {
+        if(this.$route.path === "/") {
+          const newsElementContainer = this.$refs.newsElementContainer
+          const newsElement = this.$refs.newsElement
+
+          if(newsElement instanceof HTMLElement && newsElementContainer instanceof HTMLElement) {
+            const containerSize = newsElementContainer.getBoundingClientRect()
+            const contentSize   = newsElement.getBoundingClientRect()
+
+            const contentOverflowContainer = contentSize.height > containerSize.height
+            const bottomElementIsUnderBottomContainer = contentSize.bottom > containerSize.bottom
+
+            const needScrollToBottom  = contentOverflowContainer && bottomElementIsUnderBottomContainer
+            const needScrollToZero    = contentOverflowContainer && !bottomElementIsUnderBottomContainer
+
+            const contentLineHeight = Number.parseFloat( getComputedStyle(newsElement).lineHeight )
+
+            if( needScrollToBottom )  {
+              newsElement.style.transition = "transform ease-in-out 500ms"
+              newsElement.style.transform = `translateY( ${contentSize.top - containerSize.top - contentLineHeight}px )`
+            } else if( needScrollToZero ) {
+              newsElement.style.transition = "transform ease-in-out 0ms"
+              newsElement.style.transform = `translateY( 0 )`
+            }
+          }
+        }
+      }, 2500)
+    }
   }
 
 });
@@ -371,7 +409,7 @@ export default defineComponent({
 }
 
 .v-navigation__news__content {
-  height: $small-line-height * 2;
+  height: $news-content-height;
   //overflow: hidden;
   overflow: scroll;
 }
@@ -392,7 +430,8 @@ export default defineComponent({
 
   img {
     display: inline-block;
-    height: $small-line-height * 2;
+    height: $news-content-height;
+    vertical-align: bottom;
   }
 }
 

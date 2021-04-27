@@ -13,6 +13,10 @@ $site-background-color: white;
 // font
 $line-height: 2 * $unit;
 $font-title-size: 43px;
+$small-line-height: 15px;
 
 // tile
 $tile-box-shadow:  0px -5px 10px -5px #00000033;
+
+// bottom nav
+$news-content-height: $small-line-height * 2;
