@@ -316,6 +316,10 @@ export default defineComponent({
     fill: $site-color;
   }
 
+  .is-home & > svg {
+    stroke: white;
+  }
+
   &.is-open {
     color: white;
 
