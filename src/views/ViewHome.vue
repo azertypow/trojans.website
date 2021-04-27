@@ -69,6 +69,7 @@ export default defineComponent({
     //mix-blend-mode: difference;
     user-select: none;
     pointer-events: none;
+    z-index: 10 ;
   }
 }
 
