@@ -28,7 +28,7 @@ export default defineComponent({
     withDesc: {
       required: false,
       type: Boolean,
-      default: true,
+      default: () => true,
     }
   },
 
