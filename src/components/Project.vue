@@ -274,6 +274,7 @@ export default defineComponent({
   transform: rotate3d(0, 0, 1, 0);
   opacity: 1;
   font-size: 17px;
+  color: $site-color;
 
   .v-project.is-closed & {
     transform: rotate3d(0, 0, 1, 45deg);
@@ -356,11 +357,12 @@ export default defineComponent({
 
 <style lang="scss">
 @import "../style/param";
+@import "../style/typography";
 @import "../style/grid";
 
 .v-project {
   .v-gallery__desc {
-    margin-bottom: -20px;
+    margin-bottom: - $gutter + $small-line-height / 2;
   }
 }
 

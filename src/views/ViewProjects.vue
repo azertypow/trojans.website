@@ -4,19 +4,19 @@
   >
 
     <div
-        v-for="(projectsInThisYear, year) in sortedProjects"
+        v-for="item in sortedProjects"
     >
       <div
           class="v-view-projects__year"
       >
-        <h5>{{year}}</h5>
+        <h5>{{item.projectYear}}</h5>
       </div>
 
       <Project
-          v-for="(project, key) in projectsInThisYear"
+          v-for="(project, key) in item.projects"
           :data="project"
-          :stringProjectId="`${year}${key}`"
-          @click="projectClicked(`${year}${key}`)"
+          :stringProjectId="`${item.projectYear}${key}`"
+          @click="projectClicked(`${item.projectYear}${key}`)"
       />
 
     </div>
@@ -55,16 +55,30 @@ export default defineComponent({
   },
 
   computed: {
-    sortedProjects(): { [key: number]: IApiProject[] } {
+    sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
 
-      const projectSortedByYear: { [key: number]: IApiProject[] } = {}
+      const projectSortedByYear: { projectYear: number, projects: IApiProject[] }[] = []
 
       for( const project of this.store.state.projects ) {
         if( project.date ) {
           const projectYear = new Date( project.date ).getFullYear()
-          projectSortedByYear.hasOwnProperty( projectYear ) ?
-              projectSortedByYear[projectYear].push( project ) :
-              projectSortedByYear[projectYear] = [ project ]
+
+          let projectAddedToArray = false
+
+          for( const item of projectSortedByYear ) {
+            if( item.projectYear === projectYear ) {
+              item.projects.push( project )
+              projectAddedToArray = true
+              break
+            }
+          }
+
+          if( !projectAddedToArray ) {
+            projectSortedByYear.push({
+              projects: [project],
+              projectYear: projectYear
+            })
+          }
         }
       }
 

@@ -22,6 +22,7 @@ export interface IApiProject {
 }
 
 export interface IApiExhibition_links {
+  type?: string
   id?: number
   exhibition_title?: string
   exhibition_link?: string

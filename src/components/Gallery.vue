@@ -38,6 +38,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "../style/param";
+@import "../style/typography";
+
 .v-gallery {
   display: block;
   width: 100%;
@@ -45,7 +48,9 @@ export default defineComponent({
 }
 
 .v-gallery__desc {
-  font-size: 12px;
+  @extend .t-text-small;
+  margin-top: $small-line-height / 2;
+  margin-bottom: $small-line-height / 2;
 }
 
 </style>

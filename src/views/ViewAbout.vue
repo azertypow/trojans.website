@@ -16,6 +16,11 @@
           class="v-view-about__table-content"
           v-html="about.description"
       ></div>
+      <div class="v-view-about__table-content__img" >
+        <img
+            v-for="img of about.images"
+            :src="formatUrl(img.url)" alt="">
+      </div>
     </toggle-table>
 
     <toggle-table
@@ -75,13 +80,18 @@
         v-if="manifesto"
         :is-open="getThisTableIsOpen( 3 )"
         @toggled="tableToggled(3, $event)"
-        :is-dark="true"
+        :isGreen="true"
         title="Manifesto"
     >
       <div
           class="v-view-about__table-content"
           v-html="manifesto.description"
       ></div>
+      <div class="v-view-about__table-content__img" >
+          <img
+              v-for="img of manifesto.images"
+              :src="formatUrl(img.url)" alt="">
+      </div>
     </toggle-table>
 
   </section>
@@ -92,7 +102,7 @@ import {defineComponent, PropType} from "vue"
 import {useStore} from "vuex"
 import {key, State} from "@/store"
 import ToggleTable from "@/components/ToggleTable.vue"
-import {IApiAbout, IApiExhibitionsAndAwards, IApiManifesto, IApiTheyWorkWithUs} from "@/api"
+import {API_BASE_URL, IApiAbout, IApiExhibitionsAndAwards, IApiManifesto, IApiTheyWorkWithUs} from "@/api"
 
 export default defineComponent({
 
@@ -119,6 +129,10 @@ export default defineComponent({
     tableToggled(index: number, $event: number) {
       this.arrayOfToggleTableOpen = [ index ]
     },
+
+    formatUrl(path: string) {
+      return `${API_BASE_URL}${path}`
+    }
   },
 
   computed: {
@@ -167,6 +181,19 @@ export default defineComponent({
   @include gutter;
   padding-top: $gutter / 2;
   padding-bottom: $gutter;
+}
+
+.v-view-about__table-content__img {
+    width: 100%;
+
+  > img {
+    display: block;
+    width: 100%;
+
+    + img {
+      margin-top: $gutter / 2;
+    }
+  }
 }
 
 .v-view-about__table-content__item {

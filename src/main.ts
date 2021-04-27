@@ -81,6 +81,8 @@ async function getInfo() {
   const response = await fetch( API_INFO_URL )
   const info: IApiInfo = await response.json()
 
+  info.infos = markdownIt.render( info.infos )
+
   store.commit( "updateInfo", info )
 }
 

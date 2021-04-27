@@ -4,6 +4,8 @@
       :class="{
         'is-open': isOpen,
         'is-dark': isDark,
+        'is-green': isGreen,
+        'has-title': hasTitle,
       }"
   >
 
@@ -12,14 +14,14 @@
         class="v-toggle-table__header"
         ref="headerContainer"
     >
-      <div v-if="title.length > 0"
+      <div v-if="hasTitle"
            class="v-toggle-table__title"
       >{{title}}</div>
       <div
           class="v-toggle-table__toggle"
       >
-        <template v-if="isOpen && hasCloseUi">✗</template>
-        <template v-else-if="!isOpen">↗</template>
+        <template v-if="isOpen && hasCloseUi && !hasTitle">✗</template>
+        <template v-else-if="!isOpen && !hasTitle">↗</template>
       </div>
     </div>
 
@@ -72,10 +74,21 @@ export default defineComponent({
       required: false,
       default: () => false,
     },
+    isGreen: {
+      type: Boolean,
+      required: false,
+      default: () => false,
+    },
     title: {
       type: String,
       required: false,
       default: () => "",
+    }
+  },
+
+  computed: {
+    hasTitle(): boolean {
+      return  this.title.length > 0
     }
   },
 
@@ -128,6 +141,11 @@ $header-height: $gutter;
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  .has-title & {
+    height: auto;
+    padding: $gutter/2 3em $gutter/2 $gutter/2;
+  }
 }
 
 .v-toggle-table__toggle {
@@ -140,8 +158,7 @@ $header-height: $gutter;
 }
 
 .v-toggle-table__title {
-  @include gutter;
-  @extend .t-text-subtitle;
+  @extend .t-title;
   margin: 0;
   color: black;
 }
@@ -160,6 +177,15 @@ $header-height: $gutter;
 .is-dark .v-toggle-table__body__container {
   background-color: black;
   color: white;
+}
+
+.is-green {
+  .v-toggle-table__header,
+  .v-toggle-table__toggle,
+  .v-toggle-table__body__container {
+    background-color: $site-color;
+    color: black;
+  }
 }
 
 </style>
