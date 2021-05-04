@@ -30,12 +30,14 @@ import Project from "../components/Project.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
 import {IApiProject} from "@/api"
+import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 
 export default defineComponent({
 
   name: 'ViewProjects',
 
   components: {
+    ProjectGalleryMobile,
     Project,
   },
 
@@ -47,10 +49,7 @@ export default defineComponent({
 
   methods: {
     projectClicked(stringID: string){
-
       this.store.state.idOfOpenedProject = stringID
-
-      console.log( "project clicked",  stringID)
     },
   },
 

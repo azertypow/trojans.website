@@ -56,7 +56,13 @@
         />
       </toggle-table>
 
+      <ProjectGalleryMobile
+          class="v-project__no-toggle-table"
+          v-if="isMobileWidth"
+          :images="images"
+      ></ProjectGalleryMobile>
       <toggle-table
+          v-else-if="isDeskWidth"
           class="v-project__toggle-table"
           v-for="(image, index) of images"
           @toggled="tableToggled(index, $event)"
@@ -80,11 +86,14 @@ import {useStore} from "vuex"
 import {key} from "@/store"
 import Gallery from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
+import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 
 export default defineComponent({
 
   name: 'Project',
-  components: {ToggleTable, Gallery, Exhibition},
+
+  components: {ProjectGalleryMobile, ToggleTable, Gallery, Exhibition},
+
   props: {
     data: {
       type: Object as PropType<IApiProject>,
@@ -137,13 +146,21 @@ export default defineComponent({
 
     updateHeight(heightOfOpenTable: number) {
       const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
+      const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
 
       const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
+
+      let totalOfNoToggleHeightElement = 0
+
+      noToggleTableChildElements.forEach(element => {
+        totalOfNoToggleHeightElement += element.getBoundingClientRect().height
+      })
 
       this.style.maxHeight =
           (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
           + heightOfOpenTable
           + totalToggleTableHeaderHeight
+          + totalOfNoToggleHeightElement
           + "px"
     },
 
@@ -203,6 +220,15 @@ export default defineComponent({
   },
 
   computed: {
+
+    isDeskWidth(): boolean {
+      return this.store.state.isDeskWidth
+    },
+
+    isMobileWidth(): boolean {
+      return this.store.state.isMobileWidth
+    },
+
     exhibitions(): IApiExhibition_links[] {
       return this.data.exhibition_links || []
     },

@@ -61,6 +61,7 @@ async function getContent() {
   getInfo()
   getTheyWorkWithUs()
   getHomeImages()
+  setScreenSizeGetter()
 }
 
 async function getProjects() {
@@ -126,3 +127,10 @@ async function getHomeImages() {
   store.commit( "updateHomeImages", homeImages )
 }
 
+async function setScreenSizeGetter() {
+  store.commit("updateScreenWidth", window.innerWidth )
+
+  window.addEventListener("resize", () => {
+    store.commit("updateScreenWidth", window.innerWidth )
+  })
+}

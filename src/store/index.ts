@@ -23,6 +23,8 @@ export interface State {
   info:           IApiInfo | null
   theyWorkWithUs: IApiTheyWorkWithUs | null
   homeImages:     IApiHomeImage[] | null
+  isMobileWidth:  boolean
+  isDeskWidth:    boolean
 }
 
 export interface IStoreMutation {
@@ -35,6 +37,7 @@ export interface IStoreMutation {
   updateInfo            (state: State, info:           IApiInfo): void
   updateTheyWorkWithUs  (state: State, theyWorkWithUs: IApiTheyWorkWithUs): void
   updateHomeImages      (state: State, homeImages: IApiHomeImage[]): void
+  updateScreenWidth     (state: State, screenWidth: number): void
 }
 
 // define injection key
@@ -52,6 +55,8 @@ export default createStore<State>({
     manifesto: null,
     theyWorkWithUs: null,
     homeImages: null,
+    isDeskWidth: false,
+    isMobileWidth: false,
   },
   mutations: {
     updateProjects(state, projects) {
@@ -78,6 +83,14 @@ export default createStore<State>({
     updateHomeImages(state: State, homeImages: IApiHomeImage[]) {
       state.homeImages = homeImages
     },
+    updateScreenWidth(state: State, screenWidth: number) {
+
+      const mobileBreakPoint = 900
+      const isMobileWidth = screenWidth < mobileBreakPoint
+
+      state.isMobileWidth = isMobileWidth
+      state.isDeskWidth   = !isMobileWidth
+    }
   } as IStoreMutation,
   actions: {
   },
