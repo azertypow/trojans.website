@@ -133,7 +133,14 @@ export default defineComponent({
 
         this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
       }
+
+      this.updateHeaderFixedPositionOnScroll()
+      window.addEventListener("scroll", this.updateHeaderFixedPositionOnScroll)
     })
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.updateHeaderFixedPositionOnScroll)
   },
 
   methods: {
@@ -141,6 +148,12 @@ export default defineComponent({
       if(this.thisIsOpen) {
         e.stopImmediatePropagation()
         this.store.state.idOfOpenedProject = null
+      }
+    },
+
+    updateHeaderFixedPositionOnScroll() {
+      if (this.thisIsOpen && this.$refs.containerTitle instanceof HTMLElement) {
+        console.log( this.$refs.containerTitle.getBoundingClientRect().top )
       }
     },
 

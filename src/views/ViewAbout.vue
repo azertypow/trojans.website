@@ -1,12 +1,10 @@
 <template>
-  <section class="v-view-about"
-           :class="{
-            'is-dark-bck': hasBlackBackground
-           }"
-  >
-    <toggle-table
+  <section class="v-view-about">
+    <toggle-table-fixed
         v-if="about"
         :is-open="getThisTableIsOpen( 0 )"
+        :index="0"
+        :index-of-open-tab="indexOfToggleTableOpen"
         ref="firstTable"
         @mounted="firstTableMounted"
         @toggled="tableToggled(0, $event)"
@@ -22,11 +20,13 @@
             v-for="img of about.images"
             :src="formatUrl(img.url)" alt="">
       </div>
-    </toggle-table>
+    </toggle-table-fixed>
 
-    <toggle-table
+    <toggle-table-fixed
         v-if="theyWorkWithUs"
         :is-open="getThisTableIsOpen( 1 )"
+        :index="1"
+        :index-of-open-tab="indexOfToggleTableOpen"
         @toggled="tableToggled(1, $event)"
         title="They Work With Us"
         :has-body-container-padding-bottom="false"
@@ -44,11 +44,13 @@
           >{{ partner.name }}</a>
         </div>
       </div>
-    </toggle-table>
+    </toggle-table-fixed>
 
-    <toggle-table
+    <toggle-table-fixed
         v-if="exhibitionsAndAwards"
         :is-open="getThisTableIsOpen( 2 )"
+        :index="2"
+        :index-of-open-tab="indexOfToggleTableOpen"
         @toggled="tableToggled(2, $event)"
         title="Exhibitions and Awards"
         :has-body-container-padding-bottom="false"
@@ -76,12 +78,14 @@
         </div>
 
       </div>
-    </toggle-table>
+    </toggle-table-fixed>
 
 
-    <toggle-table
+    <toggle-table-fixed
         v-if="manifesto"
         :is-open="getThisTableIsOpen( 3 )"
+        :index="3"
+        :index-of-open-tab="indexOfToggleTableOpen"
         @toggled="tableToggled(3, $event)"
         :isGreen="true"
         title="Manifesto"
@@ -96,7 +100,7 @@
               v-for="img of manifesto.images"
               :src="formatUrl(img.url)" alt="">
       </div>
-    </toggle-table>
+    </toggle-table-fixed>
 
   </section>
 </template>
@@ -107,31 +111,30 @@ import {useStore} from "vuex"
 import {key, State} from "@/store"
 import ToggleTable from "@/components/ToggleTable.vue"
 import {API_BASE_URL, IApiAbout, IApiExhibitionsAndAwards, IApiManifesto, IApiTheyWorkWithUs} from "@/api"
+import ToggleTableFixed from "@/components/ToggleTableFixed.vue"
 
 export default defineComponent({
 
   name: 'ViewAbout',
-  components: {ToggleTable},
+  components: {ToggleTableFixed, ToggleTable},
 
   data() {
     return {
       store: useStore(key),
-      arrayOfToggleTableOpen: [] as number[],
+      indexOfToggleTableOpen: 0,
     }
   },
 
   methods: {
     firstTableMounted() {
-        this.arrayOfToggleTableOpen = [0]
-        ;(this.$refs.firstTable as any).toggled()
     },
 
     getThisTableIsOpen(index: number): boolean {
-      return this.arrayOfToggleTableOpen.includes(index)
+      return this.indexOfToggleTableOpen === index
     },
 
     tableToggled(index: number, $event: number) {
-      this.arrayOfToggleTableOpen = [ index ]
+      this.indexOfToggleTableOpen = index
     },
 
     formatUrl(path: string) {
@@ -140,12 +143,6 @@ export default defineComponent({
   },
 
   computed: {
-    hasBlackBackground(): boolean {
-
-      return this.arrayOfToggleTableOpen.includes(3);
-
-    },
-
     about(): IApiAbout | null {
       return (this.store.state as State).about
     },

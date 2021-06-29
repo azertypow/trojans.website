@@ -90,7 +90,8 @@ export default createStore<State>({
 
       state.isMobileWidth = isMobileWidth
       state.isDeskWidth   = !isMobileWidth
-    }
+    },
+
   } as IStoreMutation,
   actions: {
   },
