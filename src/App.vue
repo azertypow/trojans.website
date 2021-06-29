@@ -1,7 +1,10 @@
 <template>
 
   <div
-      :class="{'is-home': isHome}"
+      :class="{
+        'is-home': isHome,
+        'is-desk-width': isDeskWidth,
+      }"
       class="v-app">
     <navigation/>
 
@@ -35,7 +38,8 @@ export default defineComponent({
 
   data () {
     return {
-      transitionName: 'slide-left'
+      transitionName: 'slide-left',
+      store: useStore(key),
     }
   },
 
@@ -43,6 +47,9 @@ export default defineComponent({
     isHome(): boolean {
       return this.$route.path === '/'
     },
+    isDeskWidth(): boolean {
+      return this.store.state.isDeskWidth
+    }
   },
 
   beforeRouteUpdate (to, from, next) {

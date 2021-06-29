@@ -419,4 +419,36 @@ export default defineComponent({
   }
 }
 
+
+.is-desk-width {
+  $width-of-closed-project: $font-title-size + $gutter;
+
+  .v-project {
+    max-height: none !important;
+    max-width: $width-of-closed-project;
+    transition: max-width 500ms ease-in-out;
+
+    &.is-closed {
+      &:hover {
+        max-width: $width-of-closed-project * 1.5;
+      }
+    }
+  }
+
+  .v-project__container {
+    display: flex;
+  }
+
+  .v-project__title {
+    writing-mode: vertical-rl;
+    text-align: right;
+
+    > * {
+      margin: 0;
+      transform: rotate3d(0, 0, 1, 180deg);
+    }
+  }
+
+}
+
 </style>

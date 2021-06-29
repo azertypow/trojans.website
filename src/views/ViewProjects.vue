@@ -5,6 +5,7 @@
 
     <div
         v-for="item in sortedProjects"
+        class="v-view-projects__item"
     >
       <div
           class="v-view-projects__year"
@@ -104,4 +105,31 @@ export default defineComponent({
   box-shadow:  $tile-box-shadow;
   position: relative;
 }
+
+.is-desk-width {
+  .v-view-projects {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .v-view-projects__item {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
+  .v-view-projects__year {
+    writing-mode: vertical-rl;
+    text-align: right;
+    padding: $gutter/2 0;
+    width: auto;
+    flex-shrink: 0;
+
+    > * {
+      margin: 0;
+      transform: rotate3d(0, 0, 1, 180deg);
+    }
+  }
+}
+
 </style>
