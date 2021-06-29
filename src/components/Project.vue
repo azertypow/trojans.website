@@ -34,7 +34,6 @@
         >
           <div
               class="v-project__description-viewer"
-              :style="descriptionViewerStyle"
           >
             <div
                 ref="descriptionContainer"
@@ -42,11 +41,6 @@
                 v-html="data.description"></div>
           </div>
 
-          <button
-              v-if="showReadMoreButton"
-              class="v-project__description__more"
-              @click="toggleDescriptionView"
-          >{{ readMoreButtonText }}</button>
         </div>
 
         <exhibition
@@ -114,26 +108,6 @@ export default defineComponent({
 
       const descriptionContent = this.$refs.descriptionContainer
 
-      if(
-          descriptionContent instanceof HTMLElement
-          && descriptionContent.children.length > maxChildrenElement
-      ) {
-
-        this.hasLongContent = true
-
-        for (
-            let childrenKey = 0;
-            childrenKey < maxChildrenElement;
-            childrenKey++
-        ) {
-          this.minHeightForLongContent +=
-              descriptionContent.children[ childrenKey ].getBoundingClientRect().height
-          + (maxChildrenElement - 1) * paragrapheMargin
-        }
-
-        this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
-      }
-
       this.updateHeaderFixedPositionOnScroll()
       window.addEventListener("scroll", this.updateHeaderFixedPositionOnScroll)
     })
@@ -177,33 +151,6 @@ export default defineComponent({
           + "px"
     },
 
-    toggleDescriptionView() {
-
-      this.readMoreIsOpen = !this.readMoreIsOpen
-
-      const descriptionContainer = this.$refs.descriptionContainer
-
-      if( descriptionContainer instanceof HTMLElement ) {
-        if( this.readMoreIsOpen ) {
-          this.descriptionViewerStyle.maxHeight = descriptionContainer.getBoundingClientRect().height + 'px'
-
-          this.style.maxHeight =
-              parseFloat( this.style.maxHeight )
-              + ( descriptionContainer.getBoundingClientRect().height
-              - this.minHeightForLongContent ) + 'px'
-
-          console.log( "this.style.maxHeight", this.style.maxHeight )
-          console.log( "descriptionContainer.getBoundingClientRect().height", descriptionContainer.getBoundingClientRect().height )
-          console.log( "this.minHeightForLongContent", this.minHeightForLongContent )
-        }
-        else
-          this.descriptionViewerStyle.maxHeight = this.minHeightForLongContent + "px"
-
-      } else {
-        this.descriptionViewerStyle.maxHeight = ""
-      }
-    },
-
     getThisTableIsOpen(index: number): boolean {
       return this.arrayOfToggleTableOpen.includes(index)
     },
@@ -222,12 +169,6 @@ export default defineComponent({
       style: {
         maxHeight: ""
       },
-      descriptionViewerStyle: {
-        maxHeight: ""
-      },
-      hasLongContent: false,
-      minHeightForLongContent: 0,
-      readMoreIsOpen: false,
       arrayOfToggleTableOpen: [] as number[],
     }
   },
@@ -250,17 +191,9 @@ export default defineComponent({
       return this.data.images || []
     },
 
-    showReadMoreButton(): boolean {
-      return this.hasLongContent
-    },
-
     thisIsOpen(): boolean {
       return this.stringProjectId === this.store.state.idOfOpenedProject
     },
-
-    readMoreButtonText(): string {
-      return this.readMoreIsOpen ? "show less" : "read more"
-    }
   },
 
   watch: {
@@ -335,22 +268,6 @@ export default defineComponent({
 
   + * {
     padding-top: 40px;
-  }
-}
-
-.v-project__description__more {
-  @extend .t-text-reg;
-  display: block;
-  background: none;
-  border: none;
-  padding: 0;
-  text-decoration: underline;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-  &:focus {
-    color: $site-color;
-    outline: none;
   }
 }
 
