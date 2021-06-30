@@ -198,4 +198,30 @@ $header-height: $gutter;
   padding-bottom: $gutter;
 }
 
+.is-desk-width {
+  .v-toggle-table {
+    width: 20px;
+  }
+
+  .v-toggle-table__body {
+    max-height: none !important;
+    transition: none;
+    display: none;
+  }
+
+  .v-toggle-table__toggle {
+    padding: 0;
+  }
+
+  .v-toggle-table {
+    &.is-open {
+      width: 100%;
+
+      .v-toggle-table__body {
+        display: block;
+      }
+    }
+  }
+}
+
 </style>
