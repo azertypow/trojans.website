@@ -16,7 +16,7 @@
         <span>go to -></span>
       </a>
       <gallery
-          :data="imageHomeItem.Image"
+          :data="{image: imageHomeItem.Image}"
           :with-desc="false"
       />
     </div>

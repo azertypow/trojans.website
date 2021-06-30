@@ -2,11 +2,11 @@
   <section class="v-project-gallery-mobile">
     <div
         class="v-project-gallery-mobile__container"
-        v-for="image of images"
+        v-for="galleryData of images"
     >
       <Gallery
           :with-desc="true"
-          :data="image"
+          :data="galleryData"
       ></Gallery>
     </div>
   </section>
@@ -14,8 +14,7 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from "vue"
-import {IApiImage} from "@/api"
-import Gallery from "@/components/Gallery.vue"
+import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 
 export default defineComponent({
 
@@ -23,7 +22,7 @@ export default defineComponent({
   components: {Gallery},
   props: {
     images: {
-      type: Object as PropType<IApiImage[]>,
+      type: Object as PropType<IGalleryData[]>,
       required: true,
     },
   },

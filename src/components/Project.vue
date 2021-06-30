@@ -78,7 +78,7 @@ import {IApiExhibition_links, IApiImage, IApiProject} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
-import Gallery from "@/components/Gallery.vue"
+import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 
@@ -215,8 +215,30 @@ export default defineComponent({
       return this.data.exhibition_links || []
     },
 
-    images(): IApiImage[] {
-      return this.data.images || []
+    images(): IGalleryData[] {
+
+      const data = []
+
+      if( this.data.images ) {
+
+        for(const galleryImage of this.data.images) {
+          data.push({
+            image: galleryImage
+          } as IGalleryData)
+        }
+      }
+
+      if(this.data.Vimeo) {
+        for(const galleryVimeo of this.data.Vimeo) {
+          data.push({
+            image: {},
+            vimeo: galleryVimeo
+          } as IGalleryData)
+        }
+      }
+
+      return data
+
     },
 
     thisIsOpen(): boolean {

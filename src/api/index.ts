@@ -20,6 +20,7 @@ export interface IApiProject {
   date?: string
   exhibition_links?: IApiExhibition_links [],
   images?: IApiImage[]
+  Vimeo?: IAPiVimeo[]
 }
 
 export interface IApiExhibition_links {
@@ -56,6 +57,13 @@ export interface IApiImage {
   provider_metadata?: null
   created_at?: string
   updated_at?: string
+}
+
+export interface IAPiVimeo {
+  id: number,
+  title: string,
+  vimeo_id: string,
+  cover: IApiImage
 }
 
 export interface IApiImageSize {
