@@ -132,23 +132,48 @@ export default defineComponent({
     },
 
     updateHeight(heightOfOpenTable: number) {
-      const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
-      const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
 
-      const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
+      if( this.isMobileWidth ) {
 
-      let totalOfNoToggleHeightElement = 0
+        const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
+        const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
 
-      noToggleTableChildElements.forEach(element => {
-        totalOfNoToggleHeightElement += element.getBoundingClientRect().height
-      })
+        const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
 
-      this.style.maxHeight =
-          (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
-          + heightOfOpenTable
-          + totalToggleTableHeaderHeight
-          + totalOfNoToggleHeightElement
-          + "px"
+        let totalOfNoToggleHeightElement = 0
+
+        noToggleTableChildElements.forEach(element => {
+          totalOfNoToggleHeightElement += element.getBoundingClientRect().height
+        })
+
+        this.style.maxHeight =
+            (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
+            + heightOfOpenTable
+            + totalToggleTableHeaderHeight
+            + totalOfNoToggleHeightElement
+            + "px"
+
+      } else {
+        this.style.maxHeight = ""
+      }
+
+    },
+
+    updateWidth() {
+
+      if( this.isDeskWidth ) {
+
+        const projectCloseWidth = 63 //px unit
+
+        this.style.maxWidth =
+            projectCloseWidth * 2.5
+            + window.innerWidth
+            + "px"
+
+      } else {
+        this.style.maxWidth = ""
+      }
+
     },
 
     getThisTableIsOpen(index: number): boolean {
@@ -157,6 +182,8 @@ export default defineComponent({
 
     tableToggled(index: number, $event: number) {
       this.updateHeight( $event )
+
+      this.updateWidth()
 
       if( index === -1 || this.getThisTableIsOpen(index) ) this.arrayOfToggleTableOpen = [ -1 ]
       else this.arrayOfToggleTableOpen = [ index ]
@@ -167,7 +194,8 @@ export default defineComponent({
     return {
       store: useStore(key),
       style: {
-        maxHeight: ""
+        maxHeight:  "",
+        maxWidth:   "",
       },
       arrayOfToggleTableOpen: [] as number[],
     }
@@ -205,6 +233,7 @@ export default defineComponent({
       } else {
         this.arrayOfToggleTableOpen = []
         this.style.maxHeight = ""
+        this.style.maxWidth = ""
       }
     }
   },
