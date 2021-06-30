@@ -166,8 +166,8 @@ export default defineComponent({
         const projectCloseWidth = 63 //px unit
 
         this.style.maxWidth =
-            projectCloseWidth * 2.5
-            + window.innerWidth
+            window.innerWidth
+            - projectCloseWidth * 2.5
             + "px"
 
       } else {
