@@ -201,26 +201,32 @@ $header-height: $gutter;
 .is-desk-width {
   .v-toggle-table {
     width: 20px;
+    height: calc(100vh - #{$nav-height});
+    box-sizing: border-box;
+
+    &.is-open {
+      width: calc( 100vw - #{65px * 5} );
+
+      .v-toggle-table__body {
+        display: block;
+      }
+    }
   }
 
   .v-toggle-table__body {
     max-height: none !important;
     transition: none;
     display: none;
+    height: calc( 100% - #{$header-height} );
   }
 
   .v-toggle-table__toggle {
     padding: 0;
   }
 
-  .v-toggle-table {
-    &.is-open {
-      width: 100%;
-
-      .v-toggle-table__body {
-        display: block;
-      }
-    }
+  .v-toggle-table__body__container {
+    height: 100%;
+    box-sizing: border-box;
   }
 }
 

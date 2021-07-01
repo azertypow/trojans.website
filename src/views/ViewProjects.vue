@@ -109,11 +109,13 @@ export default defineComponent({
 .is-desk-width {
   .v-view-projects {
     display: flex;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: scroll;
   }
 
   .v-view-projects__item {
     display: flex;
+    flex-shrink: 0;
     flex-wrap: nowrap;
     overflow: hidden;
   }

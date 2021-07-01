@@ -404,11 +404,26 @@ export default defineComponent({
   .v-project__title {
     writing-mode: vertical-rl;
     text-align: right;
+    height: calc(100vh - #{$nav-height});
+    box-sizing: border-box;
+    padding-right: $gutter / 2;
 
     > * {
       margin: 0;
       transform: rotate3d(0, 0, 1, 180deg);
     }
+  }
+
+  .v-gallery {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    object-position: right;
+  }
+
+  .v-gallery__desc {
+    margin-top: 3px;
+    text-align: right;
   }
 
 }
