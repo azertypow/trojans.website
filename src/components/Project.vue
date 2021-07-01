@@ -395,12 +395,6 @@ export default defineComponent({
     max-height: none !important;
     max-width: $width-of-closed-project;
     transition: max-width 500ms ease-in-out;
-
-    &.is-closed {
-      &:hover {
-        max-width: $width-of-closed-project * 1.5;
-      }
-    }
   }
 
   .v-project__container {
