@@ -117,6 +117,7 @@
 
 
     <div
+        v-if="isMobileWidth"
         @click="toggleMenu"
         :class="{'is-open': isOpen}"
         class="v-navigation__toggle">
@@ -131,6 +132,15 @@
         <path d="M 18 32 47 32 z"/>
         <path d="M 18 21 47 21 z"/>
       </svg>
+    </div>
+
+    <div
+        v-if="isDeskWidth"
+        class="v-navigation__toggle v-navigation__toggle__fix"
+    >
+      <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
+      <router-link class="t-nav-link" @click="closeMenu" to="/projects">Works</router-link>
+      <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
     </div>
 
   </nav>
@@ -194,7 +204,15 @@ export default defineComponent({
     news(): string | null {
       if( this.store.state.info?.activated === false ) return null
       return this.store.state.info?.infos || null
-    }
+    },
+
+    isMobileWidth(): boolean {
+      return this.store.state.isMobileWidth
+    },
+
+    isDeskWidth(): boolean {
+      return this.store.state.isDeskWidth
+    },
   },
 
   methods: {
@@ -364,6 +382,19 @@ export default defineComponent({
     > svg {
       fill: $site-background-color;
     }
+  }
+}
+
+.v-navigation__toggle__fix {
+  display: flex;
+  flex-direction: row;
+
+  > * {
+    color: $site-color;
+    font-size: 10px;
+    display: block;
+    height: auto;
+    @include gutter;
   }
 }
 
