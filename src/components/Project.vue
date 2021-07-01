@@ -253,7 +253,7 @@ export default defineComponent({
         ;(this.$refs.firstTable as any).toggled()
 
       } else {
-        this.arrayOfToggleTableOpen = []
+        // this.arrayOfToggleTableOpen = []
         this.style.maxHeight = ""
         this.style.maxWidth = ""
       }
