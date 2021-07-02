@@ -421,6 +421,11 @@ export default defineComponent({
     object-position: right;
   }
 
+  .v-view-home .v-gallery {
+    object-fit: cover;
+    object-position: center;
+  }
+
   .v-gallery__desc {
     margin-top: 3px;
     text-align: right;
