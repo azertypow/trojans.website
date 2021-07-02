@@ -114,7 +114,9 @@
 
       </div>
 
-      <tags-list></tags-list>
+      <tags-list
+          v-if="isDeskWidth && isProjectView"
+      ></tags-list>
 
     </div>
 
@@ -208,6 +210,10 @@ export default defineComponent({
     news(): string | null {
       if( this.store.state.info?.activated === false ) return null
       return this.store.state.info?.infos || null
+    },
+
+    isProjectView(): boolean {
+      return this.$route.path === '/projects'
     },
 
     isMobileWidth(): boolean {
