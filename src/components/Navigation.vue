@@ -387,7 +387,8 @@ export default defineComponent({
 
 .v-navigation__toggle__fix {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
 
   > * {
     color: $site-color;
@@ -395,6 +396,9 @@ export default defineComponent({
     display: block;
     height: auto;
     @include gutter;
+    line-height: 1em;
+    //padding-top: 5px;
+    //padding-bottom: 5px;
   }
 }
 
