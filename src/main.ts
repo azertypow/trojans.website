@@ -7,7 +7,7 @@ import {
   API_ABOUT_URL,
   API_AWARDS_URL,
   API_CONTACT_URL, API_HOME_IMAGE_URL, API_INFO_URL, API_MANIFESTO_URL,
-  API_PROJECT_URL, API_WITH_US_URL,
+  API_PROJECT_URL, API_TAGS_URL, API_WITH_US_URL,
   IApiAbout,
   IApiContact,
   IApiExhibitionsAndAwards, IApiHomeImage, IApiInfo, IApiManifesto,
@@ -54,6 +54,7 @@ markdownIt.renderer.rules.link_open = function (tokens, idx, options, env, self)
 async function getContent() {
   console.log('get content')
   getProjects()
+  getTags()
   getContact()
   getAbout()
   getAward()
@@ -74,6 +75,13 @@ async function getProjects() {
   }
 
   store.commit( "updateProjects", projects )
+}
+
+async function getTags() {
+  const response = await fetch( API_TAGS_URL )
+  const tags: IApiProject[] = await response.json()
+
+  store.commit( "updateTags", tags )
 }
 
 async function getContact() {

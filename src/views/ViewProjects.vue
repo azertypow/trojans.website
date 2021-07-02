@@ -111,6 +111,10 @@ export default defineComponent({
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
+
+    .v-project.is-hidden {
+      display: none;
+    }
   }
 
   .v-view-projects__item {

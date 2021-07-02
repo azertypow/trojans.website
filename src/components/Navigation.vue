@@ -113,6 +113,9 @@
         </a>
 
       </div>
+
+      <tags-list></tags-list>
+
     </div>
 
 
@@ -151,11 +154,12 @@ import {defineComponent, PropType} from "vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
 import {IApiContact} from "@/api"
+import TagsList from "@/components/TagsList.vue"
 
 export default defineComponent({
 
   name: 'Navigation',
-
+  components: {TagsList},
   data() {
     return {
       store: useStore(key),
@@ -291,11 +295,12 @@ export default defineComponent({
 }
 
 .v-navigation__menu {
-  @include column-container;
+  display: flex;
+  flex-wrap: nowrap;
   box-shadow: $tile-box-shadow;
   height: 100%;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: left;
 }
 
 .v-navigation__content {
@@ -336,7 +341,7 @@ export default defineComponent({
 
 .v-navigation__logo {
   height: 100%;
-  width: 100%;
+  padding-right: $gutter;
 
   > a {
     display: block;
@@ -467,6 +472,12 @@ export default defineComponent({
     display: inline-block;
     height: $news-content-height;
     vertical-align: bottom;
+  }
+}
+
+.v-navigation {
+  .v-tag-list {
+    width: 100%;
   }
 }
 

@@ -6,7 +6,7 @@ import {
   IApiExhibitionsAndAwards, IApiHomeImage,
   IApiInfo,
   IApiManifesto,
-  IApiProject,
+  IApiProject, IApiTags,
   IApiTheyWorkWithUs
 } from "@/api"
 
@@ -14,6 +14,8 @@ import {
 
 export interface State {
   projects: IApiProject[]
+  tags: IApiTags[]
+  activatedTags: string[]
   contact: IApiContact | null
   menuIsOpen: boolean
   idOfOpenedProject: null | string
@@ -30,6 +32,9 @@ export interface State {
 export interface IStoreMutation {
   [key: string]: Mutation<State>
   updateProjects        (state: State, projects:       IApiProject[]): void
+  updateTags            (state: State, tags:           IApiTags[]): void
+  tagsListAddTag        (state: State, tagToAdd:       string): void
+  tagsListRemoveTag     (state: State, tagToRemove:    string): void
   updateContact         (state: State, contact:        IApiContact): void
   updateAbout           (state: State, about:          IApiAbout): void
   updateAward           (state: State, award:          IApiExhibitionsAndAwards): void
@@ -46,6 +51,8 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export default createStore<State>({
   state: {
     projects: [],
+    tags: [],
+    activatedTags: [],
     contact: null,
     menuIsOpen: false,
     idOfOpenedProject: null,
@@ -61,6 +68,17 @@ export default createStore<State>({
   mutations: {
     updateProjects(state, projects) {
       state.projects = projects
+    },
+    updateTags(state: State, tags: IApiTags[]) {
+      state.tags = tags
+    },
+    tagsListAddTag(state: State, tagToAdd: string) {
+      state.activatedTags.push( tagToAdd )
+    },
+    tagsListRemoveTag(state: State, tagToRemove: string) {
+      const indexOfTagToRemove = state.activatedTags.indexOf( tagToRemove )
+      if( indexOfTagToRemove > -1 ) state.activatedTags.splice( indexOfTagToRemove, 1 )
+      else console.error(`can't remove ${tagToRemove}, because isn't in activatedTags array stored`)
     },
     updateContact(state, contact) {
       state.contact = contact

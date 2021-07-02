@@ -8,6 +8,7 @@ export const API_MANIFESTO_URL  = `${API_BASE_URL}/manifesto`
 export const API_INFO_URL       = `${API_BASE_URL}/info`
 export const API_WITH_US_URL    = `${API_BASE_URL}/they-work-with-us`
 export const API_HOME_IMAGE_URL = `${API_BASE_URL}/home-images`
+export const API_TAGS_URL = `${API_BASE_URL}/Tags`
 
 
 export interface IApiProject {
@@ -21,6 +22,12 @@ export interface IApiProject {
   exhibition_links?: IApiExhibition_links [],
   images?: IApiImage[]
   Vimeo?: IAPiVimeo[]
+  tags?: IApiTags[]
+}
+
+export interface IApiTags {
+  id: 2,
+  tags: string,
 }
 
 export interface IApiExhibition_links {

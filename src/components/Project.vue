@@ -1,6 +1,9 @@
 <template>
   <section
-      :class="{'is-closed': !thisIsOpen}"
+      :class="{
+        'is-closed': !thisIsOpen,
+        'is-hidden': !isActive,
+      }"
       class="v-project"
       :style="style"
   >
@@ -244,6 +247,21 @@ export default defineComponent({
     thisIsOpen(): boolean {
       return this.stringProjectId === this.store.state.idOfOpenedProject
     },
+
+    isActive(): boolean {
+
+      if( this.store.state.activatedTags.length > 0 ) {
+
+        for( const tag of this.data.tags || [] ) {
+          if( this.store.state.activatedTags.includes( tag.tags ) ) return true
+        }
+        return false
+
+      } else {
+        return true
+      }
+
+    }
   },
 
   watch: {
