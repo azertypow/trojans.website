@@ -20,7 +20,7 @@
     >
       <div v-if="hasTitle"
            class="v-toggle-table-fixed__title"
-      >{{title}} {{index}} {{indexOfOpenTab}}</div>
+      >{{title}}</div>
       <div
           class="v-toggle-table-fixed__toggle"
       >
