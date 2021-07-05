@@ -402,14 +402,18 @@ export default defineComponent({
   justify-content: center;
 
   > * {
+    @include gutter;
+    @extend .t-text-subtitle;
+    margin: 0;
     color: $site-color;
-    font-size: 10px;
     display: block;
     height: auto;
-    @include gutter;
     line-height: 1em;
-    //padding-top: 5px;
-    //padding-bottom: 5px;
+    transition: color linear 250ms;
+
+    .is-home & {
+      color: white;
+    }
   }
 }
 
