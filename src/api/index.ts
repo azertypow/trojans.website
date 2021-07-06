@@ -53,6 +53,8 @@ export interface IApiImage {
     small?: IApiImageSize,
     medium?: IApiImageSize,
     thumbnail?: IApiImageSize
+    xlarge: IApiImageSize,
+    xsmall: IApiImageSize,
   },
   hash?: string
   ext?: ImageExt

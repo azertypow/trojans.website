@@ -1,3 +1,36 @@
+# settings (based on DigitalOcean Strapi droplet)
+
+## images resizeparameters 
+
+go to development strapi project folder
+
+``` bash
+cd /srv/strapi/strapi-development
+```
+
+create or open file settings parameter for plugins:
+
+```
+nano config/plugins.js
+```
+
+and add this settings:
+
+``` js
+module.exports = {
+  upload: {
+    breakpoints: {
+      xlarge: 1920,
+      large: 1000,
+      medium: 750,
+      small: 500,
+      xsmall: 64
+    }
+  }
+}
+```
+
+
 # website
 
 ## Project setup

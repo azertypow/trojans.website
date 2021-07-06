@@ -61,7 +61,7 @@ export default defineComponent({
 
       if( this.data.vimeo ) imgData = this.data.vimeo.cover
 
-      const largeImagePath: string = imgData.formats?.large?.url || imgData.url || ""
+      const largeImagePath: string = imgData.formats?.xlarge?.url || imgData.formats?.large?.url || imgData.url || ""
       return `${API_BASE_URL}${largeImagePath}`
     },
   }

@@ -114,6 +114,12 @@ export default defineComponent({
       this.updateHeaderFixedPositionOnScroll()
       window.addEventListener("scroll", this.updateHeaderFixedPositionOnScroll)
     })
+
+    if( this.thisIsOpen ) {
+      this.updateWidth()
+      this.arrayOfToggleTableOpen = [ -1 ]
+    }
+
   },
 
   beforeUnmount() {
