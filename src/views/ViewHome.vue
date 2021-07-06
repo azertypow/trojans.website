@@ -13,7 +13,7 @@
           :href="imageHomeItem.Link"
           target="_blank"
       >
-        <span>go to -></span>
+        <span>-></span>
       </a>
       <gallery
           :data="{image: imageHomeItem.Image}"
@@ -82,6 +82,7 @@ export default defineComponent({
   width: 100%;
   height: 100vh;
   position: relative;
+  font-family: 'Inter', Helvetica, Neue, sans-serif;
 
   > a {
     position: absolute;
@@ -95,8 +96,8 @@ export default defineComponent({
       position: absolute;
       top: $gutter / 2;
       right: $gutter / 2;
-      color: white;
-      mix-blend-mode: difference;
+      color: $site-color;
+      line-height: 1ex;
     }
   }
 
