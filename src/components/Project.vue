@@ -255,13 +255,14 @@ export default defineComponent({
     },
 
     isActive(): boolean {
+      if(this.data.tags) {
 
-      if( this.store.state.activatedTags.length > 0 ) {
-
-        for( const tag of this.data.tags || [] ) {
-          if( this.store.state.activatedTags.includes( tag.tags ) ) return true
-        }
-        return false
+        return this.store.state.activatedTags.every((tagValue: string, index, array) => {
+          for (const tag of (this.data.tags as IApiTags[] ) ) {
+            if (tag.tags === tagValue) return true
+          }
+          return false
+        })
 
       } else {
         return true
