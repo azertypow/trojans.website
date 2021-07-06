@@ -410,10 +410,6 @@ export default defineComponent({
     height: auto;
     line-height: 1em;
     transition: color linear 250ms;
-
-    .is-home & {
-      color: white;
-    }
   }
 }
 
@@ -456,6 +452,7 @@ export default defineComponent({
   flex-wrap: nowrap;
   height: 100%;
   padding-bottom: $gutter / 2;
+  justify-content: flex-end;
 }
 
 .v-navigation__news__content {
