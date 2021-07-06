@@ -60,7 +60,7 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: baseline;
+  align-items: center;
 
   .v-tag__ui {
     width: 10px;
