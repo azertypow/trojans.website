@@ -6,7 +6,7 @@
 module.exports = {
 
     publicPath: process.env.NODE_ENV === 'production'
-        ? 'http://trojans-prototype.glitch.me/'
+        ? 'http://http://trojanscollective.com/'
         : '/',
     pwa: {
         themeColor: '#00EF2E',
