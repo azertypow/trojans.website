@@ -4,7 +4,7 @@
   >
 
     <div
-        v-for="item in sortedProjects"
+        v-for="(item, dateKey) in sortedProjects"
         class="v-view-projects__item"
     >
       <div
@@ -17,6 +17,7 @@
           v-for="(project, key) in item.projects"
           :data="project"
           :stringProjectId="`${item.projectYear}${key}`"
+          :key="key + dateKey"
           @click="projectClicked(`${item.projectYear}${key}`)"
       />
 

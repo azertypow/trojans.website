@@ -77,7 +77,7 @@
 
 <script lang="ts">
 import {defineComponent, PropType } from "vue"
-import {IApiExhibition_links, IApiImage, IApiProject} from "@/api"
+import {IApiExhibition_links, IApiProject, IApiTags} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
@@ -100,6 +100,9 @@ export default defineComponent({
       type: String as PropType<string>,
       required: true,
     },
+    key: {
+      type: String,
+    }
   },
 
   mounted() {
@@ -113,12 +116,18 @@ export default defineComponent({
 
       this.updateHeaderFixedPositionOnScroll()
       window.addEventListener("scroll", this.updateHeaderFixedPositionOnScroll)
+
+      // open first project in projectView.vue composant
+      if (this.key == "0") {
+        this.store.state.idOfOpenedProject = this.stringProjectId
+      }
+
+      if( this.thisIsOpen ) {
+        this.updateWidth()
+        this.arrayOfToggleTableOpen = [ -1 ]
+      }
     })
 
-    if( this.thisIsOpen ) {
-      this.updateWidth()
-      this.arrayOfToggleTableOpen = [ -1 ]
-    }
 
   },
 
@@ -257,12 +266,19 @@ export default defineComponent({
     isActive(): boolean {
       if(this.data.tags) {
 
-        return this.store.state.activatedTags.every((tagValue: string, index, array) => {
+        const tagFilterValue = this.store.state.activatedTags.every((tagValue: string, index, array) => {
           for (const tag of (this.data.tags as IApiTags[] ) ) {
             if (tag.tags === tagValue) return true
           }
           return false
         })
+
+        const secondaryTagFilterValue =
+            this.store.state.activatedSecondaryTag ?
+                this.store.state.activatedSecondaryTag === this.data.second_tag?.value
+                : true
+
+        return tagFilterValue && secondaryTagFilterValue
 
       } else {
         return true
@@ -371,7 +387,6 @@ export default defineComponent({
 .v-project__toggle-table {
   opacity: 1;
   transition: opacity 250ms ease-in-out 525ms;
-  //box-shadow: $tile-box-shadow;
   background: white;
 
   &:nth-child(1) { transition-delay: 150ms }
@@ -382,6 +397,10 @@ export default defineComponent({
 
   .is-closed & {
     opacity: 0;
+  }
+
+  .is-desk-width & {
+    box-shadow: $tile-box-shadow;
   }
 }
 
