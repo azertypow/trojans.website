@@ -7,15 +7,20 @@ import {
   IApiInfo,
   IApiManifesto,
   IApiProject, IApiTags,
-  IApiTheyWorkWithUs
+  IApiTheyWorkWithUs, ISecondTags
 } from "@/api"
 
 // define your typings for the store state
 
 export interface State {
   projects: IApiProject[]
+
   tags: IApiTags[]
   activatedTags: string[]
+
+  secondaryTag: ISecondTags[]
+  activatedSecondaryTag: string | null
+
   contact: IApiContact | null
   menuIsOpen: boolean
   idOfOpenedProject: null | string
@@ -32,9 +37,14 @@ export interface State {
 export interface IStoreMutation {
   [key: string]: Mutation<State>
   updateProjects        (state: State, projects:       IApiProject[]): void
+
   updateTags            (state: State, tags:           IApiTags[]): void
   tagsListAddTag        (state: State, tagToAdd:       string): void
   tagsListRemoveTag     (state: State, tagToRemove:    string): void
+
+  updateSecondaryTags               (state: State, tags: ISecondTags[]): void
+  ToggleSecondaryTagActivated       (state: State, tagToToggle:       string): void
+
   updateContact         (state: State, contact:        IApiContact): void
   updateAbout           (state: State, about:          IApiAbout): void
   updateAward           (state: State, award:          IApiExhibitionsAndAwards): void
@@ -51,8 +61,13 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export default createStore<State>({
   state: {
     projects: [],
+
     tags: [],
     activatedTags: [],
+
+    secondaryTag: [],
+    activatedSecondaryTag: null,
+
     contact: null,
     menuIsOpen: false,
     idOfOpenedProject: null,
@@ -69,6 +84,7 @@ export default createStore<State>({
     updateProjects(state, projects) {
       state.projects = projects
     },
+
     updateTags(state: State, tags: IApiTags[]) {
       state.tags = tags
     },
@@ -80,6 +96,16 @@ export default createStore<State>({
       if( indexOfTagToRemove > -1 ) state.activatedTags.splice( indexOfTagToRemove, 1 )
       else console.error(`can't remove ${tagToRemove}, because isn't in activatedTags array stored`)
     },
+
+    updateSecondaryTags(state: State, secondaryTags: ISecondTags[]) {
+      state.secondaryTag = secondaryTags
+    },
+
+    ToggleSecondaryTagActivated(state: State, tagToToggle: string) {
+      if ( state.activatedSecondaryTag === tagToToggle) state.activatedSecondaryTag = null
+      else state.activatedSecondaryTag = tagToToggle
+    },
+
     updateContact(state, contact) {
       state.contact = contact
     },

@@ -205,7 +205,7 @@ $header-height: $gutter;
     box-sizing: border-box;
 
     &.is-open {
-      width: calc( 100vw - #{65px * 5} );
+      width: 630px;
 
       .v-toggle-table__body {
         display: block;

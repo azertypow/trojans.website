@@ -44,13 +44,29 @@ export default defineComponent({
 
   .v-project-gallery-mobile__container {
     width: 100%;
+    height: calc( 100vh - #{$nav-height} );
     flex-shrink: 0;
     overflow: hidden;
     scroll-snap-align: start;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    .v-gallery {
+      height: 75%;
+      flex-shrink: 0;
+      flex-grow: 1;
+      object-fit: contain;
+      object-position: left bottom;
+      background: black;
+    }
 
     .v-gallery__desc {
       margin-bottom: 0 !important;
       padding-bottom: $gutter / 2;
+      height: auto;
+      flex-shrink: 0;
+      flex-grow: 0;
     }
   }
 </style>

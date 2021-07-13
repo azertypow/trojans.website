@@ -2,7 +2,8 @@
   <div
       @click="toggleStatus"
       :class="{
-        'is-active': isActive
+        'is-variante': isSecondeFilter,
+        'is-active': isActive,
       }"
       class="v-tag"
   >
@@ -25,6 +26,11 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    isSecondeFilter: {
+      type: Boolean,
+      required: true,
+      default: false,
+    }
   },
 
   data() {
@@ -35,14 +41,31 @@ export default defineComponent({
 
   methods: {
     toggleStatus() {
-      if( this.isActive ) this.store.commit('tagsListRemoveTag', this.tag)
-      else this.store.commit('tagsListAddTag', this.tag)
+      if( this.isSecondeFilter ) {
+
+        this.store.commit("ToggleSecondaryTagActivated", this.tag)
+
+      } else {
+
+        if( this.isActive ) this.store.commit('tagsListRemoveTag', this.tag)
+        else this.store.commit('tagsListAddTag', this.tag)
+
+      }
     }
   },
 
   computed: {
     isActive(): boolean {
-      return this.store.state.activatedTags.includes( this.tag )
+
+      if( this.isSecondeFilter ) {
+
+        return this.store.state.activatedSecondaryTag === this.tag
+
+      } else {
+
+        return this.store.state.activatedTags.includes( this.tag )
+
+      }
     }
   }
 
@@ -81,6 +104,15 @@ export default defineComponent({
     .v-tag__ui {
       background: $site-color;
       border-color: $site-color;
+    }
+  }
+
+  &.is-variante {
+    &.is-active {
+      .v-tag__ui {
+        background: black;
+        border-color: black;
+      }
     }
   }
 }

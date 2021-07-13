@@ -1,14 +1,15 @@
 // urls
-export const API_BASE_URL       = "http://104.248.20.170"
-export const API_PROJECT_URL    = `${API_BASE_URL}/Projects?_limit=-1`
-export const API_CONTACT_URL    = `${API_BASE_URL}/Contact`
-export const API_ABOUT_URL      = `${API_BASE_URL}/about`
-export const API_AWARDS_URL     = `${API_BASE_URL}/exhibitions-and-awards`
-export const API_MANIFESTO_URL  = `${API_BASE_URL}/manifesto`
-export const API_INFO_URL       = `${API_BASE_URL}/info`
-export const API_WITH_US_URL    = `${API_BASE_URL}/they-work-with-us`
-export const API_HOME_IMAGE_URL = `${API_BASE_URL}/home-images`
-export const API_TAGS_URL = `${API_BASE_URL}/Tags`
+export const API_BASE_URL           = "http://104.248.20.170"
+export const API_PROJECT_URL        = `${API_BASE_URL}/Projects?_limit=-1`
+export const API_CONTACT_URL        = `${API_BASE_URL}/Contact`
+export const API_ABOUT_URL          = `${API_BASE_URL}/about`
+export const API_AWARDS_URL         = `${API_BASE_URL}/exhibitions-and-awards`
+export const API_MANIFESTO_URL      = `${API_BASE_URL}/manifesto`
+export const API_INFO_URL           = `${API_BASE_URL}/info`
+export const API_WITH_US_URL        = `${API_BASE_URL}/they-work-with-us`
+export const API_HOME_IMAGE_URL     = `${API_BASE_URL}/home-images`
+export const API_TAGS_URL           = `${API_BASE_URL}/Tags`
+export const API_SECONDARY_TAGS_URL = `${API_BASE_URL}/second-tags`
 
 
 export interface IApiProject {
@@ -23,11 +24,17 @@ export interface IApiProject {
   images?: IApiImage[]
   Vimeo?: IAPiVimeo[]
   tags?: IApiTags[]
+  second_tag?: ISecondTags
 }
 
 export interface IApiTags {
   id: 2,
   tags: string,
+}
+
+export interface ISecondTags {
+  id: 1,
+  value: string,
 }
 
 export interface IApiExhibition_links {

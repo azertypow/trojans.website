@@ -7,7 +7,7 @@ import {
   API_ABOUT_URL,
   API_AWARDS_URL,
   API_CONTACT_URL, API_HOME_IMAGE_URL, API_INFO_URL, API_MANIFESTO_URL,
-  API_PROJECT_URL, API_TAGS_URL, API_WITH_US_URL,
+  API_PROJECT_URL, API_SECONDARY_TAGS_URL, API_TAGS_URL, API_WITH_US_URL,
   IApiAbout,
   IApiContact,
   IApiExhibitionsAndAwards, IApiHomeImage, IApiInfo, IApiManifesto,
@@ -55,6 +55,7 @@ async function getContent() {
   console.log('get content')
   getProjects()
   getTags()
+  getSecondaryTags()
   getContact()
   getAbout()
   getAward()
@@ -82,6 +83,13 @@ async function getTags() {
   const tags: IApiProject[] = await response.json()
 
   store.commit( "updateTags", tags )
+}
+
+async function getSecondaryTags() {
+  const response = await fetch( API_SECONDARY_TAGS_URL )
+  const secondaryTags: IApiProject[] = await response.json()
+
+  store.commit( "updateSecondaryTags", secondaryTags )
 }
 
 async function getContact() {
