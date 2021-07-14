@@ -4,19 +4,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "http://trojanscollective.com/CNAME"
   },
   {
-    "revision": "4da940875408ce522bf6",
-    "url": "http://trojanscollective.com/css/ViewHome.818f5f39.css"
+    "revision": "8c6d5c8d532e23e5120b",
+    "url": "http://trojanscollective.com/css/ViewHome.903d02ea.css"
   },
   {
-    "revision": "7677bf4c67ae9ae906e6",
-    "url": "http://trojanscollective.com/css/ViewProjects.6cb9c837.css"
+    "revision": "4bf40f899fce146cb858",
+    "url": "http://trojanscollective.com/css/ViewProjects.fbbe33c3.css"
   },
   {
-    "revision": "b2f9f373fdbfd131b9d8",
+    "revision": "5ba14d31ff81cb24346a",
     "url": "http://trojanscollective.com/css/app.e1daa14e.css"
   },
   {
-    "revision": "318d4a3fbd68a0c18dd5d4712731ca97",
+    "revision": "2c517776547a348961144620f89dd350",
     "url": "http://trojanscollective.com/favicon.png"
   },
   {
@@ -184,24 +184,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "http://trojanscollective.com/fonts/light.ab33911b.otf"
   },
   {
+    "revision": "0e03fc2d704db9dd8069774652db3a1b",
+    "url": "http://trojanscollective.com/horse.png"
+  },
+  {
     "revision": "595d7305ed9afadb6e35fb6449c16de7",
     "url": "http://trojanscollective.com/img/TrojansLogo--white.595d7305.svg"
   },
   {
-    "revision": "2b953bbb23c02d709d0b8e9ec84afc1a",
+    "revision": "c08afa1d76bfc6fb855fe85b71a7e139",
     "url": "http://trojanscollective.com/index.html"
   },
   {
-    "revision": "4da940875408ce522bf6",
-    "url": "http://trojanscollective.com/js/ViewHome.b80049d5.js"
+    "revision": "8c6d5c8d532e23e5120b",
+    "url": "http://trojanscollective.com/js/ViewHome.7514d0bd.js"
   },
   {
-    "revision": "7677bf4c67ae9ae906e6",
-    "url": "http://trojanscollective.com/js/ViewProjects.d4f739b1.js"
+    "revision": "4bf40f899fce146cb858",
+    "url": "http://trojanscollective.com/js/ViewProjects.82e66d7f.js"
   },
   {
-    "revision": "b2f9f373fdbfd131b9d8",
-    "url": "http://trojanscollective.com/js/app.8ede3edc.js"
+    "revision": "5ba14d31ff81cb24346a",
+    "url": "http://trojanscollective.com/js/app.b2a65128.js"
   },
   {
     "revision": "c4b6886032cc35ff434d",
