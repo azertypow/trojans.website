@@ -57,8 +57,8 @@ export default defineComponent({
       flex-shrink: 0;
       flex-grow: 1;
       object-fit: contain;
-      object-position: left bottom;
-      background: black;
+      object-position: center bottom;
+      background: white;
     }
 
     .v-gallery__desc {
