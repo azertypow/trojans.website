@@ -6,6 +6,8 @@
         }"
         :alt="data.image.caption"
         :src="largeImgUrl"
+        @click="openVimeoPlayer"
+        v-if="!vimeoPlayerIsOpen"
     >
   <div
       class="v-gallery__desc"
@@ -16,15 +18,15 @@
 
   <div
       class="v-gallery__vimeo-container"
-      v-if="data.vimeo"
+      v-if="data.vimeo && vimeoPlayerIsOpen"
   >
-    <iframe
-        title="vimeo-player"
-        :src="`https://player.vimeo.com/video/${data.vimeo.vimeo_id}`"
-        width="640"
-        height="360"
-        frameborder="0"
-        allowfullscreen
+
+    <iframe :src="`https://player.vimeo.com/video/${data.vimeo.vimeo_id}?color=00EF2E&portrait=0`"
+            width="250"
+            height="150"
+            frameborder="0"
+            class="v-gallery__vimeo-container__vimeo"
+            @load="vimeoLoad"
     ></iframe>
   </div>
 
@@ -55,6 +57,12 @@ export default defineComponent({
     }
   },
 
+  data() {
+    return {
+      vimeoPlayerIsOpen: false
+    }
+  },
+
   computed: {
     largeImgUrl(): string {
       let imgData = this.data.image
@@ -63,6 +71,26 @@ export default defineComponent({
 
       const largeImagePath: string = imgData.formats?.xlarge?.url || imgData.formats?.large?.url || imgData.url || ""
       return `${API_BASE_URL}${largeImagePath}`
+    },
+  },
+
+  methods: {
+    openVimeoPlayer() {
+      this.vimeoPlayerIsOpen = true
+    },
+
+    vimeoLoad( e: Event ) {
+      if (e.target instanceof HTMLIFrameElement && e.target.getBoundingClientRect().width < 650) {
+        const iframe = e.target
+        iframe.style.opacity = "0"
+        iframe.style.width = "1000px"
+        iframe.style.height = "1000px"
+        window.setTimeout(() => {
+          iframe.style.opacity = ""
+          iframe.style.width = ""
+          iframe.style.height = ""
+        }, 250)
+      }
     },
   }
 
@@ -77,12 +105,30 @@ export default defineComponent({
   display: block;
   width: 100%;
   height: auto;
+  position: relative;
 }
 
 .v-gallery__desc {
   @extend .t-text-small;
   margin-top: $small-line-height / 2;
   margin-bottom: $small-line-height / 2;
+}
+
+.v-gallery__vimeo-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+
+  > .v-gallery__vimeo-container__vimeo {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 </style>
