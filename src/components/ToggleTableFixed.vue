@@ -188,14 +188,17 @@ $header-height: $gutter;
 }
 
 .v-toggle-table-fixed__body {
-  overflow: hidden;
+  //overflow: hidden;
   transition: max-height 500ms ease-in-out;
   background: $site-background-color;
   position: relative;
+  height: calc( 100vh - (4 * 70px + 65px) );
+  overflow: scroll;
 }
 
 .v-toggle-table-fixed {
   background: white;
+  box-shadow: $tile-box-shadow;
 }
 
 .is-dark .v-toggle-table-fixed__body__container {

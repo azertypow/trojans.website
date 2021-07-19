@@ -58,7 +58,9 @@ export default defineComponent({
   computed: {
     sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
 
-      const projectSortedByYear: { projectYear: number, projects: IApiProject[] }[] = []
+      interface IProjectYear { projectYear: number, projects: IApiProject[] }
+
+      const projectSortedByYear: IProjectYear[] = []
 
       for( const project of this.store.state.projects ) {
         if( project.date ) {
@@ -82,6 +84,21 @@ export default defineComponent({
           }
         }
       }
+
+      function compare( a: IProjectYear, b: IProjectYear ) {
+        if ( a.projectYear < b.projectYear ){
+          return -1;
+        }
+        if ( a.projectYear > b.projectYear ){
+          return 1;
+        }
+        return 0;
+      }
+
+      projectSortedByYear.sort( compare );
+
+
+      console.log( {projectSortedByYear} )
 
       return projectSortedByYear
     }
@@ -136,6 +153,12 @@ export default defineComponent({
       margin: 0;
       transform: rotate3d(0, 0, 1, 180deg);
     }
+  }
+}
+
+.is-desk-width {
+  .v-view-projects__year {
+    box-shadow: inset -10px 0px 10px -15px #00000033;
   }
 }
 
