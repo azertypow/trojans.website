@@ -386,14 +386,14 @@ export default defineComponent({
 
 .v-project__toggle-table {
   opacity: 1;
-  transition: opacity 250ms ease-in-out 525ms;
+  //transition: opacity 250ms ease-in-out 525ms;
   background: white;
 
-  &:nth-child(1) { transition-delay: 150ms }
-  &:nth-child(2) { transition-delay: 225ms }
-  &:nth-child(3) { transition-delay: 300ms }
-  &:nth-child(4) { transition-delay: 375ms }
-  &:nth-child(5) { transition-delay: 450ms }
+  //&:nth-child(1) { transition-delay: 150ms }
+  //&:nth-child(2) { transition-delay: 225ms }
+  //&:nth-child(3) { transition-delay: 300ms }
+  //&:nth-child(4) { transition-delay: 375ms }
+  //&:nth-child(5) { transition-delay: 450ms }
 
   .is-closed & {
     opacity: 0;
@@ -438,7 +438,7 @@ export default defineComponent({
   .v-project {
     max-height: none !important;
     max-width: $width-of-closed-project;
-    transition: max-width 500ms ease-in-out;
+    //transition: max-width 500ms ease-in-out;
   }
 
   .v-project__container {
