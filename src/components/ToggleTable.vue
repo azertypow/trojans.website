@@ -213,6 +213,10 @@ $header-height: $gutter;
     }
   }
 
+  .v-toggle-table:nth-child(2) {
+    box-shadow: none;
+  }
+
   .v-toggle-table__body {
     max-height: none !important;
     transition: none;
