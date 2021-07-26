@@ -217,4 +217,11 @@ export default defineComponent({
     padding-bottom: 0;
   }
 }
+
+.is-desk-width {
+  .v-view-about {
+    min-height: initial;
+  }
+}
+
 </style>

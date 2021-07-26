@@ -2,7 +2,7 @@
   <div
       class="v-toggle-table-fixed"
       :style="{
-        transform: transformTop
+        transform: fixedComputedPosition
       }"
       :class="{
         'is-open': isOpen,
@@ -44,6 +44,8 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from "vue"
+import {useStore} from "vuex"
+import {key} from "@/store"
 
 export default defineComponent({
 
@@ -107,21 +109,35 @@ export default defineComponent({
       return  this.title.length > 0
     },
 
-    transformTop(): string {
+    fixedComputedPosition(): string {
+      // mobile computed
       const bottomPadding = 65
       const topTranslate = 70
       const topValue = ( topTranslate * (4 - this.index) ) + bottomPadding
 
-      // if(this.index < this.indexOfOpenTab) return `translate(0, calc( -100% + ${topValue}px) )`
-      if(this.index > this.indexOfOpenTab) return `translate(0, calc( 100% - ${topValue}px) )`
+      // desk computed
+      const leftTranslate = 70
+      const leftValue = ( leftTranslate * (4 - this.index) )
 
-      return `translate(0, ${this.index * topTranslate}px)`
+      if( this.store.state.isDeskWidth ) {
+
+        if(this.index > this.indexOfOpenTab) return `translate( calc( 100% - ${leftValue}px), 0 )`
+
+        return `translate( ${this.index * leftTranslate}px, 0 )`
+
+      } else {
+        // if(this.index < this.indexOfOpenTab) return `translate(0, calc( -100% + ${topValue}px) )`
+        if(this.index > this.indexOfOpenTab) return `translate(0, calc( 100% - ${topValue}px) )`
+
+        return `translate(0, ${this.index * topTranslate}px)`
+      }
+
     }
   },
 
   data() {
     return {
-
+      store: useStore(key),
     }
   },
 
@@ -217,6 +233,43 @@ $header-height: $gutter;
 
 .has-body-container-padding-bottom .v-toggle-table-fixed__body__container {
   padding-bottom: $gutter;
+}
+
+.is-desk-width {
+
+  .v-toggle-table-fixed {
+    height: calc( 100% - 65px );
+    display: flex;
+
+    &.is-open {
+      width: calc( 100% - (70px * 3) );
+    }
+  }
+
+  .v-toggle-table-fixed__header {
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .v-toggle-table-fixed__body {
+    height: 100%;
+    width: 100%;
+  }
+
+  .v-toggle-table-fixed__title {
+    writing-mode: vertical-rl;
+    text-align: right;
+    width: 100%;
+    height: 100%;
+    transform: rotate3d(0, 0, 1, 180deg);
+  }
+
+  .has-title {
+    .v-toggle-table-fixed__header {
+      padding: $gutter/2;
+    }
+  }
+
 }
 
 </style>
