@@ -1,5 +1,5 @@
 // urls
-export const API_BASE_URL           = "https://104.248.20.170"
+export const API_BASE_URL           = "https://api.trojanscollective.com"
 export const API_PROJECT_URL        = `${API_BASE_URL}/Projects?_limit=-1`
 export const API_CONTACT_URL        = `${API_BASE_URL}/Contact`
 export const API_ABOUT_URL          = `${API_BASE_URL}/about`
