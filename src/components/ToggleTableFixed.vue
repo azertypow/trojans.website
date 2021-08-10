@@ -249,6 +249,7 @@ $header-height: $gutter;
   .v-toggle-table-fixed__header {
     box-sizing: border-box;
     height: 100%;
+    width: auto;
   }
 
   .v-toggle-table-fixed__body {
@@ -259,7 +260,7 @@ $header-height: $gutter;
   .v-toggle-table-fixed__title {
     writing-mode: vertical-rl;
     text-align: right;
-    width: 100%;
+    width: 50px;
     height: 100%;
     transform: rotate3d(0, 0, 1, 180deg);
   }
