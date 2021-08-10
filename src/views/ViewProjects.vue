@@ -27,12 +27,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from "vue"
+import {defineComponent} from "vue"
 import Project from "../components/Project.vue"
 import {useStore} from "vuex"
 import {key} from "@/store"
-import {IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
+import {IProjectYear} from "@/GlobaleInterface"
 
 export default defineComponent({
 
@@ -56,11 +56,11 @@ export default defineComponent({
   },
 
   computed: {
-    sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
-
-      interface IProjectYear { projectYear: number, projects: IApiProject[] }
+    sortedProjects(): IProjectYear[] {
 
       const projectSortedByYear: IProjectYear[] = []
+
+      let projectIndex = 0
 
       for( const project of this.store.state.projects ) {
         if( project.date ) {
@@ -70,7 +70,7 @@ export default defineComponent({
 
           for( const item of projectSortedByYear ) {
             if( item.projectYear === projectYear ) {
-              item.projects.push( project )
+              item.projects.push( {...project, ...{index: 0} } )
               projectAddedToArray = true
               break
             }
@@ -78,7 +78,7 @@ export default defineComponent({
 
           if( !projectAddedToArray ) {
             projectSortedByYear.push({
-              projects: [project],
+              projects: [{...project, ...{index: 0} }],
               projectYear: projectYear
             })
           }
@@ -96,9 +96,6 @@ export default defineComponent({
       }
 
       projectSortedByYear.sort( compare );
-
-
-      console.log( {projectSortedByYear} )
 
       return projectSortedByYear
     }
