@@ -133,9 +133,9 @@
            viewBox="0 0 65 65"
            class="v-navigation__toggle-icon"
            xml:space="preserve">
-        <path d="M 18 43 47 43 z"/>
-        <path d="M 18 32 47 32 z"/>
-        <path d="M 18 21 47 21 z"/>
+        <path d="M 18 43 48 43 z"/>
+        <path d="M 18 32 48 32 z"/>
+        <path d="M 18 21 48 21 z"/>
       </svg>
     </div>
 
@@ -422,14 +422,16 @@ export default defineComponent({
   opacity: 1;
 
   path {
-    transition: d ease-in-out 150ms, opacity ease-in-out 150ms;
+    transition: transform ease-in-out 150ms, opacity ease-in-out 150ms;
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, 0) translate(0, 0);
   }
 
   .is-open & {
     stroke: $site-background-color;
 
     path:nth-child(1) {
-      d: path("M 18 43 47 21 z");
+      transform: rotate3d(0, 0, 1, 45deg) translate(0%, -12px);
     }
 
     path:nth-child(2) {
@@ -437,7 +439,7 @@ export default defineComponent({
     }
 
     path:nth-child(3) {
-      d: path("M 18 21 47 43 z");
+      transform: rotate3d(0, 0, 1, -45deg) translate(0%, 12px);
     }
   }
 }
