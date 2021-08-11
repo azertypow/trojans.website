@@ -128,10 +128,12 @@ export default defineComponent({
       console.log("document.getElementsByClassName(\"v-view-projects\")[0].scrollLeft", document.getElementsByClassName("v-view-projects")[0].scrollLeft)
       console.log("(this.$refs.headerContainer as HTMLElement).getBoundingClientRect().left", (this.$refs.headerContainer as HTMLElement).getBoundingClientRect().left)
 
-      document.getElementsByClassName("v-view-projects")[0].scroll({
-        top: 0,
-        left: document.getElementsByClassName("v-view-projects")[0].scrollLeft + (this.$refs.headerContainer as HTMLElement).getBoundingClientRect().x,
-      })
+      window.setTimeout(()=>{
+        document.getElementsByClassName("v-view-projects")[0].scroll({
+          top: 0,
+          left: document.getElementsByClassName("v-view-projects")[0].scrollLeft + (this.$refs.headerContainer as HTMLElement).getBoundingClientRect().x,
+        })
+      }, 150)
     },
   },
 
