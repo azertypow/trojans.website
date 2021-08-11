@@ -3,12 +3,12 @@
   font-style:  normal;
   font-weight: 100;
   font-display: swap;
-  src: url("light.otf") format("opentype");
+  src: url("italic.woff") format("woff");
 }
 @font-face {
   font-family: 'trojanFont';
   font-style:  italic;
   font-weight: 100;
   font-display: swap;
-  src: url("LightItalic.otf") format("opentype");
+  src: url("regular.woff") format("woff");
 }
