@@ -65,6 +65,7 @@
           <a
               v-if="event.link"
               :href="event.link"
+              target="_blank"
           >
             — {{event.name}} {{event.date}}
             <br>{{event.location}}
