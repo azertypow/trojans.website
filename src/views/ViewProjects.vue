@@ -18,7 +18,6 @@
           :data="project"
           :stringProjectId="`${item.projectYear}${key}`"
           :key="key + dateKey"
-          @click="projectClicked(`${item.projectYear}${key}`)"
       />
 
     </div>
@@ -33,6 +32,7 @@ import {useStore} from "vuex"
 import {key} from "@/store"
 import {IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
+import {easeLinear} from "@/lib/easing"
 
 export default defineComponent({
 
@@ -50,9 +50,6 @@ export default defineComponent({
   },
 
   methods: {
-    projectClicked(stringID: string){
-      this.store.state.idOfOpenedProject = stringID
-    },
   },
 
   computed: {

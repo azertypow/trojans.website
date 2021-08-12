@@ -18,6 +18,7 @@
       <div
           ref="containerTitle"
           class="v-project__title"
+          @click="projectClicked()"
       >
         <h1 class="t-title">
           {{ data.title }}
@@ -84,6 +85,7 @@ import {key} from "@/store"
 import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
+import {easeLinear} from "@/lib/easing"
 
 export default defineComponent({
 
@@ -141,6 +143,48 @@ export default defineComponent({
         e.stopImmediatePropagation()
         this.store.state.idOfOpenedProject = null
       }
+    },
+
+    projectClicked(){
+      this.store.state.idOfOpenedProject = this.stringProjectId
+
+      window.setTimeout(() => {
+
+        const framePerSecond = 60
+        const durationTime = .75
+        const totalFrameNumber = framePerSecond * durationTime
+        const startingScrollPosition = document.getElementsByClassName("v-view-projects")[0].scrollLeft
+        const valueToAddedOnScroll =
+            (this.$refs.container as HTMLElement).getBoundingClientRect().left
+
+        let frameNumber = 0
+
+        function scrollPositionCalculation() {
+          const currentScrollValue = easeLinear({
+            time: frameNumber,
+            duration: totalFrameNumber,
+            startValue: startingScrollPosition,
+            addedValue: valueToAddedOnScroll,
+          })
+
+          document.getElementsByClassName("v-view-projects")[0].scroll({
+            top: 0,
+            left: currentScrollValue,
+          })
+
+          frameNumber++
+
+          if( frameNumber < totalFrameNumber )
+            requestAnimationFrame(() => {
+              scrollPositionCalculation()
+            })
+        }
+
+        scrollPositionCalculation()
+
+
+      }, 150)
+
     },
 
     updateHeaderFixedPositionOnScroll() {

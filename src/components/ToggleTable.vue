@@ -1,6 +1,7 @@
 <template>
   <div
       class="v-toggle-table"
+      ref="toggleTableElement"
       :class="{
         'is-open': isOpen,
         'is-dark': isDark,
@@ -44,6 +45,7 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from "vue"
+import {easeLinear} from "@/lib/easing"
 
 export default defineComponent({
 
@@ -125,15 +127,6 @@ export default defineComponent({
 
       this.$emit("toggled", headerContainerHeight + containerHeight)
 
-      console.log("document.getElementsByClassName(\"v-view-projects\")[0].scrollLeft", document.getElementsByClassName("v-view-projects")[0].scrollLeft)
-      console.log("(this.$refs.headerContainer as HTMLElement).getBoundingClientRect().left", (this.$refs.headerContainer as HTMLElement).getBoundingClientRect().left)
-
-      window.setTimeout(()=>{
-        document.getElementsByClassName("v-view-projects")[0].scroll({
-          top: 0,
-          left: document.getElementsByClassName("v-view-projects")[0].scrollLeft + (this.$refs.headerContainer as HTMLElement).getBoundingClientRect().x,
-        })
-      }, 150)
     },
   },
 
