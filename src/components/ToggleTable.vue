@@ -208,7 +208,7 @@ $header-height: $gutter;
     box-sizing: border-box;
 
     &.is-open {
-      min-width: calc( 100vw - #{ 4 * $height-of-closed-project } );
+      width: calc( 100vw - #{ 4 * $height-of-closed-project } );
 
       .v-toggle-table__body {
         display: block;

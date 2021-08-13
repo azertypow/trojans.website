@@ -110,14 +110,13 @@
 import {defineComponent, PropType} from "vue"
 import {useStore} from "vuex"
 import {key, State} from "@/store"
-import ToggleTable from "@/components/ToggleTable.vue"
 import {API_BASE_URL, IApiAbout, IApiExhibitionsAndAwards, IApiManifesto, IApiTheyWorkWithUs} from "@/api"
 import ToggleTableFixed from "@/components/ToggleTableFixed.vue"
 
 export default defineComponent({
 
   name: 'ViewAbout',
-  components: {ToggleTableFixed, ToggleTable},
+  components: {ToggleTableFixed},
 
   data() {
     return {
