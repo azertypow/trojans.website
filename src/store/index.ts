@@ -21,6 +21,8 @@ export interface State {
   secondaryTag: ISecondTags[]
   activatedSecondaryTag: string | null
 
+  widthOfProjectOpen: number
+
   contact: IApiContact | null
   menuIsOpen: boolean
   idOfOpenedProject: null | string
@@ -45,6 +47,8 @@ export interface IStoreMutation {
   updateSecondaryTags               (state: State, tags: ISecondTags[]): void
   ToggleSecondaryTagActivated       (state: State, tagToToggle:       string): void
 
+  updateWidthOfProjectOpen (state: State, width: number): void
+
   updateContact         (state: State, contact:        IApiContact): void
   updateAbout           (state: State, about:          IApiAbout): void
   updateAward           (state: State, award:          IApiExhibitionsAndAwards): void
@@ -67,6 +71,8 @@ export default createStore<State>({
 
     secondaryTag: [],
     activatedSecondaryTag: null,
+
+    widthOfProjectOpen: 0,
 
     contact: null,
     menuIsOpen: false,
@@ -104,6 +110,10 @@ export default createStore<State>({
     ToggleSecondaryTagActivated(state: State, tagToToggle: string) {
       if ( state.activatedSecondaryTag === tagToToggle) state.activatedSecondaryTag = null
       else state.activatedSecondaryTag = tagToToggle
+    },
+
+    updateWidthOfProjectOpen(state: State, width: number) {
+      state.widthOfProjectOpen = width
     },
 
     updateContact(state, contact) {

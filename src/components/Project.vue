@@ -354,8 +354,6 @@ export default defineComponent({
 @import "../style/typography";
 
 .v-project {
-  $height-of-closed-project: $font-title-size + $gutter;
-
   overflow: hidden;
   box-shadow:  $tile-box-shadow;
   transition: max-height 500ms ease-in-out;
