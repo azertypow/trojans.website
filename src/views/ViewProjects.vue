@@ -14,6 +14,15 @@
       </div>
 
       <Project
+          v-if="isMobileWidth"
+          v-for="(project, key) in item.projects"
+          :data="project"
+          :stringProjectId="`${item.projectYear}${key}`"
+          :key="key + dateKey"
+      />
+
+      <project-viewer-desktop
+          v-else-if="isDeskWidth"
           v-for="(project, key) in item.projects"
           :data="project"
           :stringProjectId="`${item.projectYear}${key}`"
@@ -33,12 +42,14 @@ import {key} from "@/store"
 import {IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 import {easeLinear} from "@/lib/easing"
+import ProjectViewerDesktop from "@/components/ProjectViewerDesktop.vue"
 
 export default defineComponent({
 
   name: 'ViewProjects',
 
   components: {
+    ProjectViewerDesktop,
     ProjectGalleryMobile,
     Project,
   },
@@ -53,6 +64,15 @@ export default defineComponent({
   },
 
   computed: {
+
+    isMobileWidth(): boolean {
+      return this.store.state.isMobileWidth
+    },
+
+    isDeskWidth(): boolean {
+      return this.store.state.isDeskWidth
+    },
+
     sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
 
       interface IProjectYear { projectYear: number, projects: IApiProject[] }
@@ -127,7 +147,7 @@ export default defineComponent({
     overflow-y: hidden;
     overflow-x: scroll;
 
-    .v-project.is-hidden {
+    .v-project-viewer-desktop.is-hidden {
       display: none;
     }
   }
@@ -156,6 +176,7 @@ export default defineComponent({
 .is-desk-width {
   .v-view-projects__year {
     box-shadow: inset -10px 0px 10px -15px #00000033;
+    padding: $gutter / 2;
   }
 }
 

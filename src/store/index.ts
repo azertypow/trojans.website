@@ -40,6 +40,8 @@ export interface IStoreMutation {
   [key: string]: Mutation<State>
   updateProjects        (state: State, projects:       IApiProject[]): void
 
+  updateIdOfOpenedProject(state: State, id: string | null): void
+
   updateTags            (state: State, tags:           IApiTags[]): void
   tagsListAddTag        (state: State, tagToAdd:       string): void
   tagsListRemoveTag     (state: State, tagToRemove:    string): void
@@ -89,6 +91,10 @@ export default createStore<State>({
   mutations: {
     updateProjects(state, projects) {
       state.projects = projects
+    },
+
+    updateIdOfOpenedProject(state, id) {
+      state.idOfOpenedProject = id
     },
 
     updateTags(state: State, tags: IApiTags[]) {

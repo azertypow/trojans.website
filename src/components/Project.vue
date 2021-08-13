@@ -56,21 +56,8 @@
 
       <ProjectGalleryMobile
           class="v-project__no-toggle-table"
-          v-if="isMobileWidth"
           :images="images"
       ></ProjectGalleryMobile>
-      <toggle-table
-          v-else-if="isDeskWidth"
-          class="v-project__toggle-table"
-          v-for="(image, index) of images"
-          @toggled="tableToggled(index, $event)"
-          :is-open="getThisTableIsOpen(index)"
-      >
-        <Gallery
-            :data="image"
-        />
-      </toggle-table>
-
 
     </div>
   </section>
@@ -151,7 +138,7 @@ export default defineComponent({
       window.setTimeout(() => {
 
         const framePerSecond = 60
-        const durationTime = .75
+        const durationTime = .25
         const totalFrameNumber = framePerSecond * durationTime
         const startingScrollPosition = document.getElementsByClassName("v-view-projects")[0].scrollLeft
         const valueToAddedOnScroll =
@@ -183,13 +170,13 @@ export default defineComponent({
         scrollPositionCalculation()
 
 
-      }, 150)
+      }, 25)
 
     },
 
     updateHeaderFixedPositionOnScroll() {
       if (this.thisIsOpen && this.$refs.containerTitle instanceof HTMLElement) {
-        console.log( this.$refs.containerTitle.getBoundingClientRect().top )
+        // console.log( this.$refs.containerTitle.getBoundingClientRect().top )
       }
     },
 
@@ -359,12 +346,6 @@ export default defineComponent({
   transition: max-height 500ms ease-in-out;
   position: relative;
   max-height: $height-of-closed-project;
-
-  &.is-closed {
-    &:hover {
-      max-height: $height-of-closed-project * 1.5;
-    }
-  }
 }
 
 .v-project__close {
