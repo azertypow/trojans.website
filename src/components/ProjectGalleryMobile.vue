@@ -64,6 +64,8 @@ export default defineComponent({
     .v-gallery__desc {
       margin-bottom: 0 !important;
       padding-bottom: $gutter / 2;
+      padding-left: $gutter / 2;
+      padding-right: $gutter / 2;
       height: auto;
       flex-shrink: 0;
       flex-grow: 0;
