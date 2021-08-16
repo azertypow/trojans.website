@@ -75,8 +75,9 @@ export default defineComponent({
 
   mounted() {
     this.$nextTick(() => {
-      this.updateWidth()
       this.updateTitleWidth()
+      this.upadteLeftSpaceData()
+      this.updateWidth()
 
       window.addEventListener("resize", this.updateTitleWidth)
 
@@ -102,20 +103,6 @@ export default defineComponent({
       } else {
 
         this.store.commit("updateIdOfOpenedProject", this.stringProjectId)
-
-        window.setTimeout(() => {
-
-          this.upadteLeftSpaceData()
-          this.updateWidth()
-
-          scrollElementTo({
-            durationTime: .25,
-            startingScrollPosition: document.getElementsByClassName("v-view-projects")[0].scrollLeft,
-            valueToAddedOnScroll: (this.$refs.container as HTMLElement).getBoundingClientRect().left - this.space.left,
-            elementToScroll: document.getElementsByClassName("v-view-projects")[0] as HTMLElement,
-          })
-
-        }, 25)
 
       }
 
@@ -148,7 +135,8 @@ export default defineComponent({
       else if (
           beforeThisElement instanceof HTMLElement
       ) {
-        this.space.left = beforeThisElement.getBoundingClientRect().width
+        this.space.left =
+            beforeThisElement.getBoundingClientRect().width
       }
 
       else this.space.left = 0
@@ -165,7 +153,7 @@ export default defineComponent({
 
       } else {
 
-        // this.style.width = this.$refs.containerTitle
+        this.style.width = ""
 
       }
     },
@@ -249,10 +237,21 @@ export default defineComponent({
 
   watch: {
     thisIsOpen() {
-      if( this.thisIsOpen && this.$refs["container"] instanceof HTMLElement) {
-
-      } else {
-        this.style.width = ""
+      if(!this.thisIsOpen) {
+        this.updateWidth()
+      }
+      else {
+        window.setTimeout(
+        () => {
+          this.upadteLeftSpaceData()
+          this.updateWidth()
+          scrollElementTo({
+            durationTime: .25,
+            startingScrollPosition: document.getElementsByClassName("v-view-projects")[0].scrollLeft,
+            valueToAddedOnScroll: (this.$refs.container as HTMLElement).getBoundingClientRect().left - this.space.left,
+            elementToScroll: document.getElementsByClassName("v-view-projects")[0] as HTMLElement,
+          })
+        }, 50)
       }
     }
   },

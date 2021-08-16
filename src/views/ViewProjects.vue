@@ -31,6 +31,13 @@
 
     </div>
 
+    <div
+        v-if="isDeskWidth"
+        class="v-view-projects__scroll-space"
+    >
+
+    </div>
+
   </section>
 </template>
 
@@ -177,6 +184,12 @@ export default defineComponent({
   .v-view-projects__year {
     box-shadow: inset -10px 0px 10px -15px #00000033;
     padding: $gutter / 2;
+  }
+
+  .v-view-projects__scroll-space {
+    width: calc(100vw - 60px);
+    height: 50vh;
+    flex-shrink: 0;
   }
 }
 
