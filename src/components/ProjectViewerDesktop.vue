@@ -51,6 +51,7 @@ import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 import {easeLinear} from "@/lib/easing"
+import {scrollElementTo} from "@/global/scrollTo"
 
 export default defineComponent({
 
@@ -104,38 +105,15 @@ export default defineComponent({
 
         window.setTimeout(() => {
 
-          const framePerSecond = 60
-          const durationTime = .25
-          const totalFrameNumber = framePerSecond * durationTime
-          const startingScrollPosition = document.getElementsByClassName("v-view-projects")[0].scrollLeft
-          const valueToAddedOnScroll =
-              (this.$refs.container as HTMLElement).getBoundingClientRect().left - 60
+          this.upadteLeftSpaceData()
+          this.updateWidth()
 
-          let frameNumber = 0
-
-          function scrollPositionCalculation() {
-            const currentScrollValue = easeLinear({
-              time: frameNumber,
-              duration: totalFrameNumber,
-              startValue: startingScrollPosition,
-              addedValue: valueToAddedOnScroll,
-            })
-
-            document.getElementsByClassName("v-view-projects")[0].scroll({
-              top: 0,
-              left: currentScrollValue,
-            })
-
-            frameNumber++
-
-            if( frameNumber <= totalFrameNumber )
-              requestAnimationFrame(() => {
-                scrollPositionCalculation()
-              })
-          }
-
-          scrollPositionCalculation()
-
+          scrollElementTo({
+            durationTime: .25,
+            startingScrollPosition: document.getElementsByClassName("v-view-projects")[0].scrollLeft,
+            valueToAddedOnScroll: (this.$refs.container as HTMLElement).getBoundingClientRect().left - this.space.left,
+            elementToScroll: document.getElementsByClassName("v-view-projects")[0] as HTMLElement,
+          })
 
         }, 25)
 
@@ -144,14 +122,46 @@ export default defineComponent({
     },
 
     updateTitleWidth() {
-      console.log( "hé" )
       this.titleStyle.width = (this.$refs.title as HTMLElement).getBoundingClientRect().width + 'px'
+    },
+
+    upadteLeftSpaceData() {
+      const thisElement = this.$el as HTMLElement
+      const beforeThisElement = thisElement.previousElementSibling
+
+      if (
+          beforeThisElement instanceof HTMLElement
+          && beforeThisElement.classList.contains('v-view-projects__year')
+      ) {
+        // get the before element because we want a project title on the left of the screen
+        const secondBeforeElementWidth: number = (() => {
+
+          if (beforeThisElement.parentNode?.previousSibling instanceof HTMLElement)
+            return beforeThisElement.parentNode.previousSibling.lastElementChild?.getBoundingClientRect().width ?? 0
+          return 0
+
+        })()
+
+        this.space.left = beforeThisElement.getBoundingClientRect().width + secondBeforeElementWidth
+      }
+
+      else if (
+          beforeThisElement instanceof HTMLElement
+      ) {
+        this.space.left = beforeThisElement.getBoundingClientRect().width
+      }
+
+      else this.space.left = 0
     },
 
     updateWidth() {
       if(this.thisIsOpen) {
+        const thisElement = this.$el as HTMLElement
 
-        this.style.width = ""
+        const beforeThisElement = thisElement.previousElementSibling
+        const afterThisElement = thisElement.nextElementSibling
+
+        this.style.width = window.innerWidth - this.space.left + 'px'
 
       } else {
 
@@ -169,6 +179,10 @@ export default defineComponent({
       },
       titleStyle: {
         width: "0px",
+      },
+      space: {
+        left: 0,
+        right: 0,
       }
     }
   },
