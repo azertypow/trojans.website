@@ -77,6 +77,7 @@ export default defineComponent({
     this.$nextTick(() => {
       this.updateTitleWidth()
       this.upadteLeftSpaceData()
+      this.upadateRightSpaceData()
       this.updateWidth()
 
       window.addEventListener("resize", this.updateTitleWidth)
@@ -142,14 +143,48 @@ export default defineComponent({
       else this.space.left = 0
     },
 
+    upadateRightSpaceData() {
+      const thisElement = this.$el as HTMLElement
+      const rightElementOnThisElement = thisElement.nextElementSibling
+
+      if (
+          rightElementOnThisElement === null
+      ) {
+        // get the next element because we want a project title on the left of the screen
+        const secondRightElementWidth: number = (() => {
+
+          if (thisElement.parentNode?.nextSibling instanceof HTMLElement)
+            return thisElement.parentNode.nextSibling.firstElementChild?.getBoundingClientRect().width ?? 0
+          return 0
+
+        })()
+
+        const thirdRightElementWidth: number = (() => {
+
+          if (thisElement.parentNode?.nextSibling instanceof HTMLElement)
+              return thisElement.parentNode.nextSibling.firstElementChild?.nextElementSibling?.getBoundingClientRect().width ?? 0
+          return 0
+
+        })()
+
+        this.space.right = secondRightElementWidth + thirdRightElementWidth
+      }
+
+      else if (
+          rightElementOnThisElement instanceof HTMLElement
+      ) {
+        this.space.right =
+            rightElementOnThisElement.getBoundingClientRect().width
+      }
+
+      else this.space.right = 0
+    },
+
     updateWidth() {
       if(this.thisIsOpen) {
         const thisElement = this.$el as HTMLElement
 
-        const beforeThisElement = thisElement.previousElementSibling
-        const afterThisElement = thisElement.nextElementSibling
-
-        this.style.width = window.innerWidth - this.space.left + 'px'
+        this.style.width = window.innerWidth - this.space.left - this.space.right + 'px'
 
       } else {
 
@@ -244,6 +279,7 @@ export default defineComponent({
         window.setTimeout(
         () => {
           this.upadteLeftSpaceData()
+          this.upadateRightSpaceData()
           this.updateWidth()
           scrollElementTo({
             durationTime: .25,
