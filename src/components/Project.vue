@@ -176,7 +176,7 @@ export default defineComponent({
 
     updateHeaderFixedPositionOnScroll() {
       if (this.thisIsOpen && this.$refs.containerTitle instanceof HTMLElement) {
-        // console.log( this.$refs.containerTitle.getBoundingClientRect().top )
+        console.log('fixed header position on scroll')
       }
     },
 

@@ -40,8 +40,6 @@ const router = createRouter({
 
 router.afterEach((to) => {
 
-  console.log( to.meta )
-
   document.title = to.meta.title as string
   document.querySelector("meta[name=description]")!.setAttribute("content", to.meta.description as string)
 

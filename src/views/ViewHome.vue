@@ -42,7 +42,6 @@ export default defineComponent({
 
   computed: {
     homeImages(): IApiHomeImage[] | null {
-      console.log( "homeImage", this.store.state.homeImages )
       return this.store.state.homeImages
     }
   }

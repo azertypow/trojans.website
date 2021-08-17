@@ -17,7 +17,6 @@ import MarkdownIt from "markdown-it"
 import "./style/_main.scss"
 
 getContent()
-console.log("run app")
 
 createApp(App)
   .use(store, key)
@@ -52,7 +51,6 @@ markdownIt.renderer.rules.link_open = function (tokens, idx, options, env, self)
 // -----
 
 async function getContent() {
-  console.log('get content')
   getProjects()
   getTags()
   getSecondaryTags()

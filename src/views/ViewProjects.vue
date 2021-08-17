@@ -121,9 +121,6 @@ export default defineComponent({
 
       projectSortedByYear.sort( compare );
 
-
-      console.log( {projectSortedByYear} )
-
       return projectSortedByYear
     }
   }
