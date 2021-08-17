@@ -34,7 +34,7 @@
     <div
         v-if="isDeskWidth"
         class="v-view-projects__scroll-space"
-    >
+    ></div>
 
     </div>
 

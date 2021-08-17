@@ -50,7 +50,6 @@ import {key} from "@/store"
 import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
-import {easeLinear} from "@/lib/easing"
 import {scrollElementTo} from "@/global/scrollTo"
 
 export default defineComponent({
