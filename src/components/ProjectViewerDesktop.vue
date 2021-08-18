@@ -181,13 +181,12 @@ export default defineComponent({
 
     updateWidth() {
       if(this.thisIsOpen) {
-        const thisElement = this.$el as HTMLElement
 
-        this.style.width = window.innerWidth - this.space.left - this.space.right + 'px'
+        this.store.commit("updateWidthOfProjectOpen", window.innerWidth - this.space.left - this.space.right)
 
       } else {
 
-        this.style.width = ""
+        //this.store.commit("updateWidthOfProjectOpen", 0)
 
       }
     },
@@ -196,9 +195,6 @@ export default defineComponent({
   data() {
     return {
       store: useStore(key),
-      style: {
-        width:   "",
-      },
       titleStyle: {
         width: "0px",
       },
@@ -210,6 +206,12 @@ export default defineComponent({
   },
 
   computed: {
+
+    style(): any {
+      return {
+        width: (this.store.state.widthOfProjectOpen !== 0 && this.thisIsOpen) ? this.store.state.widthOfProjectOpen + 'px' : ""
+      }
+    },
 
     exhibitions(): IApiExhibition_links[] {
       return this.data.exhibition_links || []
@@ -286,6 +288,7 @@ export default defineComponent({
             valueToAddedOnScroll: (this.$refs.container as HTMLElement).getBoundingClientRect().left - this.space.left,
             elementToScroll: document.getElementsByClassName("v-view-projects")[0] as HTMLElement,
           })
+          this.store.commit('updateLeftPositionOfProjectItem', (this.$el as HTMLElement).offsetLeft )
         }, 50)
       }
     }

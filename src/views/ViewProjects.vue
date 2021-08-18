@@ -36,7 +36,12 @@
         class="v-view-projects__scroll-space"
     ></div>
 
-    </div>
+    <div
+        v-if="isDeskWidth && store.state.idOfOpenedProject !== null"
+        class="v-view-projects__viewer"
+        ref="projectViewer"
+        :style="projectContentViewerStyle"
+    ></div>
 
   </section>
 </template>
@@ -78,6 +83,13 @@ export default defineComponent({
 
     isDeskWidth(): boolean {
       return this.store.state.isDeskWidth
+    },
+
+    projectContentViewerStyle(): any {
+      return {
+        left: this.store.state.leftPositionOfProjectItem + 'px',
+        width: this.store.state.widthOfProjectOpen + 'px',
+      }
     },
 
     sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
@@ -134,6 +146,7 @@ export default defineComponent({
 
 .v-view-projects {
   overflow: hidden;
+  position: relative;
 }
 
 .v-view-projects__year {
@@ -187,6 +200,17 @@ export default defineComponent({
     width: calc(100vw - 60px);
     height: 50vh;
     flex-shrink: 0;
+  }
+
+  .v-view-projects__viewer {
+    transition: left 250ms linear, width 250ms;
+    position: absolute;
+    top: $gutter / 2;
+    left: 500px;
+    height: calc( 100% - #{$gutter / 2} );
+    width: calc( 100vw - #{$gutter} );
+    background: black;
+    z-index: 900;
   }
 }
 
