@@ -3,12 +3,14 @@
   font-style:  normal;
   font-weight: 100;
   font-display: swap;
-  src: url("regular.woff") format("woff");
+  src:
+          url("Unica77LLWeb-Regular.woff") format("woff"),
+          url("Unica77LLWeb-Regular.woff2") format("woff2");
 }
-@font-face {
-  font-family: 'trojanFont';
-  font-style:  italic;
-  font-weight: 100;
-  font-display: swap;
-  src: url("italic.woff") format("woff");
-}
+/*@font-face {*/
+/*  font-family: 'trojanFont';*/
+/*  font-style:  italic;*/
+/*  font-weight: 100;*/
+/*  font-display: swap;*/
+/*  src: url("italic.woff") format("woff");*/
+/*}*/
