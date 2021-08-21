@@ -22,7 +22,7 @@ export interface State {
   activatedSecondaryTag: string | null
 
   widthOfProjectOpen: number
-
+  titleWidthOfProjectOpen: number
   leftPositionOfProjectItem: number | null
 
   contact: IApiContact | null
@@ -52,6 +52,7 @@ export interface IStoreMutation {
   ToggleSecondaryTagActivated       (state: State, tagToToggle:       string): void
 
   updateWidthOfProjectOpen (state: State, width: number): void
+  updateTitleWidthOfProjectOpen (state: State, width: number): void
   updateLeftPositionOfProjectItem (state: State, left: number): void
 
   updateContact         (state: State, contact:        IApiContact): void
@@ -78,6 +79,7 @@ export default createStore<State>({
     activatedSecondaryTag: null,
 
     widthOfProjectOpen: 0,
+    titleWidthOfProjectOpen: 0,
     leftPositionOfProjectItem: null,
 
     contact: null,
@@ -125,6 +127,9 @@ export default createStore<State>({
     updateWidthOfProjectOpen(state: State, width: number) {
       state.widthOfProjectOpen = width
     },
+    updateTitleWidthOfProjectOpen(state, width) {
+      state.titleWidthOfProjectOpen = width
+    },
     updateLeftPositionOfProjectItem(state: State, position: number) {
       state.leftPositionOfProjectItem = position
     },
@@ -163,5 +168,14 @@ export default createStore<State>({
   actions: {
   },
   modules: {
+  },
+  getters: {
+    transformDataOfDesktopItemProjectViewer(state): {width: number, left: number} {
+
+      return {
+        left: (state.leftPositionOfProjectItem || 0) + state.titleWidthOfProjectOpen,
+        width: state.widthOfProjectOpen - state.titleWidthOfProjectOpen,
+      }
+    }
   }
 })

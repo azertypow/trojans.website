@@ -112,7 +112,7 @@ export default defineComponent({
       }
 
       if( this.thisIsOpen ) {
-        this.updateWidth()
+        this.updateStoredWidthProjectOpen()
         this.arrayOfToggleTableOpen = [ -1 ]
       }
     })
@@ -208,7 +208,7 @@ export default defineComponent({
 
     },
 
-    updateWidth() {
+    updateStoredWidthProjectOpen() {
 
       if( this.isDeskWidth ) {
 
@@ -232,7 +232,7 @@ export default defineComponent({
     tableToggled(index: number, $event: number) {
       this.updateHeight( $event )
 
-      this.updateWidth()
+      this.updateStoredWidthProjectOpen()
 
       if( index === -1 || this.getThisTableIsOpen(index) ) this.arrayOfToggleTableOpen = [ -1 ]
       else this.arrayOfToggleTableOpen = [ index ]

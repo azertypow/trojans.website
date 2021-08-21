@@ -87,8 +87,8 @@ export default defineComponent({
 
     projectContentViewerStyle(): any {
       return {
-        left: this.store.state.leftPositionOfProjectItem + 'px',
-        width: this.store.state.widthOfProjectOpen + 'px',
+        left: this.store.getters.transformDataOfDesktopItemProjectViewer.left + 'px',
+        width: this.store.getters.transformDataOfDesktopItemProjectViewer.width + 'px',
       }
     },
 
@@ -208,7 +208,6 @@ export default defineComponent({
     top: $gutter / 2;
     left: 500px;
     height: calc( 100% - #{$gutter / 2} );
-    width: calc( 100vw - #{$gutter} );
     background: black;
     z-index: 900;
   }

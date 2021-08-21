@@ -33,7 +33,14 @@
           class="v-project-viewer-desktop__content"
       >
 
-        <div>desc content or image or vimeo</div>
+        <div
+        >description</div>
+        <div
+            v-for="(image, index) of data.images"
+        >image</div>
+        <div
+            v-for="(vimeo, index) of data.Vimeo"
+        >vimeo</div>
 
       </div>
 
@@ -77,7 +84,8 @@ export default defineComponent({
       this.updateTitleWidth()
       this.upadteLeftSpaceData()
       this.upadateRightSpaceData()
-      this.updateWidth()
+      this.updateStoredWidthProjectOpen()
+      this.updateStoredProjectOpenTitleWidth()
 
       window.addEventListener("resize", this.updateTitleWidth)
 
@@ -109,7 +117,8 @@ export default defineComponent({
     },
 
     updateTitleWidth() {
-      this.titleStyle.width = (this.$refs.title as HTMLElement).getBoundingClientRect().width + 'px'
+      this.titleWidth = (this.$refs.title as HTMLElement).getBoundingClientRect().width
+      this.titleStyle.width =  this.titleWidth + 'px'
     },
 
     upadteLeftSpaceData() {
@@ -179,22 +188,21 @@ export default defineComponent({
       else this.space.right = 0
     },
 
-    updateWidth() {
-      if(this.thisIsOpen) {
-
+    updateStoredWidthProjectOpen() {
+      if(this.thisIsOpen)
         this.store.commit("updateWidthOfProjectOpen", window.innerWidth - this.space.left - this.space.right)
-
-      } else {
-
-        //this.store.commit("updateWidthOfProjectOpen", 0)
-
-      }
     },
+
+    updateStoredProjectOpenTitleWidth() {
+      if(this.thisIsOpen)
+        this.store.commit("updateTitleWidthOfProjectOpen", this.titleWidth)
+    }
   },
 
   data() {
     return {
       store: useStore(key),
+      titleWidth: 0,
       titleStyle: {
         width: "0px",
       },
@@ -274,14 +282,18 @@ export default defineComponent({
   watch: {
     thisIsOpen() {
       if(!this.thisIsOpen) {
-        this.updateWidth()
+        this.updateStoredWidthProjectOpen()
+        this.updateStoredProjectOpenTitleWidth()
       }
       else {
         window.setTimeout(
         () => {
           this.upadteLeftSpaceData()
           this.upadateRightSpaceData()
-          this.updateWidth()
+
+          this.updateStoredWidthProjectOpen()
+          this.updateStoredProjectOpenTitleWidth()
+
           scrollElementTo({
             durationTime: .25,
             startingScrollPosition: document.getElementsByClassName("v-view-projects")[0].scrollLeft,
