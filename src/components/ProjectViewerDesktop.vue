@@ -53,7 +53,7 @@ import {defineComponent, PropType } from "vue"
 import {IApiExhibition_links, IApiProject, IApiTags} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
-import {IProjectsSortedInArray, key} from "@/store"
+import {IIndexOfOpenProject, IProjectsSortedInArray, key} from "@/store"
 import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
@@ -79,10 +79,7 @@ export default defineComponent({
     },
     index: {
       required: true,
-      type: Object as PropType<{
-        dateIndex: number,
-        projectIndex: number,
-      }>,
+      type: Object as PropType<IIndexOfOpenProject>,
     },
   },
 
@@ -107,6 +104,7 @@ export default defineComponent({
     closeProject(e: MouseEvent) {
         e.stopImmediatePropagation()
         this.store.commit("updateIdOfOpenedProject", null)
+        this.store.commit("updateIndexOfOpenProject", null)
     },
 
     projectClicked(e: MouseEvent){
@@ -118,6 +116,10 @@ export default defineComponent({
       } else {
 
         this.store.commit("updateIdOfOpenedProject", this.stringProjectId)
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: this.$props.index.dateIndex,
+          projectIndex: this.$props.index.projectIndex,
+        } as IIndexOfOpenProject)
 
       }
 

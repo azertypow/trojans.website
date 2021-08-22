@@ -13,6 +13,11 @@ import {ISortedProjectsByYear, sortProjectsByYear} from "@/global/sortProjectsBy
 
 // define your typings for the store state
 
+export interface IIndexOfOpenProject {
+  dateIndex: number
+  projectIndex: number
+}
+
 export interface State {
   projects: IApiProject[]
   sortedProject: ISortedProjectsByYear
@@ -29,7 +34,10 @@ export interface State {
 
   contact: IApiContact | null
   menuIsOpen: boolean
+
   idOfOpenedProject: null | string
+  indexOfOpenProject: null | IIndexOfOpenProject
+
   about:          IApiAbout | null
   award:          IApiExhibitionsAndAwards | null
   manifesto:      IApiManifesto | null
@@ -45,6 +53,7 @@ export interface IStoreMutation {
   updateProjects        (state: State, projects:       IApiProject[]): void
 
   updateIdOfOpenedProject(state: State, id: string | null): void
+  updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject): void
 
   updateTags            (state: State, tags:           IApiTags[]): void
   tagsListAddTag        (state: State, tagToAdd:       string): void
@@ -87,7 +96,10 @@ export default createStore<State>({
 
     contact: null,
     menuIsOpen: false,
+
     idOfOpenedProject: null,
+    indexOfOpenProject: null,
+
     about: null,
     award: null,
     info: null,
@@ -107,6 +119,9 @@ export default createStore<State>({
 
     updateIdOfOpenedProject(state, id) {
       state.idOfOpenedProject = id
+    },
+    updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject) {
+      state.indexOfOpenProject = indexOfOpenProject
     },
 
     updateTags(state: State, tags: IApiTags[]) {

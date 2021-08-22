@@ -41,11 +41,28 @@
     ></div>
 
     <div
-        v-if="isDeskWidth && store.state.idOfOpenedProject !== null"
+        v-if="isDeskWidth && currentProjectItem !== null"
         class="v-view-projects__viewer"
         ref="projectViewer"
         :style="projectContentViewerStyle"
-    ></div>
+    >
+      <div
+          v-if="currentProjectItem.type === 'intro'"
+      >
+        {{ currentProjectItem.text }}
+
+        <a
+            v-for="link of currentProjectItem.exhibition_links"
+            :href="link.exhibition_link"
+        >
+          <div>{{link.type}}</div>
+          <div>{{link.exhibition_title}}</div>
+          <div>{{link.partenariat_description}}</div>
+          <div>{{link.date}}</div>
+        </a>
+      </div>
+
+    </div>
 
   </section>
 </template>
@@ -54,7 +71,7 @@
 import {defineComponent, PropType} from "vue"
 import Project from "../components/Project.vue"
 import {useStore} from "vuex"
-import {key} from "@/store"
+import {IProjectsSortedInArray, key, SortedProjectItem} from "@/store"
 import {IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 import {easeLinear} from "@/lib/easing"
@@ -98,7 +115,17 @@ export default defineComponent({
 
     sortedProjects(): { projectYear: number, projects: IApiProject[] }[] {
       return this.store.state.sortedProject
-    }
+    },
+
+    currentProjectItem(): SortedProjectItem | null {
+
+      if(this.store.state.indexOfOpenProject === null) return null
+
+      const dateIndex     = this.store.state.indexOfOpenProject.dateIndex
+      const projectIndex  = this.store.state.indexOfOpenProject.projectIndex
+
+      return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray) [dateIndex][projectIndex][0]
+    },
 
   }
 
@@ -173,7 +200,7 @@ export default defineComponent({
     top: $gutter / 2;
     left: 500px;
     height: calc( 100% - #{$gutter / 2} );
-    background: black;
+    //background: black;
     z-index: 900;
   }
 }
