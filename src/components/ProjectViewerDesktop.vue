@@ -53,7 +53,7 @@ import {defineComponent, PropType } from "vue"
 import {IApiExhibition_links, IApiProject, IApiTags} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
-import {key} from "@/store"
+import {IProjectsSortedInArray, key} from "@/store"
 import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
@@ -76,7 +76,14 @@ export default defineComponent({
     },
     key: {
       type: String,
-    }
+    },
+    index: {
+      required: true,
+      type: Object as PropType<{
+        dateIndex: number,
+        projectIndex: number,
+      }>,
+    },
   },
 
   mounted() {
@@ -276,7 +283,11 @@ export default defineComponent({
         return true
       }
 
-    }
+    },
+
+    projectsSortedInArray(): IProjectsSortedInArray {
+      return this.store.getters.projectsSortedInArray
+    },
   },
 
   watch: {

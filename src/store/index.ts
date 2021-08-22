@@ -2,18 +2,20 @@ import {createStore, Mutation, Store} from 'vuex'
 import { InjectionKey } from 'vue'
 import {
   IApiAbout,
-  IApiContact,
-  IApiExhibitionsAndAwards, IApiHomeImage,
+  IApiContact, IApiExhibition_links,
+  IApiExhibitionsAndAwards, IApiHomeImage, IApiImage,
   IApiInfo,
   IApiManifesto,
   IApiProject, IApiTags,
-  IApiTheyWorkWithUs, ISecondTags
+  IApiTheyWorkWithUs, IAPiVimeo, ISecondTags
 } from "@/api"
+import {ISortedProjectsByYear, sortProjectsByYear} from "@/global/sortProjectsByYear"
 
 // define your typings for the store state
 
 export interface State {
   projects: IApiProject[]
+  sortedProject: ISortedProjectsByYear
 
   tags: IApiTags[]
   activatedTags: string[]
@@ -71,6 +73,7 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export default createStore<State>({
   state: {
     projects: [],
+    sortedProject: [],
 
     tags: [],
     activatedTags: [],
@@ -96,6 +99,9 @@ export default createStore<State>({
   },
   mutations: {
     updateProjects(state, projects) {
+      state.sortedProject = sortProjectsByYear({
+        projects: projects
+      })
       state.projects = projects
     },
 
@@ -176,6 +182,110 @@ export default createStore<State>({
         left: (state.leftPositionOfProjectItem || 0) + state.titleWidthOfProjectOpen,
         width: state.widthOfProjectOpen - state.titleWidthOfProjectOpen,
       }
+    },
+
+    projectsSortedInArray(state): IProjectsSortedInArray {
+
+      return state.sortedProject.map((yearContent, yearContentIndex) => {
+        return yearContent.projects.map( ( project, projectIndex ) => {
+
+          const images: ISortedProjectItemImage[] = project.images?.map( image => {
+            return {
+              type: 'image',
+              images: image,
+            }
+          }) || []
+
+          const vimeo: ISortedProjectItemVimeo[] = project.Vimeo?.map(vimeo => {
+            return {
+              type: "vimeo",
+              Vimeo: vimeo
+            }
+          }) || []
+
+          const intro = [{
+            text: project.description,
+            type: "intro",
+            exhibition_links: project.exhibition_links
+          } as ISortedProjectItemDescription]
+
+          return (intro as SortedProjectItem[]).concat(images, vimeo)
+        })
+      })
+
+    }
+
+  }
+})
+
+
+export interface IProjectsSortedInArray {
+  [dateIndex: number]: {
+    [projectIndex: number]: {
+      [itemIndex: number]: SortedProjectItem
     }
   }
+}
+
+export type SortedProjectItem =
+  | ISortedProjectItemDescription
+  | ISortedProjectItemImage
+  | ISortedProjectItemVimeo
+
+export type ProjectItemType = 'intro' | 'image' | 'vimeo'
+
+export interface ISortedProjectItem {
+  type: ProjectItemType
+}
+
+export interface ISortedProjectItemDescription extends ISortedProjectItem {
+  type: 'intro'
+  text: string
+  exhibition_links: IApiExhibition_links [],
+}
+
+export interface ISortedProjectItemImage extends ISortedProjectItem {
+  type: 'image'
+  images: IApiImage
+}
+export interface ISortedProjectItemVimeo extends ISortedProjectItem {
+  type: 'vimeo'
+  Vimeo: IAPiVimeo
+}
+
+[
+  {
+    date: 2021,
+    projects: [
+      {
+        content: "content 1 2021",
+        images: ["url1", "url2", "url3", "url4", "url5"]
+      },
+      {
+        content: "content 2 2021",
+        images: ["url1", "url2", "url3", "url4", "url5"]
+      },
+      {
+        content: "content 3 2021",
+        images: ["url1", "url2", "url3", "url4", "url5"]
+      },
+    ],
+  },
+  {
+    date: 2022,
+    projects: [
+      {
+        content: "content 1 2022",
+        images: ["url1", "url2", "url3", "url4", "url5"]
+      },
+      {
+        content: "content 2 2022",
+        images: ["url1", "url2", "url3", "url4", "url5"]
+      },
+    ]
+  }
+].map((dates, index) => {
+  return dates.projects.concat().map( (project, index)=> {
+    return {url: project.images}
+  })
 })
