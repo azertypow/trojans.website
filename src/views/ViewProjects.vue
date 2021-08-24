@@ -48,9 +48,11 @@
     >
       <div
           v-if="currentProjectItem.type === 'intro'"
+          class="v-view-projects__viewer__content"
       >
-        {{ currentProjectItem.text }}
-
+        <div
+            v-html="currentProjectItem.text"
+        ></div>
         <a
             v-for="link of currentProjectItem.exhibition_links"
             :href="link.exhibition_link"
@@ -60,6 +62,30 @@
           <div>{{link.partenariat_description}}</div>
           <div>{{link.date}}</div>
         </a>
+      </div>
+
+
+      <div
+          v-else-if="currentProjectItem.type === 'image'"
+          class="v-view-projects__viewer__content"
+      >
+        <gallery
+            :data="{
+              image: currentProjectItem.images
+            }"
+        ></gallery>
+      </div>
+
+      <div
+          v-else-if="currentProjectItem.type === 'vimeo'"
+          class="v-view-projects__viewer__content"
+      >
+        <gallery
+            :data="{
+              image: currentProjectItem.images,
+              vimeo: currentProjectItem.Vimeo,
+            }"
+        ></gallery>
       </div>
 
     </div>
@@ -74,14 +100,15 @@ import {useStore} from "vuex"
 import {IProjectsSortedInArray, key, SortedProjectItem} from "@/store"
 import {IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
-import {easeLinear} from "@/lib/easing"
 import ProjectViewerDesktop from "@/components/ProjectViewerDesktop.vue"
+import Gallery from "@/components/Gallery.vue"
 
 export default defineComponent({
 
   name: 'ViewProjects',
 
   components: {
+    Gallery,
     ProjectViewerDesktop,
     ProjectGalleryMobile,
     Project,
@@ -123,8 +150,9 @@ export default defineComponent({
 
       const dateIndex     = this.store.state.indexOfOpenProject.dateIndex
       const projectIndex  = this.store.state.indexOfOpenProject.projectIndex
+      const itemIndex     = this.store.state.indexOfOpenProject.itemIndex
 
-      return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray) [dateIndex][projectIndex][0]
+      return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray) [dateIndex][projectIndex][itemIndex]
     },
 
   }
@@ -202,6 +230,29 @@ export default defineComponent({
     height: calc( 100% - #{$gutter / 2} );
     //background: black;
     z-index: 900;
+  }
+  .v-view-projects__viewer__content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+</style>
+
+<style lang="scss">
+@import "../style/param";
+
+.v-view-projects {
+  .v-gallery__desc {
+    position: absolute !important;
+    bottom: 0;
+    box-sizing: border-box;
+    background: white;
+    width: 100%;
+    text-align: right;
+    margin: 0;
+    padding: ($gutter / 4) ($gutter / 2);
   }
 }
 

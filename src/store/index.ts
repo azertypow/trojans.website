@@ -16,6 +16,7 @@ import {ISortedProjectsByYear, sortProjectsByYear} from "@/global/sortProjectsBy
 export interface IIndexOfOpenProject {
   dateIndex: number
   projectIndex: number
+  itemIndex: number
 }
 
 export interface State {
@@ -191,11 +192,20 @@ export default createStore<State>({
   modules: {
   },
   getters: {
-    transformDataOfDesktopItemProjectViewer(state): {width: number, left: number} {
+    transformDataOfDesktopItemProjectViewer(state, getters): {width: number, left: number} {
+
+      if(state.indexOfOpenProject === null) return {
+        left: window.innerWidth / 2,
+        width: 0,
+      }
+
+      const widthOfTabItemProject = 20
+      const currentProjectOpen = (getters.projectsSortedInArray as IProjectsSortedInArray)[state.indexOfOpenProject.dateIndex][state.indexOfOpenProject.projectIndex]
+      const widthOfTotalTabsItemProject = widthOfTabItemProject * currentProjectOpen.length
 
       return {
-        left: (state.leftPositionOfProjectItem || 0) + state.titleWidthOfProjectOpen,
-        width: state.widthOfProjectOpen - state.titleWidthOfProjectOpen,
+        left: (state.leftPositionOfProjectItem || 0) + state.titleWidthOfProjectOpen + widthOfTabItemProject * state.indexOfOpenProject.itemIndex,
+        width: state.widthOfProjectOpen - state.titleWidthOfProjectOpen - widthOfTotalTabsItemProject,
       }
     },
 
@@ -234,13 +244,7 @@ export default createStore<State>({
 })
 
 
-export interface IProjectsSortedInArray {
-  [dateIndex: number]: {
-    [projectIndex: number]: {
-      [itemIndex: number]: SortedProjectItem
-    }
-  }
-}
+export type IProjectsSortedInArray = SortedProjectItem[][][]
 
 export type SortedProjectItem =
   | ISortedProjectItemDescription

@@ -32,15 +32,17 @@
       <div
           class="v-project-viewer-desktop__content"
       >
-
         <div
-        >description</div>
-        <div
-            v-for="(image, index) of data.images"
-        >image</div>
-        <div
-            v-for="(vimeo, index) of data.Vimeo"
-        >vimeo</div>
+            v-for="index in lengthOfItemProject"
+            class="v-project-viewer-desktop__tab"
+            @click="projectTabClicked(index - 1)"
+            :class="{
+              'is-active': isActiveTab(index - 1)
+            }"
+        >
+          <span v-if="isActiveTab(index - 1)" >✗</span>
+          <span v-else >↗</span>
+        </div>
 
       </div>
 
@@ -79,7 +81,10 @@ export default defineComponent({
     },
     index: {
       required: true,
-      type: Object as PropType<IIndexOfOpenProject>,
+      type: Object as PropType<{
+        dateIndex: number,
+        projectIndex: number,
+      }>,
     },
   },
 
@@ -119,10 +124,19 @@ export default defineComponent({
         this.store.commit("updateIndexOfOpenProject", {
           dateIndex: this.$props.index.dateIndex,
           projectIndex: this.$props.index.projectIndex,
+          itemIndex: 0,
         } as IIndexOfOpenProject)
 
       }
 
+    },
+
+    projectTabClicked(index: number) {
+      this.store.commit("updateIndexOfOpenProject", {
+        dateIndex: this.$props.index.dateIndex,
+        projectIndex: this.$props.index.projectIndex,
+        itemIndex: index,
+      } as IIndexOfOpenProject)
     },
 
     updateTitleWidth() {
@@ -205,7 +219,11 @@ export default defineComponent({
     updateStoredProjectOpenTitleWidth() {
       if(this.thisIsOpen)
         this.store.commit("updateTitleWidthOfProjectOpen", this.titleWidth)
-    }
+    },
+
+    isActiveTab(tabIndax: number): boolean {
+      return this.store.state.indexOfOpenProject?.itemIndex === tabIndax
+    },
   },
 
   data() {
@@ -290,6 +308,10 @@ export default defineComponent({
     projectsSortedInArray(): IProjectsSortedInArray {
       return this.store.getters.projectsSortedInArray
     },
+
+    lengthOfItemProject(): number {
+      return this.store.getters.projectsSortedInArray[this.$props.index.dateIndex][this.$props.index.projectIndex].length
+    },
   },
 
   watch: {
@@ -370,6 +392,27 @@ export default defineComponent({
 .v-project-viewer-desktop__content {
   .is-close & {
     display: none;
+  }
+
+  display: flex;
+  width: 100%;
+}
+
+.v-project-viewer-desktop__tab {
+  font-family: 'Inter', Helvetica, Neue, sans-serif;
+  cursor: pointer;
+  width: $gutter;
+  flex-shrink: 0;
+  text-align: center;
+  color: $site-color;
+  user-select: none;
+  line-height: 1em;
+
+  &.is-active {
+    width: 100%;
+    flex-shrink: 1;
+    text-align: right;
+    line-height: .75em;
   }
 }
 
