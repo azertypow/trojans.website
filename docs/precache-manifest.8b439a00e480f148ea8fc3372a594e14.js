@@ -4,16 +4,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/CNAME"
   },
   {
-    "revision": "8c6d5c8d532e23e5120b",
-    "url": "https://trojanscollective.com/css/ViewHome.903d02ea.css"
+    "revision": "7a75ba623923fbe30c06",
+    "url": "https://trojanscollective.com/css/ViewHome.4974ee39.css"
   },
   {
-    "revision": "b61200dd5211beac1a36",
-    "url": "https://trojanscollective.com/css/ViewProjects.bcdda484.css"
+    "revision": "983cad2069e8ed15bd1d",
+    "url": "https://trojanscollective.com/css/ViewProjects.66417788.css"
   },
   {
-    "revision": "abb417fcdd3a62f244c2",
-    "url": "https://trojanscollective.com/css/app.80d2b5f4.css"
+    "revision": "e4458685da6df6c2e6eb",
+    "url": "https://trojanscollective.com/css/app.a2a6ee37.css"
   },
   {
     "revision": "2c517776547a348961144620f89dd350",
@@ -176,12 +176,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/fonts/Inter.var.f065685b.woff2"
   },
   {
-    "revision": "802e9f8149ced67511dc37ca6b97c03b",
-    "url": "https://trojanscollective.com/fonts/italic.802e9f81.woff"
+    "revision": "2efbfaf2c6031bc14d3f60af9c6328d7",
+    "url": "https://trojanscollective.com/fonts/Unica77LLWeb-Regular.2efbfaf2.woff"
   },
   {
-    "revision": "fa7fd510b2507efb254e4080b3d86d7c",
-    "url": "https://trojanscollective.com/fonts/regular.fa7fd510.woff"
+    "revision": "d10d6eebf0e88285ab7f7a6fe068d1d2",
+    "url": "https://trojanscollective.com/fonts/Unica77LLWeb-Regular.d10d6eeb.woff2"
   },
   {
     "revision": "0e03fc2d704db9dd8069774652db3a1b",
@@ -192,24 +192,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/img/TrojansLogo--white.595d7305.svg"
   },
   {
-    "revision": "5f6f7c1f8dd98a732ba3847ec61a581f",
+    "revision": "e429d3a0128e79b2a280be83191420cd",
     "url": "https://trojanscollective.com/index.html"
   },
   {
-    "revision": "8c6d5c8d532e23e5120b",
-    "url": "https://trojanscollective.com/js/ViewHome.7514d0bd.js"
+    "revision": "7a75ba623923fbe30c06",
+    "url": "https://trojanscollective.com/js/ViewHome.2fc1c000.js"
   },
   {
-    "revision": "b61200dd5211beac1a36",
-    "url": "https://trojanscollective.com/js/ViewProjects.934afed2.js"
+    "revision": "983cad2069e8ed15bd1d",
+    "url": "https://trojanscollective.com/js/ViewProjects.e81216b9.js"
   },
   {
-    "revision": "abb417fcdd3a62f244c2",
-    "url": "https://trojanscollective.com/js/app.f08e46b6.js"
+    "revision": "e4458685da6df6c2e6eb",
+    "url": "https://trojanscollective.com/js/app.4f06136c.js"
   },
   {
-    "revision": "c4b6886032cc35ff434d",
-    "url": "https://trojanscollective.com/js/chunk-vendors.1e3a3afb.js"
+    "revision": "5e691907ab3f2be20669",
+    "url": "https://trojanscollective.com/js/chunk-vendors.51e35b98.js"
   },
   {
     "revision": "74f175a640f9fb2e99ff0c248d89457a",
