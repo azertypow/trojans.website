@@ -146,6 +146,7 @@
       <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
       <router-link class="t-nav-link" @click="closeMenu" to="/projects">Works</router-link>
       <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
+      <router-link class="t-nav-link" @click="closeMenu" to="/About">Manifesto</router-link>
     </div>
 
   </nav>

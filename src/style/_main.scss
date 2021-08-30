@@ -43,6 +43,10 @@ h5 {
   line-height: 70px;
   font-size: 63px;
 
+  &:after{
+    content: none !important;
+  }
+
   &.router-link-exact-active {
     cursor: default;
     opacity: .5;
