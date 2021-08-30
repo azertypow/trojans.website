@@ -62,8 +62,11 @@
           <a
               v-for="link of currentProjectItem.exhibition_links"
               :href="link.exhibition_link"
+              class="no-style"
           >
-            <div>{{link.type}}</div>
+            <div
+                class="v-view-projects__viewer__content__links__type t-text-subtitle link-style"
+            >{{link.type}}</div>
             <div>{{link.exhibition_title}}</div>
             <div>{{link.partenariat_description}}</div>
             <div>{{link.date}}</div>
@@ -286,6 +289,20 @@ export default defineComponent({
 
 .v-view-projects__viewer__content__links {
   display: flex;
+
+  > a {
+    display: block;
+  }
+
+  a:hover .v-view-projects__viewer__content__links__type:after {
+    transform: translate3d(2px, -2px, 0);
+  }
+
+}
+
+.v-view-projects__viewer__content__links__type {
+  color: $site-color !important;
+  margin-top: 0;
 }
 
 </style>

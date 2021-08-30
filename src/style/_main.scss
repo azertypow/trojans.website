@@ -50,31 +50,8 @@ h5 {
 }
 
 a {
-  color: inherit;
-  text-decoration: inherit;
-  display: inline-block;
-  position: relative;
-  padding-right: 16px;
-
-  &:after {
-    color: $site-color;
-    content: "↗";
-    font-family: 'Inter', Helvetica, Neue, sans-serif;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate3d(0, 0, 0);
-    transition: transform 250ms;
-  }
-
-  &:hover {
-    &:after {
-      transform: translate3d(2px, -2px, 0);
-    }
-  }
-
+  @extend .link-style;
 }
-
 em {
   font-style: inherit;
   text-decoration: underline;
