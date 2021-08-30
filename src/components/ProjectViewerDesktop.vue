@@ -408,6 +408,10 @@ export default defineComponent({
   user-select: none;
   line-height: 1em;
 
+  &:not(:first-child) {
+    box-shadow: -2px 0px 10px -5px #00000033;
+  }
+
   &.is-active {
     width: 100%;
     flex-shrink: 1;
