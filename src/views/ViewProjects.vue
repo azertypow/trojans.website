@@ -49,6 +49,7 @@
       <div
           v-if="currentProjectItem.type === 'intro'"
           class="v-view-projects__viewer__content"
+          :style="styleIntroContent"
       >
         <div
             v-html="currentProjectItem.text"
@@ -136,6 +137,12 @@ export default defineComponent({
     projectContentViewerStyle(): any {
       return {
         left: this.store.getters.transformDataOfDesktopItemProjectViewer.left + 'px',
+        width: this.store.getters.transformDataOfDesktopItemProjectViewer.width + 'px',
+      }
+    },
+
+    styleIntroContent(): any {
+      return {
         width: this.store.getters.transformDataOfDesktopItemProjectViewer.width + 'px',
       }
     },
