@@ -67,9 +67,9 @@
             <div
                 class="v-view-projects__viewer__content__links__type t-text-subtitle link-style"
             >{{link.type}}</div>
-            <div>{{link.exhibition_title}}</div>
-            <div>{{link.partenariat_description}}</div>
-            <div>{{link.date}}</div>
+            <div class="v-view-projects__viewer__content__links__date t-text-small" >{{link.date}}</div>
+            <div class="v-view-projects__viewer__content__links__content t-text-small" >{{link.exhibition_title}}</div>
+            <div class="v-view-projects__viewer__content__links__content t-text-small" >{{link.partenariat_description}}</div>
           </a>
         </div>
 
@@ -290,8 +290,11 @@ export default defineComponent({
 .v-view-projects__viewer__content__links {
   display: flex;
 
-  > a {
+  > * {
     display: block;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+    padding-right: $gutter;
   }
 
   a:hover .v-view-projects__viewer__content__links__type:after {
@@ -303,6 +306,16 @@ export default defineComponent({
 .v-view-projects__viewer__content__links__type {
   color: $site-color !important;
   margin-top: 0;
+  margin-bottom: 0;
+}
+
+.v-view-projects__viewer__content__links__date {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.v-view-projects__viewer__content__links__content {
+  margin: 0;
 }
 
 </style>
