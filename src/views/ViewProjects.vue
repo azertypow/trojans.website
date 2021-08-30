@@ -52,17 +52,24 @@
           :style="styleIntroContent"
       >
         <div
+            class="v-view-projects__viewer__content__intro"
             v-html="currentProjectItem.text"
         ></div>
-        <a
-            v-for="link of currentProjectItem.exhibition_links"
-            :href="link.exhibition_link"
+
+        <div
+            class="v-view-projects__viewer__content__links"
         >
-          <div>{{link.type}}</div>
-          <div>{{link.exhibition_title}}</div>
-          <div>{{link.partenariat_description}}</div>
-          <div>{{link.date}}</div>
-        </a>
+          <a
+              v-for="link of currentProjectItem.exhibition_links"
+              :href="link.exhibition_link"
+          >
+            <div>{{link.type}}</div>
+            <div>{{link.exhibition_title}}</div>
+            <div>{{link.partenariat_description}}</div>
+            <div>{{link.date}}</div>
+          </a>
+        </div>
+
       </div>
 
 
@@ -262,6 +269,23 @@ export default defineComponent({
     margin: 0;
     padding: ($gutter / 4) ($gutter / 2);
   }
+}
+
+
+.v-view-projects__viewer__content__intro {
+  margin-bottom: $gutter;
+
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+.v-view-projects__viewer__content__links {
+  display: flex;
 }
 
 </style>
