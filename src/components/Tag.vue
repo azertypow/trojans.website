@@ -41,6 +41,10 @@ export default defineComponent({
 
   methods: {
     toggleStatus() {
+
+      this.store.commit("updateIdOfOpenedProject", null)
+      this.store.commit("updateIndexOfOpenProject", null)
+
       if( this.isSecondeFilter ) {
 
         this.store.commit("ToggleSecondaryTagActivated", this.tag)
