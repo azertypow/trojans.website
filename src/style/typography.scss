@@ -1,5 +1,5 @@
 .t-title {
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
   line-height: 50px;
   font-size: $font-title-size;
@@ -8,7 +8,7 @@
 }
 
 .t-text-reg {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 17px;
   line-height: $line-height;
   margin-top: 20px;
@@ -17,11 +17,11 @@
 
 .t-text-m {
   @extend .t-text-reg;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .t-text-small {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 12px;
   line-height: $small-line-height;
   margin-top: $small-line-height;
