@@ -11,15 +11,23 @@
         title="About"
         :has-body-container-padding-bottom="false"
     >
+
       <div
           class="v-view-about__table-content"
-          v-html="about.description"
-      ></div>
-      <div class="v-view-about__table-content__img" >
-        <img
-            v-for="img of about.images"
-            :src="formatUrl(img.url)" alt="">
+      >
+
+        <div
+            class="v-view-about__table-content__text"
+            v-html="about.description"
+        ></div>
+        <div class="v-view-about__table-content__img" >
+          <img
+              v-for="img of about.images"
+              :src="formatUrl(img.url)" alt="">
+        </div>
+
       </div>
+
     </toggle-table-fixed>
 
     <toggle-table-fixed
@@ -31,19 +39,27 @@
         title="They Work With Us"
         :has-body-container-padding-bottom="false"
     >
+
       <div
           class="v-view-about__table-content"
       >
+
         <div
-            class="v-view-about__table-content__item"
-            v-for="partner of theyWorkWithUs.partner"
+            class="v-view-about__table-content__text"
         >
-          <a
-             :href="partner.url"
-             target="_blank"
-          >{{ partner.name }}</a>
+          <div
+              class="v-view-about__table-content__item"
+              v-for="partner of theyWorkWithUs.partner"
+          >
+            <a
+               :href="partner.url"
+               target="_blank"
+            >{{ partner.name }}</a>
+          </div>
         </div>
+
       </div>
+
     </toggle-table-fixed>
 
     <toggle-table-fixed
@@ -55,30 +71,36 @@
         title="Exhibitions and Awards"
         :has-body-container-padding-bottom="false"
     >
+
       <div
           class="v-view-about__table-content"
       >
         <div
-            class="v-view-about__table-content__item"
-            v-for="event of exhibitionsAndAwards.events"
+            class="v-view-about__table-content__text"
         >
-          <a
-              v-if="event.link"
-              :href="event.link"
-              target="_blank"
+          <div
+              class="v-view-about__table-content__item"
+              v-for="event of exhibitionsAndAwards.events"
           >
-            — {{event.name}} {{event.date}}
-            <br>{{event.location}}
-          </a>
-          <template
-              v-else
-          >
-            — {{event.name}} {{event.date}}
-            <br>{{event.location}}
-          </template>
+            <a
+                v-if="event.link"
+                :href="event.link"
+                target="_blank"
+            >
+              — {{event.name}} {{event.date}}
+              <br>{{event.location}}
+            </a>
+            <template
+                v-else
+            >
+              — {{event.name}} {{event.date}}
+              <br>{{event.location}}
+            </template>
+          </div>
         </div>
 
       </div>
+
     </toggle-table-fixed>
 
 
@@ -92,15 +114,24 @@
         title="Manifesto"
         :has-body-container-padding-bottom="false"
     >
+
       <div
           class="v-view-about__table-content"
-          v-html="manifesto.description"
-      ></div>
-      <div class="v-view-about__table-content__img" >
-          <img
-              v-for="img of manifesto.images"
-              :src="formatUrl(img.url)" alt="">
+      >
+
+        <div
+            class="v-view-about__table-content__text"
+            v-html="manifesto.description"
+        ></div>
+        <div class="v-view-about__table-content__img" >
+            <img
+                v-for="img of manifesto.images"
+                :src="formatUrl(img.url)" alt="">
+        </div>
+
       </div>
+
+
     </toggle-table-fixed>
 
   </section>
@@ -181,21 +212,42 @@ export default defineComponent({
 }
 
 .v-view-about__table-content {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow: visible;
+}
+
+.v-view-about__table-content__text {
   @include gutter;
   padding-top: $gutter / 2;
-  padding-bottom: $gutter / 2;
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
 }
 
 .v-view-about__table-content__img {
-    width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+
 
   > img {
     display: block;
     width: 100%;
-
-    + img {
-      margin-top: $gutter / 2;
-    }
+    height: 10%;
+    object-fit: cover;
+    flex-shrink: 1;
+    flex-grow: 1;
+    padding-top: $gutter / 2;
+    box-sizing: border-box;
   }
 }
 

@@ -216,6 +216,12 @@ $header-height: $gutter;
   box-shadow: $tile-box-shadow;
 }
 
+.v-toggle-table-fixed__body__container {
+  height: 100%;
+  scroll-behavior: smooth;
+  overflow: auto;
+}
+
 .is-dark .v-toggle-table-fixed__body__container {
   background-color: black;
   color: white;

@@ -69,7 +69,7 @@ export default defineComponent({
 <style lang="scss">
 @import "./style/param";
 
-$transition-duration: .5s;
+$transition-duration: 1s;
 
 .v-app {
   padding-bottom: $nav-height;
