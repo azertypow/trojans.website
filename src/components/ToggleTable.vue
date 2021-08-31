@@ -29,9 +29,6 @@
 
     <div
         class="v-toggle-table__body"
-        :style="{
-          maxHeight: calculatedHeight
-        }"
     >
       <div
           class="v-toggle-table__body__container"
@@ -102,20 +99,6 @@ export default defineComponent({
 
   data() {
     return {
-      calculatedHeight: "0"
-    }
-  },
-
-  watch: {
-    isOpen() {
-      if( this.isOpen ) {
-        const container = this.$refs.container
-        if (container instanceof HTMLElement) {
-          this.calculatedHeight = `${container.getBoundingClientRect().height}px`
-        }
-      } else {
-        this.calculatedHeight = "0"
-      }
     }
   },
 
