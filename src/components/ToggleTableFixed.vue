@@ -167,7 +167,7 @@ $header-height: $gutter;
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -204,12 +204,11 @@ $header-height: $gutter;
 }
 
 .v-toggle-table-fixed__body {
-  //overflow: hidden;
   transition: max-height 500ms ease-in-out;
   background: $site-background-color;
   position: relative;
   height: calc( 100vh - (4 * 70px + 65px) );
-  overflow: scroll;
+  overflow: auto;
 }
 
 .v-toggle-table-fixed {

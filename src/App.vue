@@ -3,6 +3,7 @@
   <div
       :class="{
         'is-home': isHome,
+        'is-fixed-layout': isFixedLayout,
         'is-desk-width': isDeskWidth,
       }"
       class="v-app">
@@ -49,7 +50,10 @@ export default defineComponent({
     },
     isDeskWidth(): boolean {
       return this.store.state.isDeskWidth
-    }
+    },
+    isFixedLayout(): boolean {
+      return this.$route.path === '/About' && !this.isDeskWidth
+    },
   },
 
   beforeRouteUpdate (to, from, next) {
@@ -74,6 +78,10 @@ $transition-duration: .5s;
 
   &.is-home {
     padding-bottom: 0;
+  }
+
+  &.is-fixed-layout{
+    height: 100vh;
   }
 }
 
