@@ -92,7 +92,8 @@ $transition-duration: .5s;
   & ~ .overlay-left {
     display: block;
     transition: transform $transition-duration;
-    transition-timing-function: cubic-bezier(.33333,0,0,1);
+    //transition-timing-function: cubic-bezier(.33333,0,0,1);
+    transition-timing-function: ease-in-out;
   }
 }
 
@@ -104,8 +105,9 @@ $transition-duration: .5s;
   width: 100vw;
   background: $site-color;
   transition: none;
-  display: none;
+  display: block;
   transform: translate3d(-100%, 0, 0);
+  z-index: 1000000000;
 }
 
 .fade-leave-to ~ .overlay-left {
