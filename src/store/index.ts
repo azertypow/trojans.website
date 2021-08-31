@@ -120,7 +120,7 @@ export default createStore<State>({
     updateProjects(state, projects) {
       state.sortedProject = sortProjectsByYear({
         projects: projects
-      })
+      }).reverse()
       state.projects = projects
     },
 
