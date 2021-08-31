@@ -183,7 +183,7 @@ export default defineComponent({
 .v-view-about__table-content {
   @include gutter;
   padding-top: $gutter / 2;
-  padding-bottom: $gutter;
+  padding-bottom: $gutter / 2;
 }
 
 .v-view-about__table-content__img {
