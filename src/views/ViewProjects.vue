@@ -251,7 +251,8 @@ export default defineComponent({
   .v-view-projects__viewer__content {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     background: white;
   }
 }
