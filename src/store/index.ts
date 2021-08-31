@@ -39,6 +39,8 @@ export interface State {
   idOfOpenedProject: null | string
   indexOfOpenProject: null | IIndexOfOpenProject
 
+  indexOfOpenAboutTab: number
+
   about:          IApiAbout | null
   award:          IApiExhibitionsAndAwards | null
   manifesto:      IApiManifesto | null
@@ -55,6 +57,8 @@ export interface IStoreMutation {
 
   updateIdOfOpenedProject(state: State, id: string | null): void
   updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject): void
+
+  updateIndexOfOpenAboutTab(state: State, indexOfOpenAboutTab: number): void
 
   updateTags            (state: State, tags:           IApiTags[]): void
   tagsListAddTag        (state: State, tagToAdd:       string): void
@@ -101,6 +105,8 @@ export default createStore<State>({
     idOfOpenedProject: null,
     indexOfOpenProject: null,
 
+    indexOfOpenAboutTab: 0,
+
     about: null,
     award: null,
     info: null,
@@ -123,6 +129,10 @@ export default createStore<State>({
     },
     updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject) {
       state.indexOfOpenProject = indexOfOpenProject
+    },
+
+    updateIndexOfOpenAboutTab(state: State, indexOfOpenAboutTab: number) {
+      state.indexOfOpenAboutTab = indexOfOpenAboutTab
     },
 
     updateTags(state: State, tags: IApiTags[]) {

@@ -1,4 +1,5 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
+import store from '@/store'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -19,6 +20,10 @@ const routes: Array<RouteRecordRaw> = [
       title: 'About the Trojans Collective',
       description:
 `Trojans Collective is a design group by Helena, Jeanne, Jessica and Netillo. Our goal is to expand the field of design through experimentation and research.`
+    },
+    beforeEnter: (to, from, next) => {
+      store.commit('updateIndexOfOpenAboutTab', 0)
+      next()
     }
   },
   {
@@ -30,7 +35,21 @@ const routes: Array<RouteRecordRaw> = [
       description:
 `Curated list of Trojans Collective works.`
     }
-  }
+  },
+  {
+    path: '/manifesto',
+    name: 'Manifesto',
+    component: () => import(/* webpackChunkName: "ViewProjects" */ '../views/ViewAbout.vue'),
+    meta: {
+      title: 'About the Trojans Collective',
+      description:
+        `Trojans Collective is a design group by Helena, Jeanne, Jessica and Netillo. Our goal is to expand the field of design through experimentation and research.`
+    },
+    beforeEnter: (to, from, next) => {
+      store.commit('updateIndexOfOpenAboutTab', 3)
+      next()
+    },
+  },
 ]
 
 const router = createRouter({

@@ -121,7 +121,6 @@ export default defineComponent({
   data() {
     return {
       store: useStore(key),
-      indexOfToggleTableOpen: 0,
     }
   },
 
@@ -130,11 +129,11 @@ export default defineComponent({
     },
 
     getThisTableIsOpen(index: number): boolean {
-      return this.indexOfToggleTableOpen === index
+      return this.store.state.indexOfOpenAboutTab === index
     },
 
     tableToggled(index: number, $event: number) {
-      this.indexOfToggleTableOpen = index
+      this.store.commit('updateIndexOfOpenAboutTab', index)
     },
 
     formatUrl(path: string) {
@@ -158,6 +157,9 @@ export default defineComponent({
     manifesto(): IApiManifesto | null {
       return (this.store.state as State).manifesto
     },
+    indexOfToggleTableOpen(): number {
+      return this.store.state.indexOfOpenAboutTab
+    }
   }
 
 });
