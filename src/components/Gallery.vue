@@ -76,7 +76,7 @@ export default defineComponent({
 
   methods: {
     openVimeoPlayer() {
-      this.vimeoPlayerIsOpen = true
+      if(this.$props.data.vimeo !== undefined) this.vimeoPlayerIsOpen = true
     },
 
     vimeoLoad( e: Event ) {
