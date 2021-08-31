@@ -7,47 +7,52 @@
       }"
   >
 
-    <div
-        v-if="isOpen"
-        class="v-navigation__content"
+    <transition
+        name="slide"
     >
       <div
-          class="v-navigation__content__box"
+          v-if="isOpen"
+          class="v-navigation__content"
       >
         <div
-            class="v-navigation__links"
+            class="v-navigation__content__box"
         >
-          <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
-          <router-link class="t-nav-link" @click="closeMenu" to="/projects">Works</router-link>
-          <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
+          <div
+              class="v-navigation__links"
+          >
+            <router-link class="t-nav-link" @click="closeMenu" to="/">Home</router-link>
+            <router-link class="t-nav-link" @click="closeMenu" to="/projects">Works</router-link>
+            <router-link class="t-nav-link" @click="closeMenu" to="/About">About</router-link>
+          </div>
+
+          <div
+              class="v-navigation__contact"
+              v-if="contactData !== null"
+          >
+
+            <p>Address:
+              <br>{{contactData.Address}}
+              <br>{{contactData.Postal_Code}} {{contactData.City}}
+              <br>{{contactData.Country}}
+            </p>
+
+            <p><a :href="`mailto:${contactData.mail}`">{{contactData.mail}}</a></p>
+
+            <p>
+              <a
+                  v-for="(link, index) of contactData.links"
+                  :href="link.url"
+              >
+                <template v-if="index > 0"> | </template>
+                {{link.name}}
+              </a>
+            </p>
+          </div>
+
         </div>
-
-        <div
-            class="v-navigation__contact"
-            v-if="contactData !== null"
-        >
-
-          <p>Address:
-            <br>{{contactData.Address}}
-            <br>{{contactData.Postal_Code}} {{contactData.City}}
-            <br>{{contactData.Country}}
-          </p>
-
-          <p><a :href="`mailto:${contactData.mail}`">{{contactData.mail}}</a></p>
-
-          <p>
-            <a
-                v-for="(link, index) of contactData.links"
-                :href="link.url"
-            >
-              <template v-if="index > 0"> | </template>
-              {{link.name}}
-            </a>
-          </p>
-        </div>
-
       </div>
-    </div>
+    </transition>
+
 
     <div
         class="v-navigation__menu">
@@ -491,6 +496,21 @@ export default defineComponent({
   .v-tag-list {
     width: 100%;
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transition: transform .75s ease-in-out;
+}
+
+.slide-enter-from {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-leave-to {
+  transform: translate3d(100%, 0, 0);
 }
 
 </style>
