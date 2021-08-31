@@ -262,7 +262,7 @@ export default defineComponent({
 <style lang="scss">
 @import "../style/param";
 
-.v-view-projects {
+.is-desk-width .v-view-projects {
   .v-gallery__desc {
     position: absolute !important;
     bottom: 0;
