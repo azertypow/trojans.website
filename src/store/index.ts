@@ -241,7 +241,8 @@ export default createStore<State>({
           const intro = [{
             text: project.description,
             type: "intro",
-            exhibition_links: project.exhibition_links
+            exhibition_links: project.exhibition_links,
+            cover: project.cover
           } as ISortedProjectItemDescription]
 
           return (intro as SortedProjectItem[]).concat(images, vimeo)
@@ -270,7 +271,8 @@ export interface ISortedProjectItem {
 export interface ISortedProjectItemDescription extends ISortedProjectItem {
   type: 'intro'
   text: string
-  exhibition_links: IApiExhibition_links [],
+  exhibition_links: IApiExhibition_links []
+  cover: IApiImage | null
 }
 
 export interface ISortedProjectItemImage extends ISortedProjectItem {

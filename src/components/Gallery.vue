@@ -12,6 +12,9 @@
   <div
       class="v-gallery__desc"
       v-if="data.image.caption && withDesc"
+      :style="{
+        textAlign: descAlign,
+      }"
   >
     {{data.image.caption}}
   </div>
@@ -54,7 +57,12 @@ export default defineComponent({
       required: false,
       type: Boolean,
       default: () => true,
-    }
+    },
+    descAlign: {
+      required: false,
+      type: String as PropType<'left' | 'right'>,
+      default: () => 'right',
+    },
   },
 
   data() {

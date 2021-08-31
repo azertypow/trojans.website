@@ -23,6 +23,7 @@ export interface IApiProject {
   exhibition_links?: IApiExhibition_links [],
   images?: IApiImage[]
   Vimeo?: IAPiVimeo[]
+  cover: IApiImage | null
   tags?: IApiTags[]
   second_tag?: ISecondTags
 }

@@ -52,9 +52,24 @@
           :style="styleIntroContent"
       >
         <div
-            class="v-view-projects__viewer__content__intro"
-            v-html="currentProjectItem.text"
-        ></div>
+            class="v-view-projects__viewer__content__main"
+        >
+          <div
+              class="v-view-projects__viewer__content__cover"
+              v-if="currentProjectItem.cover !== null"
+          >
+            <gallery
+                :data="{
+                  image: currentProjectItem.cover
+                }"
+                desc-align="left"
+            />
+          </div>
+          <div
+              class="v-view-projects__viewer__content__intro"
+              v-html="currentProjectItem.text"
+          ></div>
+        </div>
 
         <div
             class="v-view-projects__viewer__content__links"
@@ -275,9 +290,26 @@ export default defineComponent({
   }
 }
 
+.v-view-projects__viewer__content__main {
+  display: flex;
+  margin-bottom: $gutter;
+  overflow: hidden;
+}
+
+.v-view-projects__viewer__content__cover {
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 0;
+  padding-right: $gutter;
+  position: relative;
+}
 
 .v-view-projects__viewer__content__intro {
-  margin-bottom: $gutter;
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
 
   > *:first-child {
     margin-top: 0 !important;
