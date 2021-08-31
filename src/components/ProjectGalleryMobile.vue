@@ -44,7 +44,6 @@ export default defineComponent({
 
   .v-project-gallery-mobile__container {
     width: 100%;
-    height: calc( 100vh - #{$nav-height} );
     flex-shrink: 0;
     overflow: hidden;
     scroll-snap-align: start;
@@ -53,8 +52,8 @@ export default defineComponent({
     flex-direction: column;
 
     .v-gallery {
-      height: 75%;
-      flex-shrink: 0;
+      height: 100%;
+      flex-shrink: 1;
       flex-grow: 1;
       object-fit: contain;
       object-position: center bottom;
