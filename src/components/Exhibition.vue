@@ -2,7 +2,7 @@
   <section class="v-exhibition">
 
     <a
-        class="v-exhibition__link"
+        class="v-exhibition__link no-style"
         v-if="data.exhibition_link"
         :href="data.exhibition_link"
         target="_blank"
