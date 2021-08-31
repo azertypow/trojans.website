@@ -460,8 +460,8 @@ export default defineComponent({
 
 .v-navigation__news__content {
   height: $news-content-height;
-  //overflow: hidden;
-  overflow: scroll;
+  overflow: hidden;
+  //overflow: scroll;
 }
 
 </style>
