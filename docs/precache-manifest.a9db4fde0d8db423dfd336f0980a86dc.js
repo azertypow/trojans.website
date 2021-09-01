@@ -4,16 +4,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/CNAME"
   },
   {
-    "revision": "7a75ba623923fbe30c06",
-    "url": "https://trojanscollective.com/css/ViewHome.4974ee39.css"
+    "revision": "ef82e30ab25b79d65e75",
+    "url": "https://trojanscollective.com/css/ViewHome.a7b199ef.css"
   },
   {
-    "revision": "983cad2069e8ed15bd1d",
-    "url": "https://trojanscollective.com/css/ViewProjects.66417788.css"
+    "revision": "ed4135c0fdebd3432142",
+    "url": "https://trojanscollective.com/css/ViewProjects.9929a0f9.css"
   },
   {
-    "revision": "e4458685da6df6c2e6eb",
-    "url": "https://trojanscollective.com/css/app.a2a6ee37.css"
+    "revision": "138e317c919add7b4ace",
+    "url": "https://trojanscollective.com/css/app.3b286391.css"
   },
   {
     "revision": "2c517776547a348961144620f89dd350",
@@ -192,24 +192,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/img/TrojansLogo--white.595d7305.svg"
   },
   {
-    "revision": "e429d3a0128e79b2a280be83191420cd",
+    "revision": "a96786537daf850323defd51192c00e8",
     "url": "https://trojanscollective.com/index.html"
   },
   {
-    "revision": "7a75ba623923fbe30c06",
-    "url": "https://trojanscollective.com/js/ViewHome.2fc1c000.js"
+    "revision": "ef82e30ab25b79d65e75",
+    "url": "https://trojanscollective.com/js/ViewHome.f8bd6dd8.js"
   },
   {
-    "revision": "983cad2069e8ed15bd1d",
-    "url": "https://trojanscollective.com/js/ViewProjects.e81216b9.js"
+    "revision": "ed4135c0fdebd3432142",
+    "url": "https://trojanscollective.com/js/ViewProjects.76124a87.js"
   },
   {
-    "revision": "e4458685da6df6c2e6eb",
-    "url": "https://trojanscollective.com/js/app.4f06136c.js"
+    "revision": "138e317c919add7b4ace",
+    "url": "https://trojanscollective.com/js/app.2cdbdd39.js"
   },
   {
-    "revision": "5e691907ab3f2be20669",
-    "url": "https://trojanscollective.com/js/chunk-vendors.51e35b98.js"
+    "revision": "8af6c6a6e49f7e5ea98d",
+    "url": "https://trojanscollective.com/js/chunk-vendors.70a4f2c8.js"
   },
   {
     "revision": "74f175a640f9fb2e99ff0c248d89457a",
