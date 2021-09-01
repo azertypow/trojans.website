@@ -213,9 +213,13 @@ export default defineComponent({
 
 .v-view-about__table-content {
   display: flex;
-  flex-wrap: nowrap;
-  height: 100%;
+  flex-wrap: wrap;
   overflow: visible;
+
+  .is-desk-width & {
+    flex-wrap: nowrap;
+    height: 100%;
+  }
 }
 
 .v-view-about__table-content__text {
