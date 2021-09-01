@@ -69,8 +69,6 @@ export default defineComponent({
 <style lang="scss">
 @import "./style/param";
 
-$transition-duration: 1s;
-
 .v-app {
   padding-bottom: $nav-height;
   min-height: 100vh;
@@ -87,13 +85,13 @@ $transition-duration: 1s;
 
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: $transition-duration;
+  transition-duration: $page-transition--duration;
 
   & ~ .overlay-left {
     display: block;
-    transition: transform $transition-duration;
+    transition: transform $page-transition--duration;
     //transition-timing-function: cubic-bezier(.33333,0,0,1);
-    transition-timing-function: ease-in-out;
+    transition-timing-function: $page-transition--timing-function;
   }
 }
 

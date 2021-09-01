@@ -6,6 +6,10 @@ $gutter: $unit * 2;
 //nav
 $nav-height: 65px;
 
+// page transition
+$page-transition--duration: 1s;
+$page-transition--timing-function: ease-in-out;
+
 // colors
 $site-color: #00EF2E;
 $site-background-color: white;

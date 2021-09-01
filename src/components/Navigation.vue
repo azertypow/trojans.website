@@ -289,6 +289,7 @@ export default defineComponent({
   background: $site-background-color;
   width: 100%;
   user-select: none;
+  transition: background $page-transition--duration $page-transition--timing-function;
 
   &.is-open {
     background: $site-color;
@@ -364,12 +365,12 @@ export default defineComponent({
       width: auto;
       height: 100%;
       fill: $site-color;
-      transition: fill ease-in-out 250ms;
+      transition: fill $page-transition--duration $page-transition--timing-function;
     }
   }
 
   .is-open & {
-    > svg {
+    a > svg {
       fill: $site-background-color;
     }
   }
@@ -502,7 +503,7 @@ export default defineComponent({
 .slide-leave-active {
   transform: translate3d(0, 0, 0);
   opacity: 1;
-  transition: transform .75s ease-in-out;
+  transition: transform ($page-transition--duration * 0.66666) $page-transition--timing-function;
 }
 
 .slide-enter-from {
