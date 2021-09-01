@@ -38,7 +38,6 @@ h5 {
 .t-nav-link {
   font-weight: 400;
   text-transform: uppercase;
-  color: $site-background-color !important;
   text-decoration: none !important;
   line-height: 70px;
   font-size: 63px;
@@ -50,6 +49,12 @@ h5 {
   &.router-link-exact-active {
     cursor: default;
     opacity: .5;
+  }
+
+  color: white !important;
+
+  .is-desk-width:not(.is-home) & {
+    color: $site-color !important;
   }
 }
 
