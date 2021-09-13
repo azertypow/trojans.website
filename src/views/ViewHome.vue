@@ -50,6 +50,19 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+
+.is-desk-width .v-view-home {
+  display: flex;
+  flex-wrap: nowrap;
+
+  .v-view-home__img-intro,
+  .v-view-home__img-item {
+    box-sizing: border-box;
+    width: calc( 100% - 100px);
+    flex-shrink: 0;
+  }
+}
+
 .v-view-home__img-intro {
   width: 100%;
   height: 100vh;
