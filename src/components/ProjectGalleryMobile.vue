@@ -44,6 +44,7 @@ export default defineComponent({
 
   .v-project-gallery-mobile__container {
     width: 100%;
+    max-height: 80%;
     flex-shrink: 0;
     overflow: hidden;
     scroll-snap-align: start;
