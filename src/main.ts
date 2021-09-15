@@ -101,6 +101,8 @@ async function getAbout() {
   const response = await fetch( API_ABOUT_URL )
   const about: IApiAbout = await response.json()
 
+  about.description = markdownIt.render( about.description )
+
   store.commit( "updateAbout", about )
 }
 
@@ -114,6 +116,8 @@ async function getAward() {
 async function getManifesto() {
   const response = await fetch( API_MANIFESTO_URL )
   const manifesto: IApiManifesto = await response.json()
+
+  manifesto.description = markdownIt.render( manifesto.description )
 
   store.commit( "updateManifesto", manifesto )
 }
