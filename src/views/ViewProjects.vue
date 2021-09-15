@@ -94,12 +94,18 @@
       <div
           v-else-if="currentProjectItem.type === 'image'"
           class="v-view-projects__viewer__content"
+          :style="projects__viewer__contentImageStyle.forContainer"
       >
-        <gallery
-            :data="{
-              image: currentProjectItem.images
-            }"
-        ></gallery>
+        <div
+            class="v-view-projects__viewer__content--image"
+            :style="projects__viewer__contentImageStyle.forChildren"
+        >
+          <gallery
+              :data="{
+                image: currentProjectItem.images
+              }"
+          ></gallery>
+        </div>
       </div>
 
       <div
@@ -186,6 +192,34 @@ export default defineComponent({
 
       return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray) [dateIndex][projectIndex][itemIndex]
     },
+
+    projects__viewer__contentImageStyle(): any {
+      if( this.store.getters.sizeOfFirstProjectImage && this.$refs.projectViewer instanceof HTMLElement) {
+
+        const imageRation =
+            this.store.getters.sizeOfFirstProjectImage.height / this.store.getters.sizeOfFirstProjectImage.width * 100
+
+        let imageWidth = this.store.getters.transformDataOfDesktopItemProjectViewer.width
+
+        const imageHeight = imageWidth * imageRation / 100
+        const projectViewerHeight = this.$refs.projectViewer.getBoundingClientRect().height
+
+        if(imageHeight > projectViewerHeight) {
+          imageWidth = projectViewerHeight / imageRation * 100
+        }
+
+        return {
+          forContainer: {
+            width: imageWidth + 'px',
+          },
+          forChildren: {
+            paddingTop: imageRation + '%',
+          },
+        }
+      }
+
+      return {}
+    }
 
   }
 
@@ -288,6 +322,22 @@ export default defineComponent({
     margin: 0;
     padding: ($gutter / 4) ($gutter / 2);
   }
+}
+
+.is-desk-width {
+
+  .v-view-projects__viewer__content--image {
+    position: relative;
+    width: 100%;
+
+    > img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      object-fit: cover;
+    }
+  }
+
 }
 
 .v-view-projects__viewer__content__main {

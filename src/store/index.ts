@@ -249,8 +249,32 @@ export default createStore<State>({
         })
       })
 
-    }
+    },
 
+
+
+    sizeOfFirstProjectImage(state, getters): {width: number | undefined, height: number | undefined} | null {
+
+      if(state.indexOfOpenProject) {
+        const currentProject = (getters.projectsSortedInArray as IProjectsSortedInArray)
+          [state.indexOfOpenProject.dateIndex]
+          [state.indexOfOpenProject.projectIndex]
+
+        const firstImageOrVideoItem: SortedProjectItem | undefined = currentProject[1]
+
+        if(firstImageOrVideoItem?.type === 'image' ) {
+
+          return {
+            width: firstImageOrVideoItem.images.width,
+            height: firstImageOrVideoItem.images.height,
+          }
+
+        }
+      }
+
+      return null
+
+    }
   }
 })
 
