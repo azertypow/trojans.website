@@ -119,4 +119,12 @@ export default defineComponent({
 .fade-enter-to ~ .overlay-left {
   transform: translate3d(100%, 0, 0);
 }
+
+.mc-layout__modalContent {
+  iframe {
+    width: 100% !important;
+    height: 80px !important;
+  }
+}
+
 </style>
