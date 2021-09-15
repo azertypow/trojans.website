@@ -303,6 +303,14 @@ export default defineComponent({
   flex-grow: 0;
   padding-right: $gutter;
   position: relative;
+  height: calc(100vh - 150px);
+
+  .v-gallery {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+  }
 }
 
 .v-view-projects__viewer__content__intro {
