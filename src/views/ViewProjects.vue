@@ -303,7 +303,7 @@ export default defineComponent({
   flex-grow: 0;
   padding-right: $gutter;
   position: relative;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 140px);
 
   .v-gallery {
     width: 100%;
