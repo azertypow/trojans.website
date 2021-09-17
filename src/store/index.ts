@@ -26,6 +26,8 @@ export interface State {
   tags: IApiTags[]
   activatedTags: string[]
 
+  newsletterOpen: boolean
+
   secondaryTag: ISecondTags[]
   activatedSecondaryTag: string | null
 
@@ -64,6 +66,8 @@ export interface IStoreMutation {
   tagsListAddTag        (state: State, tagToAdd:       string): void
   tagsListRemoveTag     (state: State, tagToRemove:    string): void
 
+  updateNewsletterOpen  (state: State, value:           boolean): void
+
   updateSecondaryTags               (state: State, tags: ISecondTags[]): void
   ToggleSecondaryTagActivated       (state: State, tagToToggle:       string): void
 
@@ -91,6 +95,8 @@ export default createStore<State>({
 
     tags: [],
     activatedTags: [],
+
+    newsletterOpen: true,
 
     secondaryTag: [],
     activatedSecondaryTag: null,
@@ -145,6 +151,10 @@ export default createStore<State>({
       const indexOfTagToRemove = state.activatedTags.indexOf( tagToRemove )
       if( indexOfTagToRemove > -1 ) state.activatedTags.splice( indexOfTagToRemove, 1 )
       else console.error(`can't remove ${tagToRemove}, because isn't in activatedTags array stored`)
+    },
+
+    updateNewsletterOpen(state, value) {
+      state.newsletterOpen = value
     },
 
     updateSecondaryTags(state: State, secondaryTags: ISecondTags[]) {

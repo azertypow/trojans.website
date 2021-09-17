@@ -56,6 +56,14 @@
 
     <div
         class="v-navigation__menu">
+
+      <div
+          class="v-navigation__mail-chimp"
+          v-if="store.state.newsletterOpen"
+      >
+        <mail-chimp/>
+      </div>
+
       <div class="v-navigation__logo">
         <div
             class="v-navigation__news t-text-subtitle"
@@ -164,11 +172,12 @@ import {useStore} from "vuex"
 import {key} from "@/store"
 import {IApiContact} from "@/api"
 import TagsList from "@/components/TagsList.vue"
+import MailChimp from "@/components/MailChimp.vue"
 
 export default defineComponent({
 
   name: 'Navigation',
-  components: {TagsList},
+  components: {MailChimp, TagsList},
   data() {
     return {
       store: useStore(key),
@@ -470,6 +479,14 @@ export default defineComponent({
   height: $news-content-height;
   overflow: hidden;
   //overflow: scroll;
+}
+
+.v-navigation__mail-chimp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translate(0, -100%);
 }
 
 </style>
