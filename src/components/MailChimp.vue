@@ -1,10 +1,6 @@
 <template>
   <div class="v-mail-chimp">
 
-    <p
-        class="t-text-subtitle"
-    >Subscribe to our newsletter</p>
-
     <form
         action="https://trojanscollective.us7.list-manage.com/subscribe/post?u=9347e7db75c68142d55f52ba1&amp;id=acbe94976e"
         method="post"
@@ -15,7 +11,7 @@
             type="email"
             value=""
             name="EMAIL"
-            placeholder="Enter your email"
+            placeholder="Subscribe to our newsletter"
         />
 
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
@@ -23,15 +19,9 @@
                                                                                   name="b_9347e7db75c68142d55f52ba1_acbe94976e"
                                                                                   tabindex="-1" value=""></div>
       <input type="submit"
-             value="Subscribe"
+             value="-->"
              name="subscribe"/>
     </form>
-
-    <div>
-      <div class="t-close"
-           @click="closeThis"
-      ></div>
-    </div>
 
   </div>
 </template>
@@ -67,21 +57,11 @@ export default defineComponent({
 
 .v-mail-chimp {
   display: flex;
-  background: $site-background-color;
   align-items: center;
-  justify-content: right;
-  box-shadow: $tile-box-shadow;
-  padding-top: ($gutter / 2);
+  justify-content: center;
 
   > * {
     padding: 0 ($gutter / 2);
-  }
-
-  transition: background $page-transition--duration $page-transition--timing-function;
-
-  .is-home & {
-    background: transparent;
-    box-shadow: none;
   }
 }
 
@@ -94,10 +74,10 @@ form {
   align-items: center;
 
   input {
+    all: unset;
     @extend .t-text-small;
-    color: inherit;
+    color: $site-color;
     display: block;
-    border: solid 1px black;
     line-height: 20px;
     padding: $gutter / 4;
     box-sizing: border-box;
@@ -107,13 +87,8 @@ form {
     }
 
     &[type='submit'] {
-      background: black;
-      color: $site-background-color;
+      font-family: 'Inter', Helvetica, Neue, sans-serif;
       cursor: pointer;
-    }
-
-    &[type='email'] {
-      background: white;
     }
   }
 }
