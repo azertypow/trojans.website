@@ -278,7 +278,7 @@ export default defineComponent({
 
 .is-desk-width {
   .v-view-projects__year {
-    box-shadow: inset -10px 0px 10px -15px #00000033;
+    //box-shadow: inset -10px 0px 10px -15px #00000033;
     padding: $gutter / 2;
   }
 
