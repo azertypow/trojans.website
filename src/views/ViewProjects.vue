@@ -352,14 +352,24 @@ export default defineComponent({
   flex-shrink: 1;
   flex-grow: 0;
   padding-right: $gutter;
-  position: relative;
+  position: relative !important;
   height: calc(100vh - 140px);
 
   .v-gallery {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: left;
+    object-fit: contain;
+    object-position: top left;
+  }
+
+  .v-gallery__desc {
+    position: absolute;
+    transform: rotate3d(0, 0, 1, 90deg) translateY(100%);
+    transform-origin: bottom right;
+    width: calc(100vh - 140px) !important;
+    box-sizing: border-box;
+    left: auto !important;
+    right: 0 !important;
   }
 }
 
