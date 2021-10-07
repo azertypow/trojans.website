@@ -59,7 +59,7 @@
 
       <div
           class="v-navigation__mail-chimp"
-          v-if="store.state.newsletterOpen"
+          v-if="store.state.newsletterOpen && isHome"
       >
         <mail-chimp/>
       </div>
@@ -238,6 +238,10 @@ export default defineComponent({
 
     isDeskWidth(): boolean {
       return this.store.state.isDeskWidth
+    },
+
+    isHome(): boolean {
+      return this.$route.path === '/'
     },
   },
 
