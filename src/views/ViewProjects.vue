@@ -135,8 +135,8 @@
 import {defineComponent, PropType} from "vue"
 import Project from "../components/Project.vue"
 import {useStore} from "vuex"
-import {IProjectsSortedInArray, key, SortedProjectItem} from "@/store"
-import {IApiProject} from "@/api"
+import {IIndexOfOpenProject, IProjectsSortedInArray, key, SortedProjectItem} from "@/store"
+import {IApiHomeImage, IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 import ProjectViewerDesktop from "@/components/ProjectViewerDesktop.vue"
 import Gallery from "@/components/Gallery.vue"
@@ -158,7 +158,60 @@ export default defineComponent({
     }
   },
 
+  mounted() {
+    window.addEventListener("keydown", this.keydownAction)
+  },
+
+  beforeUnmount() {
+    window.removeEventListener("keydown", this.keydownAction)
+  },
+
   methods: {
+
+    keydownAction (key: KeyboardEvent) {
+      if (key.code === "ArrowRight") this.nextProjectItem()
+    },
+
+    nextProjectItem() {
+
+      if(this.store.state.indexOfOpenProject !== null) {
+
+        const currentDateIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).dateIndex
+        const currentProjectIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).projectIndex
+        const currentItemIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).itemIndex
+
+        const currentDate = (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[currentDateIndex]
+        const currentProject = currentDate[currentProjectIndex]
+        const currentItem = currentProject[currentItemIndex]
+
+        const isLast = (elementIndex: number,) => {
+          return
+        }
+
+        const isLastDate    = currentDateIndex + 1 >= currentProject.length
+        const isLastProject = currentItemIndex + 1 >= currentProject.length
+        const isLastItem    = currentItemIndex + 1 >= currentProject.length
+
+        // const nextItemIndex =
+        // const nextDateIndex =
+        // const nextProjectIndex
+
+
+
+
+        // this.store.commit("updateIndexOfOpenProject", {
+        //   dateIndex: this.$props.index.dateIndex,
+        //   projectIndex: this.$props.index.projectIndex,
+        //   itemIndex: index,
+        // } as IIndexOfOpenProject)
+
+      }
+
+    },
+
+    beforeProjectItem() {
+
+    },
   },
 
   computed: {
@@ -246,6 +299,12 @@ export default defineComponent({
 .v-view-projects {
   overflow: hidden;
   position: relative;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .v-view-projects__year {
