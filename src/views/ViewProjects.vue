@@ -38,13 +38,7 @@
     <div
         v-if="isDeskWidth"
         class="v-view-projects__scroll-space"
-    >
-      <gallery
-          v-if="lastHomeImages"
-          :data="{image: lastHomeImages.Image}"
-          :with-desc="false"
-      />
-    </div>
+    ></div>
 
     <div
         v-if="isDeskWidth && currentProjectItem !== null"
@@ -216,13 +210,6 @@ export default defineComponent({
 
   computed: {
 
-    lastHomeImages(): IApiHomeImage | null {
-      if(this.store.state.homeImages)
-        return this.store.state.homeImages[this.store.state.homeImages.length - 1]
-      return null
-    },
-
-
     isMobileWidth(): boolean {
       return this.store.state.isMobileWidth
     },
@@ -358,6 +345,7 @@ export default defineComponent({
     width: 100%;
     height: calc( 100vh - 65px);
     flex-shrink: 1;
+    background: linear-gradient(to right, $site-background-color, $site-color);
   }
 
   .v-view-projects__viewer {
@@ -489,13 +477,6 @@ export default defineComponent({
 
 .v-view-projects__viewer__content__links__content {
   margin: 0;
-}
-
-.v-view-projects__scroll-space {
-  .v-gallery {
-    object-fit: cover;
-    object-position: center center;
-  }
 }
 
 </style>
