@@ -12,6 +12,7 @@
             value=""
             name="EMAIL"
             placeholder="Subscribe to our newsletter"
+            size="25"
         />
 
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
@@ -58,7 +59,7 @@ export default defineComponent({
 .v-mail-chimp {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 
   > * {
     padding: 0 ($gutter / 2);
@@ -79,7 +80,7 @@ form {
     color: $site-color;
     display: block;
     line-height: 20px;
-    padding: $gutter / 4;
+    padding: 0;
     box-sizing: border-box;
     margin: 0;
     &::placeholder {
