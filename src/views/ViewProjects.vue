@@ -363,6 +363,12 @@ export default defineComponent({
     overflow-x: hidden;
     overflow-y: auto;
     background: white;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
