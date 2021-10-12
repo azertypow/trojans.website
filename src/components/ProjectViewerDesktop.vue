@@ -132,10 +132,13 @@ export default defineComponent({
     },
 
     projectTabClicked(index: number) {
+
+      const indexToSetup = this.isActiveTab(index) ? 0 : index
+
       this.store.commit("updateIndexOfOpenProject", {
         dateIndex: this.$props.index.dateIndex,
         projectIndex: this.$props.index.projectIndex,
-        itemIndex: index,
+        itemIndex: indexToSetup,
       } as IIndexOfOpenProject)
     },
 
