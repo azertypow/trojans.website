@@ -57,12 +57,16 @@
     <div
         class="v-navigation__menu">
 
-      <div
-          class="v-navigation__mail-chimp"
-          v-if="isHome"
+      <transition
+          name="fade-mailchimp"
       >
-        <mail-chimp/>
-      </div>
+        <div
+            class="v-navigation__mail-chimp"
+            v-if="showMailchimpSubscription"
+        >
+          <mail-chimp/>
+        </div>
+      </transition>
 
       <div class="v-navigation__logo">
         <div
@@ -197,6 +201,13 @@ export default defineComponent({
   computed: {
     actualRout(): string {
       return this.$route.path
+    },
+
+    showMailchimpSubscription(): boolean {
+      if(this.isDeskWidth) return this.isHome
+
+      return this.isHome && !this.store.state.menuIsOpen
+
     },
 
     navigationOverHomeIntroLogo(): boolean {
@@ -536,6 +547,28 @@ export default defineComponent({
 
 .slide-leave-to {
   transform: translate3d(100%, 0, 0);
+}
+
+.fade-mailchimp-enter-active {
+  transition: opacity 1s, transform 1s;
+  transform: translate3d(-50px, -100%, 0) !important;
+  opacity: 0;
+}
+
+.fade-mailchimp-enter-to {
+  transform: translate3d(0, -100%, 0) !important;
+  opacity: 1;
+}
+
+.fade-mailchimp-leave-active {
+  transition: opacity .5s, transform .5s ease-in-out;
+  transform: translate3d(0, -100%, 0) !important;
+  opacity: 1;
+}
+
+.fade-mailchimp-leave-to {
+  transform: translate3d(100px, -100%, 0) !important;
+  opacity: 0;
 }
 
 </style>
