@@ -467,7 +467,7 @@ export default defineComponent({
   width: 42vw;
   flex-shrink: 0;
   flex-grow: 0;
-  padding-right: $gutter;
+  padding-right: $gutter / 2;
   position: relative !important;
   height: calc(42vw / 1.25);
 
@@ -480,12 +480,12 @@ export default defineComponent({
 
   .v-gallery__desc {
     position: absolute;
-    transform: rotate3d(0, 0, 1, 90deg) translateY(100%);
-    transform-origin: bottom right;
-    width: calc(100vh - 140px) !important;
+    width: 100% !important;
     box-sizing: border-box;
     left: auto !important;
     right: 0 !important;
+    padding-left: 0 !important;
+    text-align: right !important;
   }
 }
 
