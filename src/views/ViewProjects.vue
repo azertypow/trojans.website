@@ -464,18 +464,18 @@ export default defineComponent({
 
 .v-view-projects__viewer__content__cover {
   box-sizing: border-box;
-  width: 100%;
-  flex-shrink: 1;
+  width: 42vw;
+  flex-shrink: 0;
   flex-grow: 0;
   padding-right: $gutter;
   position: relative !important;
-  height: calc(100vh - 140px);
+  height: calc(42vw / 1.25);
 
   .v-gallery {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: top left;
+    object-fit: cover;
+    object-position: center;
   }
 
   .v-gallery__desc {
