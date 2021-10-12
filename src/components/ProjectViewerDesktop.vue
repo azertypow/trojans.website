@@ -368,6 +368,11 @@ export default defineComponent({
   box-sizing: border-box;
   position: relative;
   flex-shrink: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: $site-color;
+  }
 
   > * {
     margin: 0;
