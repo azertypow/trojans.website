@@ -417,6 +417,7 @@ export default defineComponent({
     flex-shrink: 1;
     text-align: right;
     line-height: .75em;
+    box-shadow: none;
   }
 }
 
