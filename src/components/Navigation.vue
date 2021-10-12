@@ -433,7 +433,8 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
   text-align: right;
-  padding-bottom: $gutter / 2;
+  padding-top: $gutter / 4;
+  padding-bottom: $gutter / 4;
   box-sizing: border-box;
 
   > * {
