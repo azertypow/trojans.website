@@ -163,11 +163,17 @@ export default defineComponent({
   methods: {
 
     keydownAction (key: KeyboardEvent) {
-      if (key.code === "ArrowRight") this.nextProjectItem()
+      if (key.code === "ArrowRight") {
+        key.preventDefault()
+        this.nextProjectItem()
+      }
+      else if (key.code === "ArrowLeft") {
+        key.preventDefault()
+        this.beforeProjectItem()
+      }
     },
 
     nextProjectItem() {
-
       if(this.store.state.indexOfOpenProject !== null) {
 
         const currentDateIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).dateIndex
@@ -178,33 +184,77 @@ export default defineComponent({
         const currentProject = currentDate[currentProjectIndex]
         const currentItem = currentProject[currentItemIndex]
 
-        const isLast = (elementIndex: number,) => {
-          return
-        }
+        const isLastDate    = currentDateIndex + 1    >= (this.store.getters.projectsSortedInArray as IProjectsSortedInArray).length
+        const isLastProject = currentProjectIndex + 1 >= currentDate.length
+        const isLastItem    = currentItemIndex + 1    >= currentProject.length
 
-        const isLastDate    = currentDateIndex + 1 >= currentProject.length
-        const isLastProject = currentItemIndex + 1 >= currentProject.length
-        const isLastItem    = currentItemIndex + 1 >= currentProject.length
+        const nextDateIndex: number = (() => {
+          if      (isLastItem && isLastProject && !isLastDate)  return currentDateIndex + 1
+                                                                return currentDateIndex
+        })()
 
-        // const nextItemIndex =
-        // const nextDateIndex =
-        // const nextProjectIndex
+        const nextProjectIndex: number = (() => {
+          if      (isLastItem && isLastProject && !isLastDate)  return 0
+          else if (isLastItem && !isLastProject)                return currentProjectIndex + 1
+                                                                return currentProjectIndex
+        })()
 
+        const nextItemIndex: number = (() => {
+          if      (isLastItem && isLastProject && !isLastDate)  return 0
+          else if (isLastItem && !isLastProject)                return 0
+          else if (!isLastItem)                                 return currentItemIndex + 1
+                                                                return currentItemIndex
+        })()
 
-
-
-        // this.store.commit("updateIndexOfOpenProject", {
-        //   dateIndex: this.$props.index.dateIndex,
-        //   projectIndex: this.$props.index.projectIndex,
-        //   itemIndex: index,
-        // } as IIndexOfOpenProject)
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: nextDateIndex,
+          projectIndex: nextProjectIndex,
+          itemIndex: nextItemIndex,
+        } as IIndexOfOpenProject)
 
       }
-
     },
 
     beforeProjectItem() {
+      if(this.store.state.indexOfOpenProject !== null) {
 
+        const currentDateIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).dateIndex
+        const currentProjectIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).projectIndex
+        const currentItemIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).itemIndex
+
+        const currentDate = (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[currentDateIndex]
+        const currentProject = currentDate[currentProjectIndex]
+        const currentItem = currentProject[currentItemIndex]
+
+        const isFirstDate    = currentDateIndex === 0
+        const isFirstProject = currentProjectIndex === 0
+        const isFirstItem    = currentItemIndex === 0
+
+        const beforeDateIndex: number = (() => {
+          if      (isFirstItem && isFirstProject && !isFirstDate)   return currentDateIndex - 1
+                                                                    return currentDateIndex
+        })()
+
+        const beforeProjectIndex: number = (() => {
+          if      (isFirstItem && isFirstProject && !isFirstDate)   return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[beforeDateIndex].length - 1
+          else if (isFirstItem && !isFirstProject)                  return currentProjectIndex - 1
+                                                                    return currentProjectIndex
+        })()
+
+        const beforeItemIndex: number = (() => {
+          if      (isFirstItem && isFirstProject && !isFirstDate)   return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[beforeDateIndex][beforeProjectIndex].length - 1
+          else if (isFirstItem && !isFirstProject)                  return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[beforeDateIndex][beforeProjectIndex].length - 1
+          else if (!isFirstItem)                                    return currentItemIndex - 1
+                                                                    return currentItemIndex
+        })()
+
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: beforeDateIndex,
+          projectIndex: beforeProjectIndex,
+          itemIndex: beforeItemIndex,
+        } as IIndexOfOpenProject)
+
+      }
     },
   },
 

@@ -127,7 +127,10 @@ export default createStore<State>({
     updateIdOfOpenedProject(state, id) {
       state.idOfOpenedProject = id
     },
-    updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject) {
+    updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject | null) {
+
+      state.idOfOpenedProject = indexOfOpenProject === null ? null : `${state.sortedProject[indexOfOpenProject.dateIndex].projectYear}${indexOfOpenProject.projectIndex}`
+
       state.indexOfOpenProject = indexOfOpenProject
     },
 
