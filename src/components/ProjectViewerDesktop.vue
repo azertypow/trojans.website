@@ -40,8 +40,8 @@
               'is-active': isActiveTab(index - 1)
             }"
         >
-          <span v-if="isActiveTab(index - 1)" >✗</span>
-          <span v-else >↗</span>
+          <span v-if="isActiveTab(index - 1) && index > 1" >✗</span>
+          <span v-else-if="!isActiveTab(index - 1)" >↗</span>
         </div>
 
       </div>
