@@ -420,12 +420,15 @@ export default defineComponent({
 .v-navigation__toggle__fix {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   text-align: right;
+  padding-bottom: $gutter / 2;
+  box-sizing: border-box;
 
   > * {
     @include gutter;
     @extend .t-text-subtitle;
+    font-size: 14px;
     margin: 0;
     color: $site-color;
     display: block;
