@@ -43,12 +43,6 @@ export default defineComponent({
     }
   },
 
-  methods: {
-    closeThis() {
-      this.store.commit("updateNewsletterOpen", false)
-    },
-  }
-
 });
 </script>
 

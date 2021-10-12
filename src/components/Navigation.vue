@@ -59,7 +59,7 @@
 
       <div
           class="v-navigation__mail-chimp"
-          v-if="store.state.newsletterOpen && isHome"
+          v-if="isHome"
       >
         <mail-chimp/>
       </div>
