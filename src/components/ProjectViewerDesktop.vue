@@ -367,6 +367,7 @@ export default defineComponent({
   width: auto;
   box-sizing: border-box;
   position: relative;
+  flex-shrink: 0;
 
   > * {
     margin: 0;
