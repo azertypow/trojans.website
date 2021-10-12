@@ -40,6 +40,12 @@ export default defineComponent({
     overflow: auto;
     align-items: flex-start;
     scroll-snap-type: x mandatory;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .v-project-gallery-mobile__container {
