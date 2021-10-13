@@ -58,7 +58,7 @@ export default defineComponent({
   .v-view-home__img-intro,
   .v-view-home__img-item {
     box-sizing: border-box;
-    width: calc( 100% - 100px);
+    width: 100%;
     flex-shrink: 0;
   }
 }
