@@ -40,8 +40,16 @@
               'is-active': isActiveTab(index - 1)
             }"
         >
-          <span v-if="isActiveTab(index - 1) && index > 1" >✗</span>
-          <span v-else-if="!isActiveTab(index - 1)" >↗</span>
+          <transition
+              name="tab-icon"
+          >
+            <div class="v-project-viewer-desktop__tab__icon"
+                 v-if="isActiveTab(index - 1) && index > 1"
+            >✗</div>
+            <div class="v-project-viewer-desktop__tab__icon"
+                 v-else-if="!isActiveTab(index - 1)"
+            >↗</div>
+          </transition>
         </div>
 
       </div>
@@ -417,7 +425,8 @@ export default defineComponent({
   user-select: none;
   line-height: 1em;
   box-sizing: border-box;
-  padding-top: 9px;
+  position: relative;
+  overflow: hidden;
 
   &:not(:first-child) {
     box-shadow: -2px 0px 10px -5px #00000033;
@@ -430,6 +439,35 @@ export default defineComponent({
     line-height: .75em;
     box-shadow: none;
   }
+}
+
+.v-project-viewer-desktop__tab__icon {
+  position: absolute;
+  top: 9px;
+  right: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+.tab-icon-enter-active {
+  transition: transform .5s, opacity .5s;
+  opacity: 0;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.tab-icon-enter-to {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.tab-icon-leave-active {
+  transition: transform .5s, opacity .5s;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.tab-icon-leave-to {
+  opacity: 0;
+  transform: translate3d(50%, 0px, 0);
 }
 
 </style>
