@@ -1,12 +1,13 @@
 <template>
-  <section class="v-view-home">
+  <section class="v-view-home" ref="viewHome">
     <div class="v-view-home__img-intro">
       <img class="v-view-home__logo" src="../style/images/TrojansLogo--white.svg" alt="Trojan logo">
     </div>
 
     <div
         class="v-view-home__img-item"
-        v-for="imageHomeItem of homeImages"
+        v-for="(imageHomeItem, key) of homeImages"
+        :class="{'is-fixed': fixedItemInHomeViewerCounter >= key}"
     >
       <a
           v-if="imageHomeItem.Link"
@@ -37,6 +38,28 @@ export default defineComponent({
   data() {
     return {
       store: useStore(key),
+      fixedItemInHomeViewerCounter: -1
+    }
+  },
+
+  mounted() {
+    const viewHome = this.$refs.viewHome as HTMLElement
+    viewHome.addEventListener("scroll", this.scrollInHomeView)
+  },
+
+  beforeUnmount() {
+    const viewHome = this.$refs.viewHome as HTMLElement
+    viewHome.removeEventListener("scroll", this.scrollInHomeView)
+  },
+
+  methods: {
+    scrollInHomeView() {
+      const viewHome = this.$refs.viewHome as HTMLElement
+
+      const leftScrollPosition = viewHome.scrollLeft
+      const screenWidth = viewHome.getBoundingClientRect().width
+
+      this.fixedItemInHomeViewerCounter = Math.floor(leftScrollPosition / screenWidth) - 1
     }
   },
 
@@ -54,6 +77,15 @@ export default defineComponent({
 .is-desk-width .v-view-home {
   display: flex;
   flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   .v-view-home__img-intro,
   .v-view-home__img-item {
@@ -117,6 +149,14 @@ export default defineComponent({
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+  }
+
+
+  &.is-fixed > .v-gallery {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -500;
   }
 }
 
