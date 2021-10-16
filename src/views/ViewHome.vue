@@ -1,5 +1,5 @@
 <template>
-  <section class="v-view-home" ref="viewHome">
+  <section class="v-view-home" @scroll="scrollInHomeView" ref="viewHome">
     <div class="v-view-home__img-intro">
       <img class="v-view-home__logo" src="../style/images/TrojansLogo--white.svg" alt="Trojan logo">
     </div>
@@ -40,16 +40,6 @@ export default defineComponent({
       store: useStore(key),
       fixedItemInHomeViewerCounter: -1
     }
-  },
-
-  mounted() {
-    const viewHome = this.$refs.viewHome as HTMLElement
-    viewHome.addEventListener("scroll", this.scrollInHomeView)
-  },
-
-  beforeUnmount() {
-    const viewHome = this.$refs.viewHome as HTMLElement
-    viewHome.removeEventListener("scroll", this.scrollInHomeView)
   },
 
   methods: {
