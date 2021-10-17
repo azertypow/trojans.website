@@ -177,7 +177,6 @@ $header-height: $gutter;
   position: relative;
   height: $header-height;
   user-select: none;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -242,12 +241,32 @@ $header-height: $gutter;
 
 .is-desk-width {
 
+  @mixin title-over($color-title) {
+    &:not(.is-open) {
+      &:hover {
+        .v-toggle-table-fixed__header {
+          cursor: pointer;
+
+          .v-toggle-table-fixed__title {
+            color: $color-title;
+          }
+        }
+      }
+    }
+  }
+
   .v-toggle-table-fixed {
     height: calc( 100% - 65px );
     display: flex;
 
     &.is-open {
       width: calc( 100% - (70px * 3) );
+    }
+
+    @include title-over($site-color);
+
+    &.is-green {
+      @include title-over($site-background-color);
     }
   }
 
