@@ -21,6 +21,27 @@
           :with-desc="false"
       />
     </div>
+
+    <div
+        v-if="store.state.isDeskWidth"
+        class="v-view-home__nav"
+    >
+      <div
+          class="v-view-home__nav__left"
+          @click="moveImage('left')"
+          v-if="showArrowLeft"
+      >
+        <img src="../style/images/arrow.svg" alt="navigation arrow left">
+      </div>
+      <div
+          class="v-view-home__nav__right"
+          @click="moveImage('right')"
+          v-if="showArrowRight"
+      >
+        <img src="../style/images/arrow.svg" alt="navigation arrow right">
+      </div>
+    </div>
+
   </section>
 </template>
 
@@ -30,6 +51,7 @@ import {useStore} from "vuex"
 import {key} from "@/store"
 import {IApiHomeImage} from "@/api"
 import Gallery from "@/components/Gallery.vue"
+import {scrollElementTo} from "@/global/scrollTo"
 
 export default defineComponent({
 
@@ -38,7 +60,9 @@ export default defineComponent({
   data() {
     return {
       store: useStore(key),
-      fixedItemInHomeViewerCounter: -1
+      fixedItemInHomeViewerCounter: -1,
+      showArrowLeft: false,
+      showArrowRight: true,
     }
   },
 
@@ -50,7 +74,28 @@ export default defineComponent({
       const screenWidth = viewHome.getBoundingClientRect().width
 
       this.fixedItemInHomeViewerCounter = Math.floor(leftScrollPosition / screenWidth) - 1
-    }
+
+      const paddingArrowShow = 10
+
+      this.showArrowLeft = viewHome.scrollLeft > paddingArrowShow
+      this.showArrowRight = viewHome.scrollLeft < (viewHome.scrollWidth - viewHome.getBoundingClientRect().width - paddingArrowShow )
+    },
+
+    moveImage(position: "left"|"right"){
+
+      const viewHome = this.$refs.viewHome as HTMLElement
+      const orientation = position === "left" ? -1 : 1
+      const nextItemViewerCounter = (this.fixedItemInHomeViewerCounter + 1) + 1 * orientation
+      // viewHome.scrollLeft = viewHome.getBoundingClientRect().width * nextItemViewerCounter
+
+      scrollElementTo({
+        durationTime: .25,
+        startingScrollPosition: viewHome.scrollLeft,
+        valueToAddedOnScroll: (viewHome.getBoundingClientRect().width * nextItemViewerCounter) - viewHome.scrollLeft,
+        elementToScroll: viewHome
+      })
+
+    },
   },
 
   computed: {
@@ -63,13 +108,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "../style/param";
 
 .is-desk-width .v-view-home {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
   overflow-y: hidden;
-  scroll-behavior: smooth;
+  //scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none; /* IE 11 */
   scrollbar-width: none; /* Firefox 64 */
 
@@ -105,6 +152,28 @@ export default defineComponent({
     pointer-events: none;
     z-index: 10 ;
   }
+}
+
+.v-view-home__nav__right,
+.v-view-home__nav__left {
+  position: fixed;
+  transform: translate(0, -50%);
+  width:  50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.v-view-home__nav__left {
+  top: 50%;
+  left: $gutter;
+  > img {
+    transform: rotate(180deg);
+  }
+}
+
+.v-view-home__nav__right {
+  top: 50%;
+  right: $gutter;
 }
 
 </style>
