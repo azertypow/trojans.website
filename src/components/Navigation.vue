@@ -354,7 +354,7 @@ export default defineComponent({
 
 .v-navigation__content__box {
   @include gutter;
-  padding-top: $gutter;
+  padding-top: $gutter / 2;
   background: $site-color;
   position: relative;
   width: 100%;
@@ -366,7 +366,10 @@ export default defineComponent({
 
   > * {
     @include column();
-    @include gutter;
+
+    .is-desk-width & {
+      @include gutter;
+    }
   }
 
 }
