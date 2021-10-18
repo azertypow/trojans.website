@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/css/ViewHome.110fe2f5.css"
   },
   {
-    "revision": "444f20ec3f9e49314dd5",
-    "url": "https://trojanscollective.com/css/ViewProjects.cdcb5b69.css"
+    "revision": "97203dfe8ccd25dc4871",
+    "url": "https://trojanscollective.com/css/ViewProjects.fe74c085.css"
   },
   {
-    "revision": "bf3c374a7f3a03d5afd7",
+    "revision": "86674f4f82066d6b1c9a",
     "url": "https://trojanscollective.com/css/app.49ed7940.css"
   },
   {
@@ -212,7 +212,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/img/nav_top.186c8696.svg"
   },
   {
-    "revision": "7a8645a0cb4baa51c2322e59a6118d97",
+    "revision": "55718eff7a2478bff1738596e1a55d98",
     "url": "https://trojanscollective.com/index.html"
   },
   {
@@ -220,12 +220,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/js/ViewHome.e867a4df.js"
   },
   {
-    "revision": "444f20ec3f9e49314dd5",
-    "url": "https://trojanscollective.com/js/ViewProjects.7aa5b31d.js"
+    "revision": "97203dfe8ccd25dc4871",
+    "url": "https://trojanscollective.com/js/ViewProjects.8b1b817e.js"
   },
   {
-    "revision": "bf3c374a7f3a03d5afd7",
-    "url": "https://trojanscollective.com/js/app.701efbcd.js"
+    "revision": "86674f4f82066d6b1c9a",
+    "url": "https://trojanscollective.com/js/app.a39ed208.js"
   },
   {
     "revision": "41b26c8830d920c41d8d",
