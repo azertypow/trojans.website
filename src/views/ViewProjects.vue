@@ -122,6 +122,16 @@
 
     </div>
 
+    <div
+        v-if="isDeskWidth"
+        class="v-view-projects__nav-icon-container"
+    >
+      <img class="t-icon_nav v-view-projects__nav-icon--top" src="../style/images/nav_top.svg" alt="icon nav top">
+      <img class="t-icon_nav v-view-projects__nav-icon--right" src="../style/images/nav_right.svg" alt="icon nav right">
+      <img class="t-icon_nav v-view-projects__nav-icon--bottom" src="../style/images/nav_bottom.svg" alt="icon nav bottom">
+      <img class="t-icon_nav v-view-projects__nav-icon--left" src="../style/images/nav_left.svg" alt="icon nav left">
+    </div>
+
   </section>
 </template>
 
@@ -420,6 +430,36 @@ export default defineComponent({
       display: none;
     }
   }
+}
+
+.v-view-projects__nav-icon-container {
+  position: fixed;
+  bottom: $nav-height + $gutter;
+  left: 50%;
+  z-index: 100000;
+  mix-blend-mode: multiply;
+}
+
+.t-icon_nav {
+  position: absolute;
+}
+
+$nav-icon-space: 2px;
+
+.v-view-projects__nav-icon--top {
+  transform: translate3d(0, calc(-200% - #{$nav-icon-space / 2}), 0);
+}
+
+.v-view-projects__nav-icon--right {
+  transform: translate3d( calc(100% + #{$nav-icon-space}), -100%, 0);
+}
+
+.v-view-projects__nav-icon--bottom {
+  transform: translate3d(0, -100%, 0);
+}
+
+.v-view-projects__nav-icon--left {
+  transform: translate3d( calc(-100% - #{$nav-icon-space / 2}), -100%, 0);
 }
 
 </style>
