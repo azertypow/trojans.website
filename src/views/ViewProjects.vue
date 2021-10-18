@@ -185,6 +185,14 @@ export default defineComponent({
         key.preventDefault()
         this.beforeProjectItem()
       }
+      else if (key.code === "ArrowUp") {
+        key.preventDefault()
+        this.nextProject()
+      }
+      else if (key.code === "ArrowDown") {
+        key.preventDefault()
+        this.beforeProject()
+      }
     },
 
     nextProjectItem() {
@@ -226,6 +234,53 @@ export default defineComponent({
           itemIndex: nextItemIndex,
         } as IIndexOfOpenProject)
 
+      } else {
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: 0,
+          projectIndex: 0,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
+      }
+    },
+
+    nextProject() {
+      if(this.store.state.indexOfOpenProject !== null) {
+
+        const currentDateIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).dateIndex
+        const currentProjectIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).projectIndex
+        const currentItemIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).itemIndex
+
+        const currentDate = (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[currentDateIndex]
+        const currentProject = currentDate[currentProjectIndex]
+        const currentItem = currentProject[currentItemIndex]
+
+        const isLastDate    = currentDateIndex + 1    >= (this.store.getters.projectsSortedInArray as IProjectsSortedInArray).length
+        const isLastProject = currentProjectIndex + 1 >= currentDate.length
+        const isLastItem    = currentItemIndex + 1    >= currentProject.length
+
+        const nextDateIndex: number = (() => {
+          if      (isLastProject && !isLastDate)  return currentDateIndex + 1
+          return currentDateIndex
+        })()
+
+        const nextProjectIndex: number = (() => {
+          if      (isLastProject && !isLastDate)  return 0
+          else if (!isLastProject)                return currentProjectIndex + 1
+          return currentProjectIndex
+        })()
+
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: nextDateIndex,
+          projectIndex: nextProjectIndex,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
+
+      } else {
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: 0,
+          projectIndex: 0,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
       }
     },
 
@@ -268,6 +323,53 @@ export default defineComponent({
           itemIndex: beforeItemIndex,
         } as IIndexOfOpenProject)
 
+      } else {
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: 0,
+          projectIndex: 0,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
+      }
+    },
+
+    beforeProject() {
+      if(this.store.state.indexOfOpenProject !== null) {
+
+        const currentDateIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).dateIndex
+        const currentProjectIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).projectIndex
+        const currentItemIndex = (this.store.state.indexOfOpenProject as IIndexOfOpenProject).itemIndex
+
+        const currentDate = (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[currentDateIndex]
+        const currentProject = currentDate[currentProjectIndex]
+        const currentItem = currentProject[currentItemIndex]
+
+        const isFirstDate    = currentDateIndex === 0
+        const isFirstProject = currentProjectIndex === 0
+        const isFirstItem    = currentItemIndex === 0
+
+        const beforeDateIndex: number = (() => {
+          if      (isFirstProject && !isFirstDate)   return currentDateIndex - 1
+          return currentDateIndex
+        })()
+
+        const beforeProjectIndex: number = (() => {
+          if      (isFirstProject && !isFirstDate)   return (this.store.getters.projectsSortedInArray as IProjectsSortedInArray)[beforeDateIndex].length - 1
+          else if (!isFirstProject)                  return currentProjectIndex - 1
+          return currentProjectIndex
+        })()
+
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: beforeDateIndex,
+          projectIndex: beforeProjectIndex,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
+
+      } else {
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: 0,
+          projectIndex: 0,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
       }
     },
   },
