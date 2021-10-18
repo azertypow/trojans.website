@@ -71,8 +71,16 @@ export default defineComponent({
 
 .v-app {
   padding-bottom: $nav-height;
-  min-height: 100vh;
   box-sizing: border-box;
+  height: 100vh;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &.is-home {
     padding-bottom: 0;
