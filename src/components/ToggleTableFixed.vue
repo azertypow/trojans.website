@@ -219,6 +219,12 @@ $header-height: $gutter;
   height: 100%;
   scroll-behavior: smooth;
   overflow: auto;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .is-dark .v-toggle-table-fixed__body__container {
