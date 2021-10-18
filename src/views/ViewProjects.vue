@@ -19,6 +19,10 @@
           :data="project"
           :stringProjectId="`${item.projectYear}${key}`"
           :key="key + dateKey"
+          :index="{
+            dateIndex: dateKey,
+            projectIndex: key,
+          }"
       />
 
       <project-viewer-desktop

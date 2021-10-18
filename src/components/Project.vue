@@ -68,7 +68,7 @@ import {defineComponent, PropType } from "vue"
 import {IApiExhibition_links, IApiProject, IApiTags} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
-import {key} from "@/store"
+import {IIndexOfOpenProject, key} from "@/store"
 import Gallery, {IGalleryData} from "@/components/Gallery.vue"
 import ToggleTable from "@/components/ToggleTable.vue"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
@@ -91,6 +91,13 @@ export default defineComponent({
     },
     key: {
       type: String,
+    },
+    index: {
+      required: true,
+      type: Object as PropType<{
+        dateIndex: number,
+        projectIndex: number,
+      }>,
     }
   },
 
@@ -108,7 +115,13 @@ export default defineComponent({
 
       // open first project in projectView.vue composant
       if (this.key == "0") {
-        this.store.state.idOfOpenedProject = this.stringProjectId
+        this.store.commit("updateIdOfOpenedProject", this.stringProjectId)
+        this.store.commit("updateIndexOfOpenProject", {
+          dateIndex: this.$props.index.dateIndex,
+          projectIndex: this.$props.index.projectIndex,
+          itemIndex: 0,
+        } as IIndexOfOpenProject)
+
       }
 
       if( this.thisIsOpen ) {
@@ -128,12 +141,18 @@ export default defineComponent({
     closeProject(e: MouseEvent) {
       if(this.thisIsOpen) {
         e.stopImmediatePropagation()
-        this.store.state.idOfOpenedProject = null
+        this.store.commit("updateIdOfOpenedProject", null)
+        this.store.commit("updateIndexOfOpenProject", null)
       }
     },
 
     projectClicked(){
-      this.store.state.idOfOpenedProject = this.stringProjectId
+      this.store.commit("updateIdOfOpenedProject", this.stringProjectId)
+      this.store.commit("updateIndexOfOpenProject", {
+        dateIndex: this.$props.index.dateIndex,
+        projectIndex: this.$props.index.projectIndex,
+        itemIndex: 0,
+      } as IIndexOfOpenProject)
 
       window.setTimeout(() => {
 
@@ -181,30 +200,34 @@ export default defineComponent({
     },
 
     updateHeight(heightOfOpenTable: number) {
+      window.setTimeout(() => {
+        if( this.isMobileWidth ) {
 
-      if( this.isMobileWidth ) {
+          const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
+          const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
 
-        const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
-        const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
+          console.log("toggleTableChildElement", toggleTableChildElement)
+          console.log("noToggleTableChildElements", noToggleTableChildElements)
 
-        const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
+          const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
 
-        let totalOfNoToggleHeightElement = 0
+          let totalOfNoToggleHeightElement = 0
 
-        noToggleTableChildElements.forEach(element => {
-          totalOfNoToggleHeightElement += element.getBoundingClientRect().height
-        })
+          noToggleTableChildElements.forEach(element => {
+            totalOfNoToggleHeightElement += element.getBoundingClientRect().height
+          })
 
-        this.style.maxHeight =
-            (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
-            + heightOfOpenTable
-            + totalToggleTableHeaderHeight
-            + totalOfNoToggleHeightElement
-            + "px"
+          this.style.maxHeight =
+              (this.$refs.containerTitle as HTMLElement).getBoundingClientRect().height
+              + heightOfOpenTable
+              + totalToggleTableHeaderHeight
+              + totalOfNoToggleHeightElement
+              + "px"
 
-      } else {
-        this.style.maxHeight = ""
-      }
+        } else {
+          this.style.maxHeight = ""
+        }
+      }, 250)
 
     },
 

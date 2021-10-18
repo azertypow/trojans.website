@@ -128,6 +128,8 @@ export default defineComponent({
 
       } else {
 
+        console.log("click")
+
         this.store.commit("updateIdOfOpenedProject", this.stringProjectId)
         this.store.commit("updateIndexOfOpenProject", {
           dateIndex: this.$props.index.dateIndex,
