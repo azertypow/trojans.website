@@ -72,8 +72,7 @@ export default defineComponent({
 .v-app {
   padding-bottom: $nav-height;
   box-sizing: border-box;
-  height: 100vh;
-  overflow-y: scroll;
+  min-height: 100vh;
 
   -ms-overflow-style: none; /* IE 11 */
   scrollbar-width: none; /* Firefox 64 */
