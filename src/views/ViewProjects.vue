@@ -450,7 +450,7 @@ export default defineComponent({
 @import "../style/grid";
 
 .v-view-projects {
-  overflow: hidden;
+  //overflow: hidden;
   position: relative;
   -ms-overflow-style: none; /* IE 11 */
   scrollbar-width: none; /* Firefox 64 */
