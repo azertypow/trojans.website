@@ -10,6 +10,18 @@
   >
 
     <div
+        class="v-project-viewer-hover-img-container"
+        v-if="data.cover !== null"
+    >
+      <gallery
+          :data="{
+                  image: data.cover
+                }"
+          :with-desc="false"
+      />
+    </div>
+
+    <div
         ref="container"
         class="v-project-viewer-desktop__container"
     >
@@ -363,7 +375,7 @@ export default defineComponent({
 @import "../style/typography";
 
 .v-project-viewer-desktop {
-  overflow: hidden;
+  //overflow: hidden;
   box-shadow:  $tile-box-shadow;
   position: relative;
   height: calc( 100vh - #{$nav-height} );
@@ -406,6 +418,21 @@ export default defineComponent({
   overflow: hidden;
   background-color: $site-background-color;
   display: flex;
+}
+
+.v-project-viewer-hover-img-container {
+  position: fixed;
+  top: 50%;
+  transform: translate3d(110px, calc(-50% - 32px), 0);
+  width: 25vw;
+  height: auto;
+  z-index: 1000000;
+  pointer-events: none;
+  display: none;
+
+  .v-project-viewer-desktop:hover & {
+    display: block;
+  }
 }
 
 .v-project-viewer-desktop__content {
