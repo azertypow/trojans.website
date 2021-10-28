@@ -157,7 +157,7 @@ export default defineComponent({
 .v-view-home__nav__right,
 .v-view-home__nav__left {
   position: fixed;
-  transform: translate(0, -50%);
+  transform: translate(0, calc(-50% + 15px ));
   width:  50px;
   height: 50px;
   cursor: pointer;
