@@ -526,6 +526,10 @@ export default defineComponent({
     @extend .t-text-small;
   }
 
+  a {
+    color: $site-color !important;
+  }
+
   img {
     display: inline-block;
     height: $news-content-height;
