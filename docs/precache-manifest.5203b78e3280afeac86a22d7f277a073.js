@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/css/ViewHome.898056b8.css"
   },
   {
-    "revision": "1fcd396377980a4521f0",
-    "url": "https://trojanscollective.com/css/ViewProjects.c5690a86.css"
+    "revision": "bd462a22154c59756ab5",
+    "url": "https://trojanscollective.com/css/ViewProjects.86658577.css"
   },
   {
-    "revision": "68d479226ca0046cb38d",
+    "revision": "3bca566374b453bd37c6",
     "url": "https://trojanscollective.com/css/app.c8608a9c.css"
   },
   {
@@ -196,23 +196,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/img/arrow.6a986dc1.svg"
   },
   {
-    "revision": "9e5b696b13c425c0a8f863c9fa0e332c",
-    "url": "https://trojanscollective.com/img/nav_bottom.9e5b696b.svg"
-  },
-  {
-    "revision": "f24f879382cfe622ca2931bf56bb6994",
-    "url": "https://trojanscollective.com/img/nav_left.f24f8793.svg"
-  },
-  {
-    "revision": "74812ff84bef013c0afa6b1a314b8075",
-    "url": "https://trojanscollective.com/img/nav_right.74812ff8.svg"
-  },
-  {
-    "revision": "186c86969a43ff66e351834be14c1f68",
-    "url": "https://trojanscollective.com/img/nav_top.186c8696.svg"
-  },
-  {
-    "revision": "4de24f36984829d3e5d691c760823c7f",
+    "revision": "e4030c512f924bd956aff55c59e090a6",
     "url": "https://trojanscollective.com/index.html"
   },
   {
@@ -220,12 +204,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "https://trojanscollective.com/js/ViewHome.c4681c64.js"
   },
   {
-    "revision": "1fcd396377980a4521f0",
-    "url": "https://trojanscollective.com/js/ViewProjects.f880e87c.js"
+    "revision": "bd462a22154c59756ab5",
+    "url": "https://trojanscollective.com/js/ViewProjects.96e95945.js"
   },
   {
-    "revision": "68d479226ca0046cb38d",
-    "url": "https://trojanscollective.com/js/app.3aec4da3.js"
+    "revision": "3bca566374b453bd37c6",
+    "url": "https://trojanscollective.com/js/app.ea3e3e1b.js"
   },
   {
     "revision": "41b26c8830d920c41d8d",
