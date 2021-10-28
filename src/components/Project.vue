@@ -59,6 +59,15 @@
           :images="images"
       ></ProjectGalleryMobile>
 
+      <div
+          class="v-project-gallery-mobile__dot-number-container"
+      >
+        <div
+            class="v-project-gallery-mobile__dot-number"
+            v-for="i of images"
+        ></div>
+      </div>
+
     </div>
   </section>
 </template>
@@ -417,6 +426,7 @@ export default defineComponent({
   @include no-margin-for-first-and-last;
   overflow: hidden;
   background-color: $site-background-color;
+  position: relative;
 }
 
 .v-project__title {
@@ -448,6 +458,23 @@ export default defineComponent({
   .is-desk-width & {
     box-shadow: $tile-box-shadow;
   }
+}
+
+.v-project-gallery-mobile__dot-number-container {
+  position: absolute;
+  display: flex;
+  bottom: $gutter / 2;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  mix-blend-mode: difference;
+}
+
+.v-project-gallery-mobile__dot-number {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 100%;
+  margin-left: $gutter / 4;
 }
 
 </style>
