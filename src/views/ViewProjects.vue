@@ -582,6 +582,7 @@ export default defineComponent({
   top: 50%;
   left: 50%;
   z-index: 100000;
+  pointer-events: none;
   //mix-blend-mode: multiply;
 }
 
