@@ -126,17 +126,17 @@
 
     </div>
 
-    <div
-        v-if="showArrowNavInformation"
-        class="v-view-projects__nav-icon-container"
-    >
-      <img class="t-icon_nav v-view-projects__nav-icon--top"    v-if="store.state.showProjectNavArrowTop"     src="../style/images/nav_top.svg" alt="icon nav top">
-      <img class="t-icon_nav v-view-projects__nav-icon--right"  v-if="store.state.showProjectNavArrowRight"   src="../style/images/nav_right.svg" alt="icon nav right">
-      <img class="t-icon_nav v-view-projects__nav-icon--bottom" v-if="store.state.showProjectNavArrowBottom"  src="../style/images/nav_bottom.svg" alt="icon nav bottom">
-      <img class="t-icon_nav v-view-projects__nav-icon--left"   v-if="store.state.showProjectNavArrowLeft"    src="../style/images/nav_left.svg" alt="icon nav left">
-      <p   class="v-view-projects__nav-icon--text"
-      >use arrows on your keyboard<br>to navigate between projects.</p>
-    </div>
+<!--    <div-->
+<!--        v-if="showArrowNavInformation"-->
+<!--        class="v-view-projects__nav-icon-container"-->
+<!--    >-->
+<!--      <img class="t-icon_nav v-view-projects__nav-icon&#45;&#45;top"    v-if="store.state.showProjectNavArrowTop"     src="../style/images/nav_top.svg" alt="icon nav top">-->
+<!--      <img class="t-icon_nav v-view-projects__nav-icon&#45;&#45;right"  v-if="store.state.showProjectNavArrowRight"   src="../style/images/nav_right.svg" alt="icon nav right">-->
+<!--      <img class="t-icon_nav v-view-projects__nav-icon&#45;&#45;bottom" v-if="store.state.showProjectNavArrowBottom"  src="../style/images/nav_bottom.svg" alt="icon nav bottom">-->
+<!--      <img class="t-icon_nav v-view-projects__nav-icon&#45;&#45;left"   v-if="store.state.showProjectNavArrowLeft"    src="../style/images/nav_left.svg" alt="icon nav left">-->
+<!--      <p   class="v-view-projects__nav-icon&#45;&#45;text"-->
+<!--      >use arrows on your keyboard<br>to navigate between projects.</p>-->
+<!--    </div>-->
 
   </section>
 </template>
