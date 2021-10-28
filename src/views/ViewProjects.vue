@@ -127,13 +127,15 @@
     </div>
 
     <div
-        v-if="isDeskWidth"
+        v-if="showArrowNavInformation"
         class="v-view-projects__nav-icon-container"
     >
-      <img class="t-icon_nav v-view-projects__nav-icon--top" src="../style/images/nav_top.svg" alt="icon nav top">
-      <img class="t-icon_nav v-view-projects__nav-icon--right" src="../style/images/nav_right.svg" alt="icon nav right">
-      <img class="t-icon_nav v-view-projects__nav-icon--bottom" src="../style/images/nav_bottom.svg" alt="icon nav bottom">
-      <img class="t-icon_nav v-view-projects__nav-icon--left" src="../style/images/nav_left.svg" alt="icon nav left">
+      <img class="t-icon_nav v-view-projects__nav-icon--top"    v-if="store.state.showProjectNavArrowTop"     src="../style/images/nav_top.svg" alt="icon nav top">
+      <img class="t-icon_nav v-view-projects__nav-icon--right"  v-if="store.state.showProjectNavArrowRight"   src="../style/images/nav_right.svg" alt="icon nav right">
+      <img class="t-icon_nav v-view-projects__nav-icon--bottom" v-if="store.state.showProjectNavArrowBottom"  src="../style/images/nav_bottom.svg" alt="icon nav bottom">
+      <img class="t-icon_nav v-view-projects__nav-icon--left"   v-if="store.state.showProjectNavArrowLeft"    src="../style/images/nav_left.svg" alt="icon nav left">
+      <p   class="v-view-projects__nav-icon--text"
+      >use arrows on your keyboard<br>to navigate between projects.</p>
     </div>
 
   </section>
@@ -143,7 +145,13 @@
 import {defineComponent, PropType} from "vue"
 import Project from "../components/Project.vue"
 import {useStore} from "vuex"
-import {IIndexOfOpenProject, IProjectsSortedInArray, key, SortedProjectItem} from "@/store"
+import {
+  IIndexOfOpenProject,
+  IProjectsSortedInArray,
+  key,
+  SortedProjectItem,
+  updateShowProjectNavArrowParameters
+} from "@/store"
 import {IApiHomeImage, IApiProject} from "@/api"
 import ProjectGalleryMobile from "@/components/ProjectGalleryMobile.vue"
 import ProjectViewerDesktop from "@/components/ProjectViewerDesktop.vue"
@@ -179,18 +187,36 @@ export default defineComponent({
     keydownAction (key: KeyboardEvent) {
       if (key.code === "ArrowRight") {
         key.preventDefault()
+        this.store.commit("updateShowProjectNavArrow", {
+          key: "showProjectNavArrowRight",
+          value: false,
+        } as updateShowProjectNavArrowParameters)
         this.nextProjectItem()
       }
       else if (key.code === "ArrowLeft") {
         key.preventDefault()
+        this.store.commit("updateShowProjectNavArrow", {
+          key: "showProjectNavArrowLeft",
+          value: false,
+        } as updateShowProjectNavArrowParameters)
+
         this.beforeProjectItem()
       }
       else if (key.code === "ArrowUp") {
         key.preventDefault()
+        this.store.commit("updateShowProjectNavArrow", {
+          key: "showProjectNavArrowTop",
+          value: false,
+        } as updateShowProjectNavArrowParameters)
+
         this.nextProject()
       }
       else if (key.code === "ArrowDown") {
         key.preventDefault()
+        this.store.commit("updateShowProjectNavArrow", {
+          key: "showProjectNavArrowBottom",
+          value: false,
+        } as updateShowProjectNavArrowParameters)
         this.beforeProject()
       }
     },
@@ -438,6 +464,19 @@ export default defineComponent({
       }
 
       return {}
+    },
+
+    showArrowNavInformation(): boolean {
+
+      const stillOneMoreArrowToShow =
+              this.store.state.showProjectNavArrowTop
+          ||  this.store.state.showProjectNavArrowRight
+          ||  this.store.state.showProjectNavArrowBottom
+          ||  this.store.state.showProjectNavArrowLeft
+
+      return this.isDeskWidth
+          // && !this.currentProjectItem
+          && stillOneMoreArrowToShow
     }
 
   }
@@ -540,10 +579,10 @@ export default defineComponent({
 
 .v-view-projects__nav-icon-container {
   position: fixed;
-  bottom: $nav-height + $gutter;
+  top: 50%;
   left: 50%;
   z-index: 100000;
-  mix-blend-mode: multiply;
+  //mix-blend-mode: multiply;
 }
 
 .t-icon_nav {
@@ -553,19 +592,27 @@ export default defineComponent({
 $nav-icon-space: 2px;
 
 .v-view-projects__nav-icon--top {
-  transform: translate3d(0, calc(-200% - #{$nav-icon-space / 2}), 0);
+  transform: translate3d(-50%, calc(-200% - #{$nav-icon-space / 2}), 0);
 }
 
 .v-view-projects__nav-icon--right {
-  transform: translate3d( calc(100% + #{$nav-icon-space}), -100%, 0);
+  transform: translate3d( calc(50% + #{$nav-icon-space}), -100%, 0);
 }
 
 .v-view-projects__nav-icon--bottom {
-  transform: translate3d(0, -100%, 0);
+  transform: translate3d(-50%, -100%, 0);
 }
 
 .v-view-projects__nav-icon--left {
-  transform: translate3d( calc(-100% - #{$nav-icon-space / 2}), -100%, 0);
+  transform: translate3d( calc(-150% - #{$nav-icon-space / 2}), -100%, 0);
+}
+
+.v-view-projects__nav-icon--text {
+  position: absolute;
+  color: $site-color;
+  width: 30em;
+  text-align: center;
+  transform: translate3d(-50%, 0, 0);
 }
 
 </style>

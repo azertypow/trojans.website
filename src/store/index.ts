@@ -19,6 +19,14 @@ export interface IIndexOfOpenProject {
   itemIndex: number
 }
 
+export interface updateShowProjectNavArrowParameters {
+  key: "showProjectNavArrowTop"
+    |"showProjectNavArrowRight"
+    |"showProjectNavArrowBottom"
+    |"showProjectNavArrowLeft",
+  value: boolean
+}
+
 export interface State {
   projects: IApiProject[]
   sortedProject: ISortedProjectsByYear
@@ -49,11 +57,20 @@ export interface State {
   homeImages:     IApiHomeImage[] | null
   isMobileWidth:  boolean
   isDeskWidth:    boolean
+
+  showProjectNavArrowTop: boolean
+  showProjectNavArrowRight: boolean
+  showProjectNavArrowBottom: boolean
+  showProjectNavArrowLeft: boolean
 }
 
 export interface IStoreMutation {
   [key: string]: Mutation<State>
   updateProjects        (state: State, projects:       IApiProject[]): void
+
+  updateShowProjectNavArrow(
+    state: State,
+    value: updateShowProjectNavArrowParameters  ): void
 
   updateIdOfOpenedProject(state: State, id: string | null): void
   updateIndexOfOpenProject(state: State, indexOfOpenProject: IIndexOfOpenProject): void
@@ -115,6 +132,11 @@ export default createStore<State>({
     homeImages: null,
     isDeskWidth: false,
     isMobileWidth: false,
+
+    showProjectNavArrowTop: true,
+    showProjectNavArrowRight: true,
+    showProjectNavArrowBottom: true,
+    showProjectNavArrowLeft: true,
   },
   mutations: {
     updateProjects(state, projects) {
@@ -122,6 +144,10 @@ export default createStore<State>({
         projects: projects
       }).reverse()
       state.projects = projects
+    },
+
+    updateShowProjectNavArrow(state, value) {
+      state[value.key] = value.value
     },
 
     updateIdOfOpenedProject(state, id) {
