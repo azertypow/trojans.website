@@ -462,7 +462,6 @@ export default defineComponent({
   transform: translate3d(110px, calc(-50% - 32px), 0);
   width: 50vw;
   height: 50vh;
-  object-fit: cover;
   z-index: 1000000;
   pointer-events: none;
   display: none;
@@ -536,4 +535,12 @@ export default defineComponent({
   transform: translate3d(50%, 0px, 0);
 }
 
+</style>
+
+<style lang="scss">
+.v-project-viewer-hover-img-container {
+  > * {
+    object-fit: cover !important;
+  }
+}
 </style>
