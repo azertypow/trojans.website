@@ -53,8 +53,6 @@ export default defineComponent({
 
     projects__mobile_viewer__contentImageStyle(): any {
 
-      console.log( this.store.getters.sizeOfFirstProjectImage )
-
       if( this.store.getters.sizeOfFirstProjectImage && this.$refs.projectViewer instanceof HTMLElement) {
 
         const imageRation =

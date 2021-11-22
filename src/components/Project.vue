@@ -215,9 +215,6 @@ export default defineComponent({
           const toggleTableChildElement = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__toggle-table")
           const noToggleTableChildElements = (this.$refs.container as HTMLElement).querySelectorAll(".v-project__no-toggle-table")
 
-          console.log("toggleTableChildElement", toggleTableChildElement)
-          console.log("noToggleTableChildElements", noToggleTableChildElements)
-
           const totalToggleTableHeaderHeight = toggleTableChildElement.length * 20
 
           let totalOfNoToggleHeightElement = 0
