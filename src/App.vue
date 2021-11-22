@@ -44,6 +44,12 @@ export default defineComponent({
     }
   },
 
+  mounted() {
+    window.addEventListener('mousemove', ev => {
+      this.store.commit("updateMousePosition", {x: ev.clientX, y: ev.clientY})
+    })
+  },
+
   computed: {
     isHome(): boolean {
       return this.$route.path === '/'

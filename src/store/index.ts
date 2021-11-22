@@ -62,6 +62,8 @@ export interface State {
   showProjectNavArrowRight: boolean
   showProjectNavArrowBottom: boolean
   showProjectNavArrowLeft: boolean
+
+  mousePosition: {x: number, y: number} | null
 }
 
 export interface IStoreMutation {
@@ -96,6 +98,8 @@ export interface IStoreMutation {
   updateTheyWorkWithUs  (state: State, theyWorkWithUs: IApiTheyWorkWithUs): void
   updateHomeImages      (state: State, homeImages: IApiHomeImage[]): void
   updateScreenWidth     (state: State, screenWidth: number): void
+
+  updateMousePosition(sate: State, mousePosition: {x: number, y: number}): void
 }
 
 // define injection key
@@ -137,6 +141,8 @@ export default createStore<State>({
     showProjectNavArrowRight: true,
     showProjectNavArrowBottom: true,
     showProjectNavArrowLeft: true,
+
+    mousePosition: null,
   },
   mutations: {
     updateProjects(state, projects) {
@@ -224,6 +230,11 @@ export default createStore<State>({
       state.isMobileWidth = isMobileWidth
       state.isDeskWidth   = !isMobileWidth
     },
+
+    updateMousePosition(state, mousePosition) {
+      state.mousePosition = mousePosition
+      console.log(state.mousePosition)
+    }
 
   } as IStoreMutation,
   actions: {

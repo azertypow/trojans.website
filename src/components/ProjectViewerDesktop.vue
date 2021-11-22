@@ -12,6 +12,7 @@
     <div
         class="v-project-viewer-hover-img-container"
         v-if="data.cover !== null"
+        :style= imgContainerPosition
     >
       <gallery
           :data="{
@@ -337,6 +338,41 @@ export default defineComponent({
     lengthOfItemProject(): number {
       return this.store.getters.projectsSortedInArray[this.$props.index.dateIndex][this.$props.index.projectIndex].length
     },
+
+    imgContainerPosition(): {
+      top: string,
+      bottom: string,
+      left: string,
+      right: string,
+      transform: string
+    } {
+
+      const mouseIsOnleftOfTheScreen: boolean = !!(
+          this.store.state.mousePosition
+          && this.store.state.mousePosition.x < window.innerWidth / 2
+      )
+
+      const mouseIsOnTopOfTheScreen: boolean = !!(
+          this.store.state.mousePosition
+          && this.store.state.mousePosition.y < window.innerHeight / 2
+      )
+
+      return {
+        transform: "none",
+        top:      mouseIsOnTopOfTheScreen ? this.store.state.mousePosition?.y + "px" : 'inherit',
+        bottom:  !mouseIsOnTopOfTheScreen ? (window.innerHeight - (this.store.state.mousePosition?.y || 0)) + "px" : '',
+
+        left:     mouseIsOnleftOfTheScreen ? this.store.state.mousePosition?.x + "px" : 'inherit',
+        right:   !mouseIsOnleftOfTheScreen ? (window.innerWidth - (this.store.state.mousePosition?.x || 0)) + "px" : '',
+      }
+    ||
+      {
+        transform: '',
+        top: "",
+        left: "",
+        right: '',
+      }
+    }
   },
 
   watch: {
@@ -430,7 +466,7 @@ export default defineComponent({
   pointer-events: none;
   display: none;
 
-  .v-project-viewer-desktop:hover & {
+  .v-project-viewer-desktop:not(.is-open):hover & {
     display: block;
   }
 }
