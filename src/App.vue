@@ -5,9 +5,19 @@
         'is-home': isHome,
         'is-fixed-layout': isFixedLayout,
         'is-desk-width': isDeskWidth,
+        'show-nav': showNavInfo,
       }"
       class="v-app">
     <navigation/>
+
+    <transition
+        name="nav-inf-disappear"
+    >
+      <navigation-informations
+          class="v-app-nav-inf"
+          v-if="showNavInfo"
+      />
+    </transition>
 
     <router-view
         v-slot="{ Component, route }"
@@ -29,11 +39,13 @@ import { defineComponent } from 'vue';
 import {useStore} from "vuex"
 import {key} from "@/store"
 import Navigation from "@/components/Navigation.vue"
+import NavigationInformations from "@/components/navigation-informations.vue"
 
 export default defineComponent({
   name: 'App',
 
   components: {
+    NavigationInformations,
     Navigation,
   },
 
@@ -53,6 +65,12 @@ export default defineComponent({
   computed: {
     isHome(): boolean {
       return this.$route.path === '/'
+    },
+    isPorjects(): boolean {
+      return this.$route.path === "/projects"
+    },
+    showNavInfo(): boolean {
+      return this.store.state.topArrowNavInformationActive && this.isPorjects && this.isDeskWidth
     },
     isDeskWidth(): boolean {
       return this.store.state.isDeskWidth
@@ -79,6 +97,7 @@ export default defineComponent({
   padding-bottom: $nav-height;
   box-sizing: border-box;
   min-height: 100vh;
+  transition: padding ease-in-out .5s;
 
   -ms-overflow-style: none; /* IE 11 */
   scrollbar-width: none; /* Firefox 64 */
@@ -94,6 +113,18 @@ export default defineComponent({
   &.is-fixed-layout{
     height: 100vh;
   }
+
+  &.show-nav {
+    padding-top: $line-height;
+    padding-bottom: $nav-height - $line-height;
+  }
+}
+
+.v-app-nav-inf {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .fade-enter-active,
@@ -131,6 +162,20 @@ export default defineComponent({
 
 .fade-enter-to ~ .overlay-left {
   transform: translate3d(100%, 0, 0);
+}
+
+.nav-inf-disappear-enter-active,
+.nav-inf-disappear-leave-active {
+  transition: transform ease-in-out .5s;
+}
+
+.nav-inf-disappear-leave,
+.nav-inf-disappear-entre-to {
+  transform: translate3d(0, 0, 0);
+}
+.nav-inf-disappear-leave-to,
+.nav-inf-disappear-entre {
+  transform: translate3d(0, -100%, 0);
 }
 
 </style>

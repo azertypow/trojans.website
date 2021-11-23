@@ -64,6 +64,8 @@ export interface State {
   showProjectNavArrowLeft: boolean
 
   mousePosition: {x: number, y: number} | null
+
+  topArrowNavInformationActive: boolean
 }
 
 export interface IStoreMutation {
@@ -100,6 +102,8 @@ export interface IStoreMutation {
   updateScreenWidth     (state: State, screenWidth: number): void
 
   updateMousePosition(sate: State, mousePosition: {x: number, y: number}): void
+
+  updateTopArrowNavInformationActive(state: State, value: boolean): void
 }
 
 // define injection key
@@ -143,6 +147,8 @@ export default createStore<State>({
     showProjectNavArrowLeft: true,
 
     mousePosition: null,
+
+    topArrowNavInformationActive: true,
   },
   mutations: {
     updateProjects(state, projects) {
@@ -233,7 +239,10 @@ export default createStore<State>({
 
     updateMousePosition(state, mousePosition) {
       state.mousePosition = mousePosition
-      console.log(state.mousePosition)
+    },
+
+    updateTopArrowNavInformationActive(state, value) {
+      state.topArrowNavInformationActive = value
     }
 
   } as IStoreMutation,
