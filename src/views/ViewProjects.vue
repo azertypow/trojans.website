@@ -658,22 +658,20 @@ $nav-icon-space: 2px;
 
 .v-view-projects__viewer__content__cover {
   box-sizing: border-box;
-  width: 42vw;
   flex-shrink: 0;
   flex-grow: 0;
   padding-right: $gutter / 2;
   position: relative !important;
-  height: calc(42vw / 1.25);
 
   .v-gallery {
-    width: 100%;
-    height: 100%;
+    width: 40vw;
+    height: 30vw;
     object-fit: cover;
     object-position: center;
   }
 
   .v-gallery__desc {
-    position: absolute;
+    position: relative !important;
     width: 100% !important;
     box-sizing: border-box;
     left: auto !important;

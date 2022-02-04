@@ -457,8 +457,8 @@ export default defineComponent({
   position: fixed;
   top: 50%;
   transform: translate3d(110px, calc(-50% - 32px), 0);
-  width: 50vw;
-  height: 50vh;
+  width: 40vw;
+  height: 30vw;
   z-index: 1000000;
   pointer-events: none;
   display: none;
