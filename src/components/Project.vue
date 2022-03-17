@@ -58,7 +58,8 @@
           class="v-project__no-toggle-table"
           :images="images"
           ref="mobileImageGallery"
-          :currentIndex="currentIndex"
+          :desiredIndex="desiredIndexFromProject"
+          @indexChange="mobileGalleryIndexChange"
       ></ProjectGalleryMobile>
 
       <div
@@ -68,6 +69,7 @@
             class="v-project-gallery-mobile__dot-number"
             v-for="(image, index) of images"
             @click="dotItemClicked(index)"
+            :class="{'is-active': index === dotIndex}"
         ></div>
       </div>
 
@@ -206,7 +208,11 @@ export default defineComponent({
     },
 
     dotItemClicked(dotIndex: number) {
-      this.currentIndex = dotIndex
+      this.desiredIndexFromProject = dotIndex
+    },
+
+    mobileGalleryIndexChange(newIndex: number) {
+      this.dotIndex = newIndex
     },
 
     updateHeaderFixedPositionOnScroll() {
@@ -282,7 +288,8 @@ export default defineComponent({
         maxWidth:   "",
       },
       arrayOfToggleTableOpen: [] as number[],
-      currentIndex: 0,
+      desiredIndexFromProject: 0,
+      dotIndex: 0,
     }
   },
 
@@ -481,6 +488,10 @@ export default defineComponent({
   background: #cccccc;
   border-radius: 100%;
   margin-left: $gutter / 3;
+
+  &.is-active {
+    background: $site-color;
+  }
 }
 
 </style>

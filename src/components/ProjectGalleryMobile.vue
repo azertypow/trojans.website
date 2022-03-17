@@ -2,6 +2,7 @@
   <section
       class="v-project-gallery-mobile"
       ref="projectViewer"
+      @scroll="mobileGalleryScrolling"
   >
 
     <div
@@ -38,7 +39,7 @@ export default defineComponent({
 
   data() {
     return {
-      store: useStore(key)
+      store: useStore(key),
     }
   },
 
@@ -47,18 +48,18 @@ export default defineComponent({
       type: Object as PropType<IGalleryData[]>,
       required: true,
     },
-    currentIndex: {
+    desiredIndex: {
       type: Number,
       required: true,
     }
   },
 
   watch: {
-    currentIndex() {
+    desiredIndex() {
       if(! (this.$refs.projectViewer instanceof HTMLElement) ) return
 
       this.$refs.projectViewer.scrollTo({
-        left: this.currentIndex * this.$refs.projectViewer.getBoundingClientRect().width,
+        left: this.desiredIndex * this.$refs.projectViewer.getBoundingClientRect().width,
         behavior: 'smooth',
       })
     }
@@ -96,6 +97,17 @@ export default defineComponent({
     }
 
 
+  },
+
+  methods: {
+    mobileGalleryScrolling() {
+      const projectViewer = this.$refs.projectViewer as HTMLElement
+      const projectViewerWidth = projectViewer.getBoundingClientRect().width
+
+      const calculateIndexFromScroll = Math.floor( projectViewer.scrollLeft / projectViewerWidth )
+
+      this.$emit('indexChange', calculateIndexFromScroll)
+    },
   },
 
 });
