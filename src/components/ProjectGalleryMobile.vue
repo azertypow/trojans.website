@@ -47,6 +47,21 @@ export default defineComponent({
       type: Object as PropType<IGalleryData[]>,
       required: true,
     },
+    currentIndex: {
+      type: Number,
+      required: true,
+    }
+  },
+
+  watch: {
+    currentIndex() {
+      if(! (this.$refs.projectViewer instanceof HTMLElement) ) return
+
+      this.$refs.projectViewer.scrollTo({
+        left: this.currentIndex * this.$refs.projectViewer.getBoundingClientRect().width,
+        behavior: 'smooth',
+      })
+    }
   },
 
   computed: {

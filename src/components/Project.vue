@@ -57,6 +57,8 @@
       <ProjectGalleryMobile
           class="v-project__no-toggle-table"
           :images="images"
+          ref="mobileImageGallery"
+          :currentIndex="currentIndex"
       ></ProjectGalleryMobile>
 
       <div
@@ -64,7 +66,8 @@
       >
         <div
             class="v-project-gallery-mobile__dot-number"
-            v-for="i of images"
+            v-for="(image, index) of images"
+            @click="dotItemClicked(index)"
         ></div>
       </div>
 
@@ -73,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType } from "vue"
+import {defineComponent, PropType, ref } from "vue"
 import {IApiExhibition_links, IApiProject, IApiTags} from "@/api"
 import Exhibition from "@/components/Exhibition.vue"
 import {useStore} from "vuex"
@@ -202,6 +205,10 @@ export default defineComponent({
 
     },
 
+    dotItemClicked(dotIndex: number) {
+      this.currentIndex = dotIndex
+    },
+
     updateHeaderFixedPositionOnScroll() {
       if (this.thisIsOpen && this.$refs.containerTitle instanceof HTMLElement) {
       }
@@ -275,6 +282,7 @@ export default defineComponent({
         maxWidth:   "",
       },
       arrayOfToggleTableOpen: [] as number[],
+      currentIndex: 0,
     }
   },
 
