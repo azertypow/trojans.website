@@ -106,7 +106,6 @@ export default defineComponent({
 
   .v-project-gallery-mobile__container {
     width: 100%;
-    //max-height: 80%;
     flex-shrink: 0;
     overflow: hidden;
     scroll-snap-align: start;
@@ -115,14 +114,6 @@ export default defineComponent({
     flex-direction: column;
     padding-bottom: $gutter;
 
-    //.v-gallery {
-    //  height: 100%;
-    //  flex-shrink: 1;
-    //  flex-grow: 1;
-    //  object-fit: contain;
-    //  object-position: center bottom;
-    //  background: white;
-    //}
 
     .v-gallery__desc {
       margin-bottom: 0 !important;
