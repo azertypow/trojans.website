@@ -63,9 +63,17 @@
       >
         <div
             class="v-navigation__mail-chimp"
-            v-if="showMailchimpSubscription"
+            v-if="showContactNewsletter"
         >
           <mail-chimp/>
+
+          <div class="v-navigation__mail-chimp__contact">
+            <router-link
+                @click="closeMenu"
+                to="/About"
+            >contact</router-link>
+          </div>
+
         </div>
       </transition>
 
@@ -204,7 +212,7 @@ export default defineComponent({
       return this.$route.path
     },
 
-    showMailchimpSubscription(): boolean {
+    showContactNewsletter(): boolean {
       if(this.isDeskWidth) return this.isHome
 
       return this.isHome && !this.store.state.menuIsOpen
@@ -505,11 +513,32 @@ export default defineComponent({
 }
 
 .v-navigation__mail-chimp {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  transform: translate(0, -100%);
+}
+
+.v-navigation__mail-chimp__contact {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  a {
+    all: unset;
+    @extend .t-text-small;
+    color: $site-color;
+    display: block;
+    line-height: 20px;
+    padding: $gutter / 2;
+    box-sizing: border-box;
+    margin: 0;
+    cursor: pointer;
+
+    &:after {
+      content: none;
+    }
+  }
 }
 
 </style>
@@ -560,7 +589,7 @@ export default defineComponent({
 
 .fade-mailchimp-enter-active {
   transition: opacity 1s, transform 1s;
-  transform: translate3d(-50px, -100%, 0) !important;
+  transform: translate3d(0, -100%, 0) !important;
   opacity: 0;
 }
 
@@ -576,7 +605,7 @@ export default defineComponent({
 }
 
 .fade-mailchimp-leave-to {
-  transform: translate3d(100px, -100%, 0) !important;
+  transform: translate3d(0, -100%, 0) !important;
   opacity: 0;
 }
 
