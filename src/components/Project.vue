@@ -460,18 +460,20 @@ export default defineComponent({
 .v-project-gallery-mobile__dot-number-container {
   position: absolute;
   display: flex;
-  bottom: $gutter / 2;
+  bottom: 0;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
-  mix-blend-mode: difference;
+  height: $gutter;
+  align-items: center;
 }
 
 .v-project-gallery-mobile__dot-number {
+  cursor: pointer;
   width: 10px;
   height: 10px;
-  background: white;
+  background: #cccccc;
   border-radius: 100%;
-  margin-left: $gutter / 4;
+  margin-left: $gutter / 3;
 }
 
 </style>

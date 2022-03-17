@@ -113,6 +113,7 @@ export default defineComponent({
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
+    padding-bottom: $gutter;
 
     //.v-gallery {
     //  height: 100%;
